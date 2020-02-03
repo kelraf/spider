@@ -2,6 +2,8 @@ defmodule Spider.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Spider.UserToolKit
+
 
   schema "users" do
     field :email, :string
@@ -9,7 +11,7 @@ defmodule Spider.Accounts.User do
     field :kra_pin, :string
     field :last_name, :string
     field :national_id_number, :integer
-    field :password, :string, virtual: true
+    field :raw_password, :string, virtual: true
     field :password_hash, :string
     field :phone_number, :string
     field :role, :integer
@@ -21,8 +23,11 @@ defmodule Spider.Accounts.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:phone_number, :email, :password_hash, :verification_code, :first_name, :last_name, :role, :national_id_number, :kra_pin])
-    |> validate_required([:phone_number, :password_hash, :first_name, :last_name, :role])
+    |> cast(attrs, [:phone_number, :email, :raw_password, :password_hash, :verification_code, :first_name, :last_name, :role, :national_id_number, :kra_pin])
+    |> validate_required([:phone_number, :raw_password, :first_name, :last_name, :role])
+    |> UserToolKit.validate_roles()
+    |> UserToolKit.password_hash()
+    |> UserToolKit.set_verification_code()
     |> unique_constraint(:phone_number)
     |> unique_constraint(:email)
     |> unique_constraint(:national_id_number)
