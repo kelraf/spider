@@ -25,6 +25,7 @@ defmodule SpiderWeb.Router do
     pipe_through :api
 
     resources "/users", UserController
+    resources "/businesses", BusinessController
 
   end
 end
