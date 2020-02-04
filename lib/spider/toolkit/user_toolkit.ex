@@ -57,14 +57,14 @@ defmodule Spider.UserToolKit do
 
   end
 
-  def set_verification_code(changeset) do
-    case get_field(changeset, :raw_password) do
-      nil ->
-        changeset
-      raw_password ->
-        put_change(changeset, :verification_code, raw_password)
-    end
-  end
+  # def set_verification_code(changeset) do
+  #   case get_field(changeset, :raw_password) do
+  #     nil ->
+  #       changeset
+  #     raw_password ->
+  #       put_change(changeset, :verification_code, raw_password)
+  #   end
+  # end
 
   # def create_account_using_role(create_results) do
 

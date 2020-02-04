@@ -6,6 +6,7 @@ defmodule Spider.Accounts.User do
 
 
   schema "users" do
+    
     field :email, :string
     field :first_name, :string
     field :kra_pin, :string
@@ -16,7 +17,11 @@ defmodule Spider.Accounts.User do
     field :password_hash, :string
     field :phone_number, :string
     field :role, :integer
-    field :verification_code, :integer
+    field :country_code, :string
+    field :county, :string
+    field :sub_county, :string
+    field :ward, :string
+    field :location, :string
 
     timestamps()
   end
@@ -24,14 +29,13 @@ defmodule Spider.Accounts.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:phone_number, :email, :raw_password, :confirm_password, :password_hash, :verification_code, :first_name, :last_name, :role, :national_id_number, :kra_pin])
+    |> cast(attrs, [:phone_number, :email, :raw_password, :confirm_password, :password_hash, :first_name, :last_name, :role, :national_id_number, :kra_pin, :country_code, :county, :sub_county, :ward, :location])
     |> validate_required([:phone_number, :raw_password, :confirm_password, :first_name, :last_name, :role])
     |> validate_length(:raw_password, min: 6, max: 15)
     |> validate_length(:phone_number, min: 10, max: 15)
     |> UserToolKit.validate_roles()
     |> UserToolKit.password_confirm()
     |> UserToolKit.password_hash()
-    |> UserToolKit.set_verification_code()
     |> unique_constraint(:phone_number)
     |> unique_constraint(:email)
     |> unique_constraint(:national_id_number)
