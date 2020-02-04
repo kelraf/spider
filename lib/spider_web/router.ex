@@ -21,6 +21,10 @@ defmodule SpiderWeb.Router do
 
   # Other scopes may use custom stacks.
   scope "/api", SpiderWeb do
+    
     pipe_through :api
+
+    resources "/users", UserController
+
   end
 end
