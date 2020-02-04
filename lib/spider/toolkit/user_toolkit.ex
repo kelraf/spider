@@ -12,6 +12,26 @@ defmodule Spider.UserToolKit do
     end
   end
 
+  def password_confirm(changeset) do
+    case get_field(changeset, :raw_password) do
+      nil ->
+        changeset
+
+      raw_password ->
+        case get_field(changeset, :confirm_password) do
+          nil ->
+            changeset
+
+          confirm_password ->
+            if raw_password != confirm_password do
+              add_error(changeset, :confirm_password, "Your Passwords must match")
+            else
+              changeset
+            end
+        end
+    end
+  end
+
   def validate_roles(changeset) do
 
     case get_field(changeset, :role) do
