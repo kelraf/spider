@@ -24,8 +24,12 @@ defmodule SpiderWeb.Router do
     
     pipe_through :api
 
+    # Verification Starts
+    post "/verification", VerificationController, :sms_sender
+
     resources "/users", UserController
     resources "/businesses", BusinessController
 
   end
+  
 end

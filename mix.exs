@@ -20,7 +20,7 @@ defmodule Spider.Mixfile do
   def application do
     [
       mod: {Spider.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :httpoison, :runtime_tools]
     ]
   end
 
@@ -44,7 +44,8 @@ defmodule Spider.Mixfile do
       {:cowboy, "~> 1.0"},
       {:comeonin, "~> 2.6.0"},
       {:cors_plug, "~> 2.0"},
-      {:guardian, github: "ueberauth/guardian"}
+      {:guardian, github: "ueberauth/guardian"},
+      {:httpoison, "~> 1.6"}
     ]
   end
 
@@ -58,7 +59,7 @@ defmodule Spider.Mixfile do
     [
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      "test": ["ecto.create --quiet", "ecto.migrate", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate", "test"]
     ]
   end
 end

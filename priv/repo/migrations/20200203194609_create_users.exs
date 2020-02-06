@@ -14,6 +14,7 @@ defmodule Spider.Repo.Migrations.CreateUsers do
       add :country_code, :string
       add :county, :string
       add :sub_county, :string
+      add :ward, :string
       add :location, :string
 
       timestamps()

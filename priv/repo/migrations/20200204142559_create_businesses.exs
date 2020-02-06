@@ -13,7 +13,7 @@ defmodule Spider.Repo.Migrations.CreateBusinesses do
       add :ward, :string
       add :location, :string
 
-      add :user_id, references(:users, on_delete: :nothing)
+      add :user_id, references(:users, on_delete: :nothing), null: false
 
       timestamps()
     end

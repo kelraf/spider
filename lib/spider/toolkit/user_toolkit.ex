@@ -3,6 +3,9 @@ defmodule Spider.UserToolKit do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Spider.Repo
+  alias Spider.Accounts.User
+
   def password_hash(changeset) do
     case get_field(changeset, :raw_password) do
       nil ->
@@ -82,5 +85,18 @@ defmodule Spider.UserToolKit do
   #       end
   #   end
   # end
+
+
+  def get_user_by_phone(%{"phone_number" => phone_number}) do
+    user = Repo.get_by(User, phone_number: phone_number)
+
+    case user do
+      nil -> 
+        {:error, "User Not Found"}
+      _ ->
+        {:ok, user}
+    end
+
+  end
 
 end
