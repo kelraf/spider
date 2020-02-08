@@ -1,7 +1,8 @@
 defmodule Spider.VerificationAgentToolKit do  
+    use Agent
 
-    def start_link do  
-        Agent.start_link(fn -> %{} end)  
+    def start_link(opts) do  
+        Agent.start_link(fn -> opts end, [name: __MODULE__])
     end
     
     def put(pid, key, value) do

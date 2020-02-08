@@ -8,13 +8,10 @@ defmodule Spider.Repo.Migrations.CreateUsers do
       add :password_hash, :string
       add :first_name, :string
       add :last_name, :string
-      add :role, :integer
+      add :role, :string
       add :national_id_number, :integer
-      add :kra_pin, :string
+      add :pin, :string
       add :country_code, :string
-      add :county, :string
-      add :sub_county, :string
-      add :ward, :string
       add :location, :string
 
       timestamps()
