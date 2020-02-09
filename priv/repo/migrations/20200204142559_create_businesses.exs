@@ -7,7 +7,7 @@ defmodule Spider.Repo.Migrations.CreateBusinesses do
       add :business_pin, :string
       add :registration_number, :string
       add :business_type, :string
-      add :categoty, :string
+      add :category, :string
       add :country_code, :string
       add :location, :string
 

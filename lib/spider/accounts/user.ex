@@ -3,6 +3,7 @@ defmodule Spider.Accounts.User do
   import Ecto.Changeset
 
   alias Spider.UserToolKit
+  alias Spider.BusinessToolKit
 
 
   schema "users" do
@@ -27,12 +28,13 @@ defmodule Spider.Accounts.User do
   def changeset(user, attrs) do
     user
     |> cast(attrs, [:phone_number, :email, :raw_password, :confirm_password, :password_hash, :first_name, :last_name, :role, :national_id_number, :pin, :country_code, :location])
-    |> validate_required([:phone_number, :raw_password, :confirm_password, :first_name, :last_name, :role])
+    |> validate_required([:phone_number, :raw_password, :confirm_password, :first_name, :last_name, :pin, :role])
     |> validate_length(:raw_password, min: 6, max: 15)
     |> validate_length(:phone_number, min: 10, max: 15)
     |> UserToolKit.validate_roles()
     |> UserToolKit.password_confirm()
     |> UserToolKit.password_hash()
+    |> BusinessToolKit.validate_country_code()
     |> unique_constraint(:phone_number)
     |> unique_constraint(:email)
     |> unique_constraint(:national_id_number)

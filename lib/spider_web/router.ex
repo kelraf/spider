@@ -27,6 +27,8 @@ defmodule SpiderWeb.Router do
     # Verification Starts
     post "/verification", VerificationController, :sms_sender
 
+    # Verification ends
+
     resources "/users", UserController
     resources "/businesses", BusinessController
 

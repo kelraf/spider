@@ -38,24 +38,20 @@ defmodule Spider.UserToolKit do
   def validate_roles(changeset) do
 
     case get_field(changeset, :role) do
-      1 -> 
+      "business_owner" -> 
         changeset
-      2 -> 
+      "group_business_creator" -> 
         changeset
-      3 ->
+      "group_member" ->
         changeset
-      4 -> 
+      "multi" -> 
         changeset
-      5 -> 
-        changeset
-      6 -> 
-        changeset
-      7 -> 
+      "driver" -> 
         changeset
       nil ->
           changeset
       _ -> 
-        add_error(changeset, :role, "Invalid Role")
+        add_error(changeset, :role, "Invalid role")
     end
 
   end

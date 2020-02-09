@@ -9,8 +9,38 @@ defmodule Spider.BusinessToolKit do
             nil -> 
                 changeset
             business_type ->
-                if business_type not in ["solo_proprietor", "group_ranch", "association", "co-oparative"] do
+                if business_type not in ["supplier", "distributor", "farmer", "slaughter_house", "abour"] do
                     add_error(changeset, :business_type, "Unknown Business Type")
+                else
+                    changeset
+                end
+        end
+
+    end
+
+    def validate_business_category(changeset) do
+
+        case get_field(changeset, :category) do
+            nil -> 
+                changeset
+            category -> 
+                if category not in ["solo_proprietor", "company", "group_ranch", "association", "co-oparative"] do
+                    add_error(changeset, :category, "Unknown Business Category")
+                else
+                    changeset
+                end
+        end
+
+    end
+
+    def validate_country_code(changeset) do
+
+        case get_field(changeset, :country_code) do
+            nil -> 
+                changeset
+            country_code ->
+                if country_code not in ["254"] do
+                    add_error(changeset, :country_code, "Country Code Not Allowed")
                 else
                     changeset
                 end
