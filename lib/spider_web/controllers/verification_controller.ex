@@ -2,6 +2,7 @@ defmodule SpiderWeb.VerificationController do
     use SpiderWeb, :controller
 
     alias Spider.UserToolKit
+    alias Spider.Sms
 
     def sms_sender(conn, %{"user" => user_params}) do
 

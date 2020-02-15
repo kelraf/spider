@@ -6,7 +6,7 @@ defmodule Spider.VerificationAgentToolKit do
     end
     
     def put(pid, key, value) do
-        Agent.update(pid, &Map.put(&1, key, value))  
+        Agent.update(pid, &Map.put(&1, key, value))
     end
     
     def get(pid, key) do  

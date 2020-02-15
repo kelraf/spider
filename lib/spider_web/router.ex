@@ -31,6 +31,8 @@ defmodule SpiderWeb.Router do
 
     resources "/users", UserController
     resources "/businesses", BusinessController
+    resources "/transtools", TranstoolController
+    resources "/transtooluserrels", TranstoolUserRelController
 
   end
   
