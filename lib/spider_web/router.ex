@@ -33,6 +33,7 @@ defmodule SpiderWeb.Router do
     resources "/businesses", BusinessController
     resources "/transtools", TranstoolController
     resources "/transtooluserrels", TranstoolUserRelController
+    resources "/livestocks", LivestockController
 
   end
   
