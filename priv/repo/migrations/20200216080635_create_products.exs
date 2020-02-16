@@ -3,6 +3,7 @@ defmodule Spider.Repo.Migrations.CreateProducts do
 
   def change do
     create table(:products) do
+      
       add :name, :string
       add :type, :string
       add :category, :string

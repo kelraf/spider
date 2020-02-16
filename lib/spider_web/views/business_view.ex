@@ -11,14 +11,13 @@ defmodule SpiderWeb.BusinessView do
   end
 
   def render("business.json", %{business: business}) do
-    %{id: business.id,
+    %{
+      id: business.id,
       business_name: business.business_name,
-      kra_pin: business.kra_pin,
+      pin: business.business_pin,
       registration_number: business.registration_number,
       country_code: business.country_code,
-      county: business.county,
-      sub_county: business.sub_county,
-      ward: business.ward,
-      location: business.location}
+      location: business.location
+    }
   end
 end

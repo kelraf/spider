@@ -11,15 +11,16 @@ defmodule SpiderWeb.UserView do
   end
 
   def render("user.json", %{user: user}) do
-    %{id: user.id,
+    %{
+      id: user.id,
       phone_number: user.phone_number,
       email: user.email,
       password_hash: user.password_hash,
-      verification_code: user.verification_code,
       first_name: user.first_name,
       last_name: user.last_name,
       role: user.role,
       national_id_number: user.national_id_number,
-      kra_pin: user.kra_pin}
+      pin: user.pin
+    }
   end
 end
