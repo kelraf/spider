@@ -10,7 +10,7 @@ defmodule Spider.TranstoolKit do
                 changeset
             role ->
 
-                if role not in ["meat_transporter"] do
+                if role not in ["meat_transporter", "milk_transporter"] do
                     add_error(changeset, :role, "Invalid Role")
                 else 
                     changeset

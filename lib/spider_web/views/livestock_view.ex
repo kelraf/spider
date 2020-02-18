@@ -11,9 +11,13 @@ defmodule SpiderWeb.LivestockView do
   end
 
   def render("livestock.json", %{livestock: livestock}) do
-    %{id: livestock.id,
+    %{
+      id: livestock.id,
       type: livestock.type,
       category: livestock.category,
-      number: livestock.number}
+      number: livestock.number,
+      user_id: livestock.user_id,
+      business_id: livestock.business_id
+    }
   end
 end

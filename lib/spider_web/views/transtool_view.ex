@@ -11,10 +11,14 @@ defmodule SpiderWeb.TranstoolView do
   end
 
   def render("transtool.json", %{transtool: transtool}) do
-    %{id: transtool.id,
+    %{
+      id: transtool.id,
       registration_number: transtool.registration_number,
       brand: transtool.brand,
       model: transtool.model,
-      type: transtool.type}
+      role: transtool.role,
+      user_id: transtool.user_id,
+      business_id: transtool.business_id
+    }
   end
 end

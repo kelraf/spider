@@ -24,7 +24,7 @@ defmodule Spider.Transtools.Transtool do
   def changeset(transtool, attrs) do
     transtool
     |> cast(attrs, [:registration_number, :brand, :model, :role, :user_id, :business_id])
-    |> validate_required([:registration_number, :brand, :model, :role, :user_id])
+    |> validate_required([:registration_number, :brand, :model, :role, :user_id, :business_id])
     |> TranstoolKit.validate_role()
     |> unique_constraint(:registration_number)
   end
