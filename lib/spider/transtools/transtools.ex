@@ -49,6 +49,33 @@ defmodule Spider.Transtools do
       {:error, %Ecto.Changeset{}}
 
   """
+
+  defp list_empty(list) do
+    case list do
+      [] -> true
+      [_|_] -> false
+    end
+  end
+
+  def get_transtool_using_business_id(business_id) do
+    
+    query = from t in Transtool,
+                where: t.business_id == ^business_id,
+                select: t
+
+    transtools = Repo.all(query)
+
+    case transtools |> list_empty do
+      true -> 
+        {:empty, "Empty"}
+
+      false ->
+        {:ok, transtools}
+        
+    end
+
+  end
+
   def create_transtool(attrs \\ %{}) do
     %Transtool{}
     |> Transtool.changeset(attrs)

@@ -39,4 +39,22 @@ defmodule SpiderWeb.TranstoolController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  def get_transtool_using_business_id(conn, %{"business_id" => business_id}) do
+    
+    case Transtools.get_transtool_using_business_id business_id do
+      {:empty, message} -> 
+        conn 
+        |> json(%{
+          "message" => message
+        })
+
+      {:ok, transtools} ->
+        conn
+        |> render("index.json", transtools: transtools)
+        
+    end
+
+  end
+
 end
