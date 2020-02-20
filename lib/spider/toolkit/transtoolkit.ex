@@ -23,7 +23,7 @@ defmodule Spider.TranstoolKit do
 
     end
 
-    defp list_empty(list) do
+    def list_empty(list) do
         case list do
             [] -> true
             [_|_] -> false    

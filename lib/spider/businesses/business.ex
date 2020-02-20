@@ -7,6 +7,7 @@ defmodule Spider.Businesses.Business do
 
 
   schema "businesses" do
+
     field :business_name, :string
     field :country_code, :string
     field :business_type, :string
@@ -18,6 +19,7 @@ defmodule Spider.Businesses.Business do
     belongs_to(:user, User)
 
     timestamps()
+    
   end
 
   @doc false

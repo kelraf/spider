@@ -29,10 +29,15 @@ defmodule SpiderWeb.Router do
 
     # Verification ends
     resources "/users", UserController
+
+    # Business Routes
     resources "/businesses", BusinessController
+    get "/businesses/user/:user_id", BusinessController, :get_businesses_using_user_id
+
+    # End of business routes
 
     # Transtools Routes
-    
+
     resources "/transtools", TranstoolController
     get "/transtools/business/:business_id", TranstoolController, :get_transtool_using_business_id
 

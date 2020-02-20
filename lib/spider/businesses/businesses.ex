@@ -7,6 +7,7 @@ defmodule Spider.Businesses do
   alias Spider.Repo
 
   alias Spider.Businesses.Business
+  alias  Spider.TranstoolKit
 
   @doc """
   Returns the list of businesses.
@@ -19,6 +20,28 @@ defmodule Spider.Businesses do
   """
   def list_businesses do
     Repo.all(Business)
+  end
+
+  def get_businesses_using_user_id(user_id) do
+
+    query = from b in Business,
+                where: b.user_id == ^user_id,
+                select: b
+
+    businesses = Repo.all query
+
+    case businesses |> TranstoolKit.list_empty do
+
+      true ->
+
+        {:empty, "Empty"}
+
+      false -> 
+
+        {:ok, businesses}
+        
+    end
+
   end
 
   @doc """
