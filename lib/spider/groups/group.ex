@@ -4,6 +4,7 @@ defmodule Spider.Groups.Group do
 
   alias Spider.Accounts.User
   alias Spider.Businesses.Business
+  alias Spider.Context.GroupToolKit
 
   schema "groups" do
 
@@ -20,5 +21,6 @@ defmodule Spider.Groups.Group do
     group
     |> cast(attrs, [:user_id, :business_id, :status])
     |> validate_required([:user_id, :business_id, :status])
+    |> GroupToolKit.validate_one_for_one_user_group_relationship()
   end
 end

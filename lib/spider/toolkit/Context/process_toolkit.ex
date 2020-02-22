@@ -6,7 +6,6 @@ defmodule Spider.ProcessToolKit do
 
         receive do
             {:response, x} ->
-                IO.inspect x 
                 case x do
                     ^data_store -> 
                         {:ok, data_store.phone_number}
