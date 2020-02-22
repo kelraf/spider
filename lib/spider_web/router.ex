@@ -46,6 +46,7 @@ defmodule SpiderWeb.Router do
     resources "/livestocks", LivestockController
     resources "/produces", ProduceController
     resources "/products", ProductController
+    resources "/groups", GroupController
 
   end
   
