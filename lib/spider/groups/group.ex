@@ -21,6 +21,7 @@ defmodule Spider.Groups.Group do
     group
     |> cast(attrs, [:user_id, :business_id, :status])
     |> validate_required([:user_id, :business_id, :status])
+    |> GroupToolKit.validate_restrict_join_non_group_business()
     |> GroupToolKit.validate_one_for_one_user_group_relationship()
   end
 end
