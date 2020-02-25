@@ -16,4 +16,11 @@ defmodule SpiderWeb.GroupView do
       business_id: group.business_id,
       status: group.status}
   end
+
+  def render("group.json", %{group: group}) do
+    %{id: group.id,
+      user_id: group.user_id,
+      business_id: group.business_id,
+      status: group.status}
+  end
 end
