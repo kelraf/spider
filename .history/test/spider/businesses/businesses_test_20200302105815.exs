@@ -26,16 +26,7 @@ defmodule Spider.BusinessesTest do
         sub_county: "some updated sub_county", 
         ward: "some updated ward"
       }
-    @invalid_attrs %{
-        business_name: nil, 
-        country_code: nil, 
-        county: nil, 
-        kra_pin: nil, 
-        location: nil, 
-        registration_number: nil, 
-        sub_county: nil,
-        ward: nil
-      }
+    @invalid_attrs %{business_name: nil, country_code: nil, county: nil, kra_pin: nil, location: nil, registration_number: nil, sub_county: nil, ward: nil}
 
     def business_fixture(attrs \\ %{}) do
       {:ok, business} =

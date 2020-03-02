@@ -6,36 +6,9 @@ defmodule Spider.BusinessesTest do
   describe "businesses" do
     alias Spider.Businesses.Business
 
-    @valid_attrs %{
-        business_name: "some business_name", 
-        country_code: "some country_code", 
-        county: "some county", 
-        kra_pin: "some kra_pin", 
-        location: "some location", 
-        registration_number: "some registration_number", 
-        sub_county: "some sub_county", 
-        ward: "some ward"
-      }
-    @update_attrs %{
-        business_name: "some updated business_name", 
-        country_code: "some updated country_code", 
-        county: "some updated county", 
-        kra_pin: "some updated kra_pin", 
-        location: "some updated location", 
-        registration_number: "some updated registration_number", 
-        sub_county: "some updated sub_county", 
-        ward: "some updated ward"
-      }
-    @invalid_attrs %{
-        business_name: nil, 
-        country_code: nil, 
-        county: nil, 
-        kra_pin: nil, 
-        location: nil, 
-        registration_number: nil, 
-        sub_county: nil,
-        ward: nil
-      }
+    @valid_attrs %{business_name: "some business_name", country_code: "some country_code", county: "some county", kra_pin: "some kra_pin", location: "some location", registration_number: "some registration_number", sub_county: "some sub_county", ward: "some ward"}
+    @update_attrs %{business_name: "some updated business_name", country_code: "some updated country_code", county: "some updated county", kra_pin: "some updated kra_pin", location: "some updated location", registration_number: "some updated registration_number", sub_county: "some updated sub_county", ward: "some updated ward"}
+    @invalid_attrs %{business_name: nil, country_code: nil, county: nil, kra_pin: nil, location: nil, registration_number: nil, sub_county: nil, ward: nil}
 
     def business_fixture(attrs \\ %{}) do
       {:ok, business} =

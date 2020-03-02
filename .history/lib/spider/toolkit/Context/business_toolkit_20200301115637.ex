@@ -24,7 +24,7 @@ defmodule Spider.BusinessToolKit do
             nil -> 
                 changeset
             category -> 
-                if category not in ["sole_proprietor", "group_ranch", "association", "co-oparative"] do
+                if category not in ["sole_proprietor", "company", "group_ranch", "association", "co-oparative"] do
                     add_error(changeset, :category, "Unknown Business Category")
                 else
                     changeset
