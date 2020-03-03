@@ -19,7 +19,7 @@ defmodule SpiderWeb.VerificationController do
                 phone_number = user_params["phone_number"]
                 phone_number_atom = :"#{phone_number}"
 
-                VerificationAgentToolKit.put VerificationAgentToolKit, phone_number_atom, code
+                # VerificationAgentToolKit.put VerificationAgentToolKit, user_params["phone_number"], code
 
                 # if sms sent successfully spawn a process that will
                 # 1. Store the generated random code

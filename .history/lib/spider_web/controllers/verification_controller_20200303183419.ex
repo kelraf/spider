@@ -16,10 +16,8 @@ defmodule SpiderWeb.VerificationController do
             {:error, _} ->
                 # Generate a random code and Send it in an sms
                 code = Enum.random(2000..99999)
-                phone_number = user_params["phone_number"]
-                phone_number_atom = :"#{phone_number}"
 
-                VerificationAgentToolKit.put VerificationAgentToolKit, phone_number_atom, code
+                # VerificationAgentToolKit.put VerificationAgentToolKit, user_params["phone_number"], code
 
                 # if sms sent successfully spawn a process that will
                 # 1. Store the generated random code
@@ -27,8 +25,8 @@ defmodule SpiderWeb.VerificationController do
                 # 3. Start a countdown
                 conn 
                 |> json(%{
-                    phone_number:  phone_number,
-                    message: "We send an sms with verification Code to #{phone_number_atom}. Please Respond With The Code Sent."
+                    phone_number:  user_params["phone_number"],
+                    message: "We send an sms with verification Code to #{user_params["phone_number"]}. Please Respond With The Code Sent."
                 })
         end
 
