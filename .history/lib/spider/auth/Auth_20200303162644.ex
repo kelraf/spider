@@ -21,7 +21,7 @@ defmodule Spider.Auth do
                         phone_number: user.phone_number
                     }
 
-                    {:ok, user_data_to_encode}
+                    {:ok, user}
                 else
                     {:error, "Invalid Credentials 00200"}
                 end

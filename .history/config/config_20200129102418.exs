@@ -22,20 +22,6 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:user_id]
 
-# Guardian Authentication
-config :spider, Spider.Guardian,
-  allowed_algos: ["HS512"],
-  verify_module: Guardian.JWT,
-  issuer: "spider",
-  ttl: {30, :minutes},
-  allowed_drift: 2000,
-  verify_issuer: true,
-  secret_key: "CBmqCdkBw8jOSlGzi6A0WdhDyU1N03W5oc3hoks9xVgS+0u/muUsmPkfTRBVy6ki"
-
-config :cors_plug,
-  max_age: 86400,
-  methods: ["GET", "POST", "PUT", "DELETE"]
-
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"

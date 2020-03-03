@@ -16,17 +16,20 @@ defmodule SpiderWeb.AuthController do
         })
 
       {:ok, user} ->
+        token = Guardian.encode_and_sign(user)
 
         case Guardian.encode_and_sign(user) do
           {:ok, token, _claims} ->
             conn
+            |> IO.inspect
             |> put_req_header("authorization", "Bearer #{token}")
+            |> IO.inspect
             |> json(%{
               token: token
             })
 
           {:error, _reason} ->
-            conn
+            conn 
             |> json(%{
               error: "Oops Something went wrong. Please Try Again"
             })

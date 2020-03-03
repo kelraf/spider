@@ -12,7 +12,6 @@ defmodule SpiderWeb.BusinessController do
   end
 
   def get_businesses_using_user_id(conn, %{"user_id" => user_id}) do
-
     case Businesses.get_businesses_using_user_id(user_id) do
       {:empty, message} ->
         conn
@@ -24,7 +23,6 @@ defmodule SpiderWeb.BusinessController do
         conn
         |> render("index.json", businesses: businesses)
     end
-    
   end
 
   def create(conn, %{"business" => business_params}) do

@@ -26,27 +26,24 @@ defmodule SpiderWeb.Router do
   scope "/api", SpiderWeb do
     pipe_through :api
 
-    # Auth Starts
-    post "/user/auth", AuthController, :login
-    # Auth Ends
-
-    # Verification Starts
-    post "/verification", VerificationController, :sms_sender
-    # Verification ends
-
-    # Users Start
-    post "/users", UserController, :create
-    # Users Ends
+     # Auth Starts
+     post "/user/auth", AuthController, :login
+     # Auth Ends
 
   end
 
   # Other scopes may use custom stacks.
   scope "/api", SpiderWeb do
     
-    pipe_through [:api, :jwt_auth]
+    pipe_through :api
+
+    # Verification Starts
+    post "/verification", VerificationController, :sms_sender
+    # Verification ends
 
     # Users Starts
-    # resources "/users", UserController
+    resources "/users", UserController
+    post "/users", UserController, :create
     get "/users", UserController, :index # Belongs to Admins
     get "/users/:id", UserController, :show
     put "/users/:id", UserController, :update

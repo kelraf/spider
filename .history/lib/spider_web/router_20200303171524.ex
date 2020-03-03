@@ -47,6 +47,7 @@ defmodule SpiderWeb.Router do
 
     # Users Starts
     # resources "/users", UserController
+    post "/users", UserController, :create
     get "/users", UserController, :index # Belongs to Admins
     get "/users/:id", UserController, :show
     put "/users/:id", UserController, :update
@@ -54,7 +55,7 @@ defmodule SpiderWeb.Router do
     # Users Ends
 
     # Business Routes
-    post "/businesses", BusinessController, :create
+    # post "/businesses", BusinessController, :create
     get "/businesses", BusinessController, :index # Belongs to Admins
     get "/businesses/:id", BusinessController, :show
     put "/businesses/:id", BusinessController, :update

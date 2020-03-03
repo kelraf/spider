@@ -12,16 +12,7 @@ defmodule Spider.Auth do
                 {:error, "Invalid Credentials: 00100"}
             user -> 
                 if password |> Comeonin.Bcrypt.checkpw(user.password_hash) do
-
-                    user = Map.from_struct(user)
-                    user_data_to_encode = %{
-                        id: user.id,
-                        role: user.role,
-                        email: user.email,
-                        phone_number: user.phone_number
-                    }
-
-                    {:ok, user_data_to_encode}
+                    {:ok, user}
                 else
                     {:error, "Invalid Credentials 00200"}
                 end

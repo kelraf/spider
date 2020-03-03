@@ -23,7 +23,7 @@ config :logger, :console,
   metadata: [:user_id]
 
 # Guardian Authentication
-config :spider, Spider.Guardian,
+config :rental, Spider.Guardian,
   allowed_algos: ["HS512"],
   verify_module: Guardian.JWT,
   issuer: "spider",
