@@ -7,6 +7,7 @@ defmodule Spider.Businesses.Business do
 
   schema "businesses" do
     field(:business_name, :string)
+    field(:country_code, :string)
     field(:business_type, :string)
     field(:category, :string)
     field(:business_pin, :string)
@@ -17,7 +18,7 @@ defmodule Spider.Businesses.Business do
     field(:continent_code, :string)
     field(:country_calling_code, :string)
     field(:latitude, :string)
-    field(:longitude, :string)
+    field(:logitude, :string)
 
     belongs_to(:user, User)
 
@@ -40,7 +41,7 @@ defmodule Spider.Businesses.Business do
       :currency_name,
       :continent_code,
       :latitude,
-      :longitude
+      :logitude
     ])
     |> validate_required([
       :business_name,
@@ -48,12 +49,16 @@ defmodule Spider.Businesses.Business do
       :business_type,
       :category,
       :user_id,
-      :country_calling_code
+      :country_code,
+      :location
     ])
     |> validate_length(:business_name, min: 2, max: 100)
     |> BusinessToolKit.validate_business_type()
     |> BusinessToolKit.validate_business_category()
     |> validate_length(:registration_number, min: 2)
+    |> validate_length(:country_code, min: 2)
+    |> BusinessToolKit.validate_country_code()
+    |> validate_length(:location, min: 4)
     |> unique_constraint(:business_pin)
     |> unique_constraint(:registration_number)
   end

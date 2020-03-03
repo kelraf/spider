@@ -16,16 +16,11 @@ defmodule SpiderWeb.BusinessView do
       business_name: business.business_name,
       business_pin: business.business_pin,
       registration_number: business.registration_number,
+      country_code: business.country_code,
       business_type: business.business_type,
       category: business.category,
       user_id: business.user_id,
-      country_name: business.country_name,
-      country_calling_code: business.country_calling_code,
-      currency: business.currency,
-      currency_name: business.currency_name,
-      continent_code: business.continent_code,
-      latitude: business.latitude,
-      longitude: business.longitude
+      location: business.location
     }
   end
 end

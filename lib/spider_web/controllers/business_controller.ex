@@ -4,7 +4,7 @@ defmodule SpiderWeb.BusinessController do
   alias Spider.Businesses
   alias Spider.Businesses.Business
 
-  action_fallback SpiderWeb.FallbackController
+  action_fallback(SpiderWeb.FallbackController)
 
   def index(conn, _params) do
     businesses = Businesses.list_businesses()
@@ -12,8 +12,7 @@ defmodule SpiderWeb.BusinessController do
   end
 
   def get_businesses_using_user_id(conn, %{"user_id" => user_id}) do
-
-    case Businesses.get_businesses_using_user_id user_id do
+    case Businesses.get_businesses_using_user_id(user_id) do
       {:empty, message} ->
         conn
         |> json(%{
@@ -21,11 +20,9 @@ defmodule SpiderWeb.BusinessController do
         })
 
       {:ok, businesses} ->
-        IO.inspect businesses
-        conn 
+        conn
         |> render("index.json", businesses: businesses)
     end
-
   end
 
   def create(conn, %{"business" => business_params}) do
@@ -52,6 +49,7 @@ defmodule SpiderWeb.BusinessController do
 
   def delete(conn, %{"id" => id}) do
     business = Businesses.get_business!(id)
+
     with {:ok, %Business{}} <- Businesses.delete_business(business) do
       send_resp(conn, :no_content, "")
     end

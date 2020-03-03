@@ -22,7 +22,7 @@ defmodule Spider.Accounts.User do
     field(:continent_code, :string)
     field(:country_calling_code, :string)
     field(:latitude, :string)
-    field(:longitude, :string)
+    field(:logitude, :string)
 
     timestamps()
   end
@@ -47,7 +47,7 @@ defmodule Spider.Accounts.User do
       :currency_name,
       :continent_code,
       :latitude,
-      :longitude
+      :logitude
     ])
     |> validate_required([
       :phone_number,

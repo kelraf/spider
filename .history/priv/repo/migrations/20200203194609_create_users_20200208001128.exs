@@ -11,13 +11,8 @@ defmodule Spider.Repo.Migrations.CreateUsers do
       add :role, :string
       add :national_id_number, :integer
       add :pin, :string
-      add :country_name, :string
-      add :currency, :string
-      add :currency_name, :string
-      add :continent_code, :string
-      add :country_calling_code, :string
-      add :latitude, :string
-      add :longitude, :string
+      add :country_code, :string
+      add :location, :string
 
       timestamps()
     end

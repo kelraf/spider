@@ -17,7 +17,7 @@ defmodule Spider.Businesses.Business do
     field(:continent_code, :string)
     field(:country_calling_code, :string)
     field(:latitude, :string)
-    field(:longitude, :string)
+    field(:logitude, :string)
 
     belongs_to(:user, User)
 
@@ -40,7 +40,7 @@ defmodule Spider.Businesses.Business do
       :currency_name,
       :continent_code,
       :latitude,
-      :longitude
+      :logitude
     ])
     |> validate_required([
       :business_name,

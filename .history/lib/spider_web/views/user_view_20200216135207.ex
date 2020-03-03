@@ -20,14 +20,7 @@ defmodule SpiderWeb.UserView do
       last_name: user.last_name,
       role: user.role,
       national_id_number: user.national_id_number,
-      pin: user.pin,
-      country_name: user.country_name,
-      country_calling_code: user.country_calling_code,
-      currency: user.currency,
-      currency_name: user.currency_name,
-      continent_code: user.continent_code,
-      latitude: user.latitude,
-      longitude: user.longitude
+      pin: user.pin
     }
   end
 end

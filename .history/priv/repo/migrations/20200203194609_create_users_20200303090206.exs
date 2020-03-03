@@ -17,7 +17,7 @@ defmodule Spider.Repo.Migrations.CreateUsers do
       add :continent_code, :string
       add :country_calling_code, :string
       add :latitude, :string
-      add :longitude, :string
+      add :logitude, :string
 
       timestamps()
     end

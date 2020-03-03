@@ -14,7 +14,7 @@ defmodule Spider.Repo.Migrations.CreateBusinesses do
       add :continent_code, :string
       add :country_calling_code, :string
       add :latitude, :string
-      add :longitude, :string
+      add :logitude, :string
 
       add :user_id, references(:users, on_delete: :nothing), null: false
 
