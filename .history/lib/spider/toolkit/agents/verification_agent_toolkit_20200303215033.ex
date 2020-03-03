@@ -13,8 +13,8 @@ defmodule Spider.VerificationAgentToolKit do
         Agent.get(pid, &Map.get(&1, key))  
     end
     
-    def delete_one(pid, key) do
-        Agent.update(pid, &Map.delete(&1, key))
+    def get_all(pid) do
+        
     end
 
 end 

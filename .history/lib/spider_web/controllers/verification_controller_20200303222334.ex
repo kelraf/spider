@@ -33,7 +33,7 @@ defmodule SpiderWeb.VerificationController do
 
     end
 
-    def verify_code(conn, %{"user" => user_params}) do
+    def verifie_code(conn, %{"user" => user_params}) do
         # This action will receive verification Code
         # Spawn a process that will send the code to the process spawn earler for verification
     end
