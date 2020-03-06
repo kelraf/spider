@@ -60,8 +60,8 @@ defmodule SpiderWeb.UserController do
 
             conn
             |> json(%{
-              message: "It Seems Like you already have an account. Please Reply with the code sent to #{user_params["phone_number"]} to activate Your Account.",
-              data: %{
+              message: "It Seems Like you already have an account. Please Reply with the code sent to #{user_params["phone_number"]} to active Your Account.",
+              user: %{
                 id: user.id,
                 phone_number: user.phone_number,
                 email: user.email,
@@ -107,7 +107,6 @@ defmodule SpiderWeb.UserController do
               |> put_status(:created)
               |> put_resp_header("location", user_path(conn, :show, user))
               |> render("show.json", user: user)
-
             end
             
         end

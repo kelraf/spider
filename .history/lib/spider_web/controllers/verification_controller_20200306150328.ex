@@ -65,37 +65,19 @@ defmodule SpiderWeb.VerificationController do
                   }
                 })
         
-            byte_size(phone_number) > 15 ->
-            conn
-            |> json(%{
-                errors: %{
-                phone_number: ["Invalid Phone Number"]
-                }
-            })
+              byte_size(phone_number) > 15 ->
+                conn
+                |> json(%{
+                  errors: %{
+                    phone_number: ["Invalid Phone Number"]
+                  }
+                })
         
-            true ->
+              true ->
 
-                case VerificationAgentToolKit |> VerificationAgentToolKit.get phone_number do
+                case VerificationAgentToolKit |> VerificationAgentToolKit.delete_one phone_number do
 
                     nil ->
-                         
-                        # Generate a random code and Send it in an sms
-                        code = Enum.random(2000..99999)
-                        phone_number = user_params["phone_number"]
-
-                        spider_code = %{
-                            code: code,
-                            created: NaiveDateTime.utc_now,
-                            status: 1
-                        }
-
-                        VerificationAgentToolKit.put VerificationAgentToolKit, phone_number, spider_code
-
-                        Task.start(fn -> 
-                            Process.sleep(90000);
-                            VerificationAgentToolKit.delete_one VerificationAgentToolKit, phone_number
-                        end)
-
                         conn
                         |> json(%{
                             errors: %{

@@ -65,17 +65,17 @@ defmodule SpiderWeb.VerificationController do
                   }
                 })
         
-            byte_size(phone_number) > 15 ->
-            conn
-            |> json(%{
-                errors: %{
-                phone_number: ["Invalid Phone Number"]
-                }
-            })
+              byte_size(phone_number) > 15 ->
+                conn
+                |> json(%{
+                  errors: %{
+                    phone_number: ["Invalid Phone Number"]
+                  }
+                })
         
-            true ->
+              true ->
 
-                case VerificationAgentToolKit |> VerificationAgentToolKit.get phone_number do
+                case VerificationAgentToolKit |> VerificationAgentToolKit.delete_one phone_number do
 
                     nil ->
                          
