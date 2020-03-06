@@ -83,7 +83,7 @@ defmodule Spider.UserToolKit do
   # end
 
 
-  def get_user_by_phone(%{"phone_number" => phone_number}, check_status, what_to_check \\ 0) do
+  def get_user_by_phone(%{"phone_number" => phone_number}, check_status, what_to_check // 0) do
 
     user = Repo.get_by(User, phone_number: phone_number)
 
@@ -91,15 +91,7 @@ defmodule Spider.UserToolKit do
       nil -> 
         {:error, "User Not Found"}
       _ ->
-        if check_status do
-          if user.status == what_to_check do
-            {:ok, user}
-          else
-            {:error, user}
-          end
-        else
-          {:ok, user}
-        end
+        {:ok, user}
     end
 
   end

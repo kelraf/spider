@@ -7,7 +7,7 @@ defmodule SpiderWeb.VerificationController do
 
     def sms_sender(conn, %{"user" => user_params}) do
 
-        case user_params |> UserToolKit.get_user_by_phone false  do
+        case UserToolKit.get_user_by_phone user_params do
             {:ok, _} ->
                 conn
                 |> json(%{
@@ -20,7 +20,7 @@ defmodule SpiderWeb.VerificationController do
 
                 spider_code = %{
                     code: code,
-                    created: NaiveDateTime.utc_now,
+                    created: NaiveDateTime.utc_now
                     status: 1
                 }
 
@@ -53,18 +53,12 @@ defmodule SpiderWeb.VerificationController do
     def verify_code(conn, %{"user" => user_params}) do
 
         phone_number = user_params["phone_number"]
-        code = user_params["code"]
-
-        cond do
-            byte_size(phone_number) < 10 ->
-        end
         
         conn
         |> json(%{
             message: "Success",
             map: %{
-                phone_number: phone_number,
-                code: code
+                map: "Here is the map"
             }
         })
 

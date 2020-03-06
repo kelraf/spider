@@ -16,7 +16,7 @@ defmodule Spider.Accounts.User do
     field(:password_hash, :string)
     field(:phone_number, :string)
     field(:role, :string)
-    field(:status, :integer, default: 0)
+    field(:status, :string)
     field(:country_name, :string)
     field(:currency, :string)
     field(:currency_name, :string)
@@ -58,7 +58,8 @@ defmodule Spider.Accounts.User do
       :first_name,
       :last_name,
       :pin,
-      :role
+      :role,
+      :status
     ])
     |> validate_length(:raw_password, min: 6, max: 15)
     |> validate_length(:phone_number, min: 10, max: 15)

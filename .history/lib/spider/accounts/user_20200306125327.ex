@@ -58,7 +58,8 @@ defmodule Spider.Accounts.User do
       :first_name,
       :last_name,
       :pin,
-      :role
+      :role,
+      :status
     ])
     |> validate_length(:raw_password, min: 6, max: 15)
     |> validate_length(:phone_number, min: 10, max: 15)

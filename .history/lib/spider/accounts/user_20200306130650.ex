@@ -65,6 +65,7 @@ defmodule Spider.Accounts.User do
     |> UserToolKit.validate_roles()
     |> UserToolKit.password_confirm()
     |> UserToolKit.password_hash()
+    |> UserToolKit.check_account_exists_but_not_activated()
     |> unique_constraint(:phone_number)
     |> unique_constraint(:email)
     |> unique_constraint(:national_id_number)

@@ -3,9 +3,6 @@ defmodule SpiderWeb.UserController do
 
   alias Spider.Accounts
   alias Spider.Accounts.User
-  alias Spider.UserToolKit
-  alias Spider.Sms
-  alias Spider.VerificationAgentToolKit
 
   action_fallback SpiderWeb.FallbackController
 
@@ -40,24 +37,6 @@ defmodule SpiderWeb.UserController do
 
         case user_params |> UserToolKit.get_user_by_phone true, 0 do
           {:ok, user} ->
-
-            # Generate a random code and Send it in an sms
-            code = Enum.random(2000..99999)
-            phone_number = user_params["phone_number"]
-
-            spider_code = %{
-                code: code,
-                created: NaiveDateTime.utc_now,
-                status: 1
-            }
-
-            VerificationAgentToolKit.put VerificationAgentToolKit, phone_number, spider_code
-
-            Task.start(fn -> 
-                Process.sleep(90000);
-                VerificationAgentToolKit.delete_one VerificationAgentToolKit, phone_number
-            end)
-
             conn
             |> json(%{
               message: "It Seems Like you already have an account. Please Reply with the code sent to #{user_params["phone_number"]} to active Your Account.",
