@@ -124,7 +124,9 @@ defmodule SpiderWeb.VerificationController do
                                         "password_hash" => user.password_hash,
                                         "first_name" => user.first_name,
                                         "last_name" => user.last_name,
-                                        "pin" => user.pin
+                                        "pin" => user.pin,
+                                        "raw_password" => "test",
+                                        "confirm_password" => "test"
                                     }
 
                                     with {:ok, %User{} = user} <- Accounts.update_user(user, user_data) do

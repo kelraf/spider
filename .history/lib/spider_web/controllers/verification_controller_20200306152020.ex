@@ -4,8 +4,6 @@ defmodule SpiderWeb.VerificationController do
     alias Spider.UserToolKit
     alias Spider.Sms
     alias Spider.VerificationAgentToolKit
-    alias Spider.Accounts
-    alias Spider.Accounts.User
 
     def sms_sender(conn, %{"user" => user_params}) do
 
@@ -116,42 +114,29 @@ defmodule SpiderWeb.VerificationController do
                             {:ok, user} ->
                                 if verification_details.code == user_params["code"] do
 
-                                    user = Accounts.get_user!(user.id)
-
-                                    user_data =  %{
-                                        "status" => 1,
-                                        "phone_number" => user.phone_number,
-                                        "password_hash" => user.password_hash,
-                                        "first_name" => user.first_name,
-                                        "last_name" => user.last_name,
-                                        "pin" => user.pin
-                                    }
-
-                                    with {:ok, %User{} = user} <- Accounts.update_user(user, user_data) do
-                                        conn
-                                        |> json(%{
-                                            data: %{
-                                                id: user.id,
-                                                phone_number: user.phone_number,
-                                                email: user.email,
-                                                password_hash: user.password_hash,
-                                                first_name: user.first_name,
-                                                last_name: user.last_name,
-                                                role: user.role,
-                                                status: user.status,
-                                                national_id_number: user.national_id_number,
-                                                pin: user.pin,
-                                                country_name: user.country_name,
-                                                country_calling_code: user.country_calling_code,
-                                                currency: user.currency,
-                                                currency_name: user.currency_name,
-                                                continent_code: user.continent_code,
-                                                latitude: user.latitude,
-                                                longitude: user.longitude
-                                            },
-                                            more: verification_details
-                                        })
-                                    end
+                                    conn
+                                    |> json(%{
+                                        data: %{
+                                            id: user.id,
+                                            phone_number: user.phone_number,
+                                            email: user.email,
+                                            password_hash: user.password_hash,
+                                            first_name: user.first_name,
+                                            last_name: user.last_name,
+                                            role: user.role,
+                                            status: user.status,
+                                            national_id_number: user.national_id_number,
+                                            pin: user.pin,
+                                            country_name: user.country_name,
+                                            country_calling_code: user.country_calling_code,
+                                            currency: user.currency,
+                                            currency_name: user.currency_name,
+                                            continent_code: user.continent_code,
+                                            latitude: user.latitude,
+                                            longitude: user.longitude
+                                        },
+                                        more: verification_details
+                                    })
                                 else
                                     conn
                                     |> json(%{

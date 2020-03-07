@@ -9,7 +9,7 @@ defmodule Spider.UserToolKit do
   def password_hash(changeset, action) do
 
     if action == "normal" do
-
+      
       case get_field(changeset, :raw_password) do
         nil ->
           changeset
@@ -17,67 +17,8 @@ defmodule Spider.UserToolKit do
           put_change(changeset, :password_hash, Comeonin.Bcrypt.hashpwsalt(raw_password))
       end
 
-    else
-      changeset
     end
     
-  end
-
-  def passwords(changeset, action) do
-    if action == "update" do
-
-      raw_password = get_field(changeset, :raw_password)
-      confirm_password = get_field(changeset, :confirm_password)
-      password_hash = get_field(changeset, :password_hash)
-
-      if raw_password == nil and confirm_password == nil or password_hash == nil do
-        changeset
-      else
-        cond do
-          byte_size(raw_password) < 6 ->
-            add_error(changeset, :raw_password, "Your password is too short")
-          raw_password !== confirm_password ->
-            add_error(changeset, :raw_password, "Your passwords must match")
-          true -> 
-            put_change(changeset, :password_hash, Comeonin.Bcrypt.hashpwsalt(raw_password))
-        end
-
-      end
-
-    else
-
-      case get_field(changeset, :raw_password) do
-        nil ->
-          add_error(changeset, :raw_password, "raw password can't be blank")
-        raw_password ->
-
-          case get_field(changeset, :confirm_password) do
-            nil ->
-
-              add_error(changeset, :confirm_password, "confirm password can't be blank")
-              
-            confirm_password ->
-
-              cond do
-                byte_size(raw_password) < 6 ->
-
-                  add_error(changeset, :raw_password, "password too short")
-
-                raw_password !== confirm_password ->
-
-                  add_error(changeset, :confirm_password, "Your Passwords Must Match") 
-
-                true ->
-
-                  put_change(changeset, :password_hash, Comeonin.Bcrypt.hashpwsalt(raw_password))
-
-              end
-
-          end
-
-      end
-
-    end
   end
 
   def password_confirm(changeset, action) do

@@ -30,18 +30,12 @@ defmodule Spider.UserToolKit do
       confirm_password = get_field(changeset, :confirm_password)
       password_hash = get_field(changeset, :password_hash)
 
-      if raw_password == nil and confirm_password == nil or password_hash == nil do
+      IO.puts raw_password
+      
+      if byte_size(raw_password) == 0 do
         changeset
       else
-        cond do
-          byte_size(raw_password) < 6 ->
-            add_error(changeset, :raw_password, "Your password is too short")
-          raw_password !== confirm_password ->
-            add_error(changeset, :raw_password, "Your passwords must match")
-          true -> 
-            put_change(changeset, :password_hash, Comeonin.Bcrypt.hashpwsalt(raw_password))
-        end
-
+        changeset
       end
 
     else

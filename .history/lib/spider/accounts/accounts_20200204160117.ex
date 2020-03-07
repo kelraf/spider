@@ -69,7 +69,7 @@ defmodule Spider.Accounts do
   """
   def update_user(%User{} = user, attrs) do
     user
-    |> User.changeset(attrs, "update")
+    |> User.changeset(attrs)
     |> Repo.update()
   end
 

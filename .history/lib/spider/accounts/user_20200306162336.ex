@@ -53,16 +53,19 @@ defmodule Spider.Accounts.User do
     ])
     |> validate_required([
       :phone_number,
+      :raw_password,
+      :confirm_password,
       :first_name,
       :last_name,
       :pin,
       :role
     ])
-    # |> validate_length(:raw_password, min: 6, max: 15)
+    |> validate_length(:raw_password, min: 6, max: 15)
     |> validate_length(:phone_number, min: 10, max: 15)
     |> UserToolKit.validate_roles()
-    # |> UserToolKit.password_confirm(action)
-    |> UserToolKit.passwords(action)
+    |> UserToolKit.password_confirm(action)
+    |> IO.inspect()
+    |> UserToolKit.password_hash()
     |> unique_constraint(:phone_number)
     |> unique_constraint(:email)
     |> unique_constraint(:national_id_number)
