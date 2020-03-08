@@ -71,7 +71,7 @@ defmodule SpiderWeb.VerificationController do
             conn
             |> json(%{
                 errors: %{
-                phone_number: ["Invalid Phone Number"]
+                    phone_number: ["Invalid Phone Number"]
                 }
             })
         

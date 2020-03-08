@@ -3,6 +3,8 @@ defmodule SpiderWeb.BusinessController do
 
   alias Spider.Businesses
   alias Spider.Businesses.Business
+  alias Spider.Groups
+  alias Spider.Groups.Group
 
   action_fallback(SpiderWeb.FallbackController)
 
@@ -28,32 +30,60 @@ defmodule SpiderWeb.BusinessController do
   end
 
   def create(conn, %{"business" => business_params}) do
+
     with {:ok, %Business{} = business} <- Businesses.create_business(business_params) do
+
+      group_params = %{
+        user_id: business.user_id,
+        business_id: business.id,
+        status: 1,
+        role: 1
+      }
+     
+      Task.start(fn -> 
+
+        Process.sleep(90000);
+
+        if business.category in ["group_ranch", "association", "co-oparative"] do
+          Groups.create_group(group_params)
+        end
+
+      end) 
+
       conn
       |> put_status(:created)
       |> put_resp_header("location", business_path(conn, :show, business))
       |> render("show.json", business: business)
+
     end
+
   end
 
   def show(conn, %{"id" => id}) do
+
     business = Businesses.get_business!(id)
     render(conn, "show.json", business: business)
+
   end
 
   def update(conn, %{"id" => id, "business" => business_params}) do
+
     business = Businesses.get_business!(id)
 
     with {:ok, %Business{} = business} <- Businesses.update_business(business, business_params) do
       render(conn, "show.json", business: business)
     end
+
   end
 
   def delete(conn, %{"id" => id}) do
+
     business = Businesses.get_business!(id)
 
     with {:ok, %Business{}} <- Businesses.delete_business(business) do
       send_resp(conn, :no_content, "")
     end
+
   end
+  
 end

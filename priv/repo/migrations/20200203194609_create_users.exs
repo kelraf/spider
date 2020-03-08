@@ -9,7 +9,7 @@ defmodule Spider.Repo.Migrations.CreateUsers do
       add :first_name, :string
       add :last_name, :string
       add :role, :string
-      add :status, :integer
+      add :status, :integer, default: 0, null: false
       add :national_id_number, :integer
       add :pin, :string
       add :country_name, :string

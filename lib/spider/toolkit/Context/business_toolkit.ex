@@ -47,5 +47,5 @@ defmodule Spider.BusinessToolKit do
         end
 
     end
-
+    
 end

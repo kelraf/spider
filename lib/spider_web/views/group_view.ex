@@ -11,10 +11,13 @@ defmodule SpiderWeb.GroupView do
   end
 
   def render("group.json", %{group: group}) do
-    %{id: group.id,
+    %{
+      id: group.id,
       user_id: group.user_id,
       business_id: group.business_id,
-      status: group.status}
+      status: group.status,
+      role: group.role
+    }
   end
 
   def render("group.json", %{group: group}) do
@@ -22,7 +25,8 @@ defmodule SpiderWeb.GroupView do
       id: group.id,
       user_id: group.user_id,
       business_id: group.business_id,
-      status: group.status
+      status: group.status,
+      role: group.role
     }
   end
 end
