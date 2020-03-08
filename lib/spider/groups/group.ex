@@ -18,11 +18,11 @@ defmodule Spider.Groups.Group do
   end
 
   @doc false
-  def changeset(group, attrs) do
+  def changeset(group, attrs, action \\ "normal") do
     group
     |> cast(attrs, [:user_id, :business_id, :status, :role])
-    |> validate_required([:user_id, :business_id, :status, :role])
+    |> validate_required([:user_id, :business_id])
     |> GroupToolKit.validate_restrict_join_non_group_business()
-    |> GroupToolKit.validate_one_for_one_user_group_relationship()
+    |> GroupToolKit.validate_one_for_one_user_group_relationship(action)
   end
 end

@@ -69,7 +69,7 @@ defmodule Spider.Groups do
   """
   def update_group(%Group{} = group, attrs) do
     group
-    |> Group.changeset(attrs)
+    |> Group.changeset(attrs, "update")
     |> Repo.update()
   end
 

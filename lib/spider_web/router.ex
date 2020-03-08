@@ -47,7 +47,6 @@ defmodule SpiderWeb.Router do
     pipe_through [:api]
 
     # Users Starts
-    # resources "/users", UserController
     get "/users", UserController, :index # Belongs to Admins
     get "/users/:id", UserController, :show
     put "/users/:id", UserController, :update
