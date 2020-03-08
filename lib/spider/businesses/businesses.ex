@@ -22,6 +22,18 @@ defmodule Spider.Businesses do
     Repo.all(Business)
   end
 
+  @doc """
+  Get all Businesses belonging to a particular user i.e using user id
+  
+  ## Examples
+
+    iex> get_businesses_using_user_id(user_id)
+    {:ok, [%Business{}, ...]}
+
+    iex> get_businesses_using_user_id(user_id)
+    {:empty, "Empty"}
+
+  """
   def get_businesses_using_user_id(user_id) do
 
     query = from b in Business,

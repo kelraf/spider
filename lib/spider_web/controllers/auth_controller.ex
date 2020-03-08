@@ -9,7 +9,15 @@ defmodule SpiderWeb.AuthController do
   def login(conn, %{"user_credentials" => user_credentials}) do
     
     case Auth.login(user_credentials) do
+      
       {:error, message} ->
+        conn
+        |> json(%{
+          message: message
+        })
+
+      {:not_verified, message} ->
+
         conn
         |> json(%{
           message: message
