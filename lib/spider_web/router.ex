@@ -24,6 +24,7 @@ defmodule SpiderWeb.Router do
   end
 
   scope "/api", SpiderWeb do
+    
     pipe_through :api
 
     # Auth Starts
@@ -61,6 +62,11 @@ defmodule SpiderWeb.Router do
     delete "/businesses/:id", BusinessController, :delete
     get "/businesses/user/:user_id", BusinessController, :get_businesses_using_user_id
     # End of business routes
+    
+    # Groups Routes
+    resources "/groups", GroupController
+
+    # Groups Routes End
 
     # Transtools Routes
     post "/transtools", TranstoolController, :create
@@ -82,7 +88,6 @@ defmodule SpiderWeb.Router do
     resources "/livestocks", LivestockController
     resources "/produces", ProduceController
     resources "/products", ProductController
-    resources "/groups", GroupController
 
   end
   

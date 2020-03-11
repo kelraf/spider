@@ -13,9 +13,14 @@ config :spider,
 config :spider, SpiderWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "azFxZsvIn3FfpkdQVTdk2Qbrz/guhCQj7Csh6pE92r0aulE97QPNrIDmUr59fv/l",
-  render_errors: [view: SpiderWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Spider.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  render_errors: [
+    view: SpiderWeb.ErrorView, 
+    accepts: ~w(html json)
+    ],
+  pubsub: [
+            name: Spider.PubSub,
+            adapter: Phoenix.PubSub.PG2
+          ]
 
 # Configures Elixir's Logger
 config :logger, :console,

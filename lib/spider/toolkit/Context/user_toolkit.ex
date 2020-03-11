@@ -164,4 +164,18 @@ defmodule Spider.UserToolKit do
 
   end
 
+  # ensure that the email looks valid
+  def validate_email(email) when is_binary(email) do
+    case Regex.run(~r/^[\w.!#$%&’*+\-\/=?\^`{|}~]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*$/i, email) do
+      nil ->
+        {:error, "Invalid email"}
+      [email] ->
+        try do
+          Regex.run(~r/(\w+)@([\w.]+)/, email) |> validate_email
+        rescue
+          _ -> {:error, "Invalid email"}
+        end
+    end
+  end
+
 end

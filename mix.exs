@@ -45,7 +45,8 @@ defmodule Spider.Mixfile do
       {:comeonin, "~> 2.6.0"},
       {:cors_plug, "~> 2.0"},
       {:guardian, github: "ueberauth/guardian"},
-      {:httpoison, "~> 1.6"}
+      {:httpoison, "~> 1.6"},
+      {:number, "~> 0.5.6"}
     ]
   end
 
