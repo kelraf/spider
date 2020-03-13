@@ -11,11 +11,28 @@ defmodule SpiderWeb.VessleController do
     render(conn, "index.json", vessles: vessles)
   end
 
+  def get_vessles_using_business_id(conn, %{"business_id" => business_id}) do
+    
+    case Vessles.get_vessles_using_business_id(business_id) do
+      {:empty, _rubish} ->
+        conn
+        |> json(%{
+          message: "No Vessels Related Your Business"
+        })
+
+      {:ok, vessles} ->
+        conn
+        |> render("index.json", vessles: vessles)
+        
+    end
+
+  end
+
   def create(conn, %{"vessle" => vessle_params}) do
     with {:ok, %Vessle{} = vessle} <- Vessles.create_vessle(vessle_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", vessle_path(conn, :show, vessle))
+      # |> put_resp_header("location", vessle_path(conn, :show, vessle))
       |> render("show.json", vessle: vessle)
     end
   end

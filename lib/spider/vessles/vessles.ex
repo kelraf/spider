@@ -7,6 +7,7 @@ defmodule Spider.Vessles do
   alias Spider.Repo
 
   alias Spider.Vessles.Vessle
+  alias Spider.Helpers.SpiderData
 
   @doc """
   Returns the list of vessles.
@@ -36,6 +37,25 @@ defmodule Spider.Vessles do
 
   """
   def get_vessle!(id), do: Repo.get!(Vessle, id)
+
+  def get_vessles_using_business_id(business_id) do
+    
+    query = from v in Vessle,
+                where: v.business_id == ^business_id,
+                select: v
+
+    vessles = Repo.all(query)
+
+    case vessles |> SpiderData.list_empty? do
+      true -> 
+        {:empty, "Empty"}
+
+      false ->
+        {:ok, vessles}
+        
+    end
+
+  end
 
   @doc """
   Creates a vessle.

@@ -85,13 +85,31 @@ defmodule SpiderWeb.Router do
     delete "/trains/:id", TrainController, :delete
     # Trains Routes End
 
+    # Vessle Router
+    post "/vessles", VessleController, :create
+    get "/vessles", VessleController, :index # Belongs to Admins
+    get "/vessles/:id", VessleController, :show
+    get "/vessles/business/:business_id", VessleController, :get_vessles_using_business_id
+    put "/vessles/:id", VessleController, :update
+    delete "/vessles/:id", VessleController, :delete
+    # Vessle Router End
+
+    # Flight Routes
+    post "/flights", FlightController, :create
+    get "/flights", FlightController, :index # Belongs to admins
+    get "/flights/:id", FlightController, :show
+    get "/flights/business/:business_id", FlightController, :get_flights_using_business_id
+    put "/flights/:id", FlightController, :update
+    delete "/flights/:id", FlightController, :delete
+    # Flight Routes End
+
     # Transtools Routes
     post "/transtools", TranstoolController, :create
     get "/transtools", TranstoolController, :index # Belongs to admins
     get "/transtools/:id", TranstoolController, :show
+    get "/transtools/business/:business_id", TranstoolController, :get_transtool_using_business_id
     put "/transtools/:id", TranstoolController, :update
     delete "/transtools/:id", TranstoolController, :delete
-    get "/transtools/business/:business_id", TranstoolController, :get_transtool_using_business_id
     # Transtools Routes End
 
     # transtooluserrels Routes Starts

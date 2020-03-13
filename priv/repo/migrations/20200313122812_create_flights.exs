@@ -1,8 +1,8 @@
-defmodule Spider.Repo.Migrations.CreateVessles do
+defmodule Spider.Repo.Migrations.CreateFlights do
   use Ecto.Migration
 
   def change do
-    create table(:vessles) do
+    create table(:flights) do
       add :unique_number, :string
       add :role, :string
 
@@ -12,6 +12,6 @@ defmodule Spider.Repo.Migrations.CreateVessles do
       timestamps()
     end
 
-    create unique_index(:vessles, [:unique_number])
+    create unique_index(:flights, [:unique_number])
   end
 end

@@ -11,8 +11,12 @@ defmodule SpiderWeb.VessleView do
   end
 
   def render("vessle.json", %{vessle: vessle}) do
-    %{id: vessle.id,
+    %{
+      id: vessle.id,
       unique_number: vessle.unique_number,
-      role: vessle.role}
+      role: vessle.role,
+      user_id: vessle.user_id,
+      business_id: vessle.business_id
+    }
   end
 end
