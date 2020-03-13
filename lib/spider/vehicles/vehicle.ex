@@ -1,11 +1,16 @@
 defmodule Spider.Vehicles.Vehicle do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Spider.Accounts.User
+  alias Spider.Businesses.Business
 
 
   schema "vehicles" do
     field :registration_number, :string
     field :role, :string
+
+    belongs_to(:user, User)
+    belongs_to(:business, Business)
 
     timestamps()
   end
@@ -13,8 +18,8 @@ defmodule Spider.Vehicles.Vehicle do
   @doc false
   def changeset(vehicle, attrs) do
     vehicle
-    |> cast(attrs, [:registration_number, :role])
-    |> validate_required([:registration_number, :role])
+    |> cast(attrs, [:registration_number, :role, :user_id, :business_id])
+    |> validate_required([:registration_number, :role, :user_id, :business_id])
     |> unique_constraint(:registration_number)
   end
 end

@@ -11,11 +11,28 @@ defmodule SpiderWeb.VehicleController do
     render(conn, "index.json", vehicles: vehicles)
   end
 
+  def get_vehicles_using_business_id(conn, %{"business_id" => business_id}) do
+    
+    case Vehicles.get_vehicles_using_business_id(business_id) do
+      {:empty, _nonses} ->
+        conn
+        |> json(%{
+          message: "No Vehicles Related Your Business"
+        })
+
+      {:ok, vehicles} ->
+        conn
+        |> render("index.json", vehicles: vehicles)
+        
+    end
+
+  end
+
   def create(conn, %{"vehicle" => vehicle_params}) do
     with {:ok, %Vehicle{} = vehicle} <- Vehicles.create_vehicle(vehicle_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", vehicle_path(conn, :show, vehicle))
+      # |> put_resp_header("location", vehicle_path(conn, :show, vehicle))
       |> render("show.json", vehicle: vehicle)
     end
   end

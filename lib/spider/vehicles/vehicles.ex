@@ -7,6 +7,7 @@ defmodule Spider.Vehicles do
   alias Spider.Repo
 
   alias Spider.Vehicles.Vehicle
+  alias Spider.Helpers.SpiderData
 
   @doc """
   Returns the list of vehicles.
@@ -36,6 +37,25 @@ defmodule Spider.Vehicles do
 
   """
   def get_vehicle!(id), do: Repo.get!(Vehicle, id)
+
+  def get_vehicles_using_business_id(business_id) do
+    
+    query = from v in Vehicle,
+                where: v.business_id == ^business_id,
+                select: v
+
+    vehicles = Repo.all(query)
+
+    case vehicles |> SpiderData.list_empty? do
+      true -> 
+        {:empty, "Empty"}
+
+      false ->
+        {:ok, vehicles}
+        
+    end
+
+  end
 
   @doc """
   Creates a vehicle.

@@ -11,8 +11,12 @@ defmodule SpiderWeb.VehicleView do
   end
 
   def render("vehicle.json", %{vehicle: vehicle}) do
-    %{id: vehicle.id,
+    %{
+      id: vehicle.id,
       registration_number: vehicle.registration_number,
-      role: vehicle.role}
+      role: vehicle.role,
+      user_id: vehicle.user_id,
+      business_id: vehicle.business_id
+    }
   end
 end
