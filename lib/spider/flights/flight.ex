@@ -11,7 +11,7 @@ defmodule Spider.Flights.Flight do
 
     belongs_to(:user, User)
     belongs_to(:business, Business)
-
+ 
     timestamps()
   end
 
