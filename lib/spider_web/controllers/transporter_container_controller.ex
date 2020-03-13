@@ -15,7 +15,7 @@ defmodule SpiderWeb.TransporterContainerController do
     with {:ok, %TransporterContainer{} = transporter_container} <- TransporterContainers.create_transporter_container(transporter_container_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", transporter_container_path(conn, :show, transporter_container))
+      # |> put_resp_header("location", transporter_container_path(conn, :show, transporter_container))
       |> render("show.json", transporter_container: transporter_container)
     end
   end

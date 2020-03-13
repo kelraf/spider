@@ -103,6 +103,14 @@ defmodule SpiderWeb.Router do
     delete "/flights/:id", FlightController, :delete
     # Flight Routes End
 
+    # Transporter Container Routes
+    post "/transporter-containers", TransporterContainerController, :create
+    get "/transporter-containers", TransporterContainerController, :index # Belongs to admins
+    get "/transporter-containers/:id", TransporterContainerController, :show
+    put "/transporter-containers/:id", TransporterContainerController, :update
+    delete "/transporter-containers/:id", TransporterContainerController, :delete
+    # Transporter Container Routes End
+
     # Transtools Routes
     post "/transtools", TranstoolController, :create
     get "/transtools", TranstoolController, :index # Belongs to admins

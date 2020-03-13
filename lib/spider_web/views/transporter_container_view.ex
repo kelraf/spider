@@ -11,7 +11,12 @@ defmodule SpiderWeb.TransporterContainerView do
   end
 
   def render("transporter_container.json", %{transporter_container: transporter_container}) do
-    %{id: transporter_container.id,
-      order_id: transporter_container.order_id}
+    %{
+      id: transporter_container.id,
+      order_id: transporter_container.order_id,
+      user_id: transporter_container.user_id,
+      business_id: transporter_container.business_id,
+      status: transporter_container.status
+    }
   end
 end
