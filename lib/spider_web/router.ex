@@ -76,6 +76,14 @@ defmodule SpiderWeb.Router do
     delete "/vehicles/:id", VehicleController, :delete
     # Vehicles Routes End
 
+    # Trains Routes
+    post "/trains", TrainController, :create
+    get "/trains", TrainController, :index # Belongs Admins
+    get "/trains/:id", TrainController, :show
+    get "/trains/business/:business_id", TrainController, :get_trains_using_business_id
+    put "/trains/:id", TrainController, :update
+    # Trains Routes End
+
     # Transtools Routes
     post "/transtools", TranstoolController, :create
     get "/transtools", TranstoolController, :index # Belongs to admins
