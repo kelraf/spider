@@ -11,6 +11,23 @@ defmodule SpiderWeb.TrainController do
     render(conn, "index.json", trains: trains)
   end
 
+  def get_trains_using_business_id(conn, %{"business_id" => business_id}) do
+    
+    case Trains.get_trains_using_business_id(business_id) do
+      {:empty, _rubish} ->
+        conn
+        |> json(%{
+          message: "No Trains Related Your Business"
+        })
+
+      {:ok, trains} ->
+        conn
+        |> render("index.json", trains: trains)
+        
+    end
+
+  end
+
   def create(conn, %{"train" => train_params}) do
     with {:ok, %Train{} = train} <- Trains.create_train(train_params) do
       conn

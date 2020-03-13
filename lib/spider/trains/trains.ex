@@ -7,6 +7,7 @@ defmodule Spider.Trains do
   alias Spider.Repo
 
   alias Spider.Trains.Train
+  alias Spider.Helpers.SpiderData
 
   @doc """
   Returns the list of trains.
@@ -36,6 +37,25 @@ defmodule Spider.Trains do
 
   """
   def get_train!(id), do: Repo.get!(Train, id)
+
+  def get_trains_using_business_id(business_id) do
+    
+    query = from t in Train,
+                where: t.business_id == ^business_id,
+                select: t
+
+    trains = Repo.all(query)
+
+    case trains |> SpiderData.list_empty? do
+      true -> 
+        {:empty, "Empty"}
+
+      false ->
+        {:ok, trains}
+        
+    end
+
+  end
 
   @doc """
   Creates a train.

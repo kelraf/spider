@@ -82,6 +82,7 @@ defmodule SpiderWeb.Router do
     get "/trains/:id", TrainController, :show
     get "/trains/business/:business_id", TrainController, :get_trains_using_business_id
     put "/trains/:id", TrainController, :update
+    delete "/trains/:id", TrainController, :delete
     # Trains Routes End
 
     # Transtools Routes
