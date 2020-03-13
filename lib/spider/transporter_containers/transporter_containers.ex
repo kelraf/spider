@@ -38,7 +38,7 @@ defmodule Spider.TransporterContainers do
   """
   def get_transporter_container!(id), do: Repo.get!(TransporterContainer, id)
 
-  def get_transporter_container_using_business_id(business_id) do
+  def get_transporter_containers_using_business_id(business_id) do
     
     query = from tc in TransporterContainer,
                 where: tc.business_id == ^business_id,

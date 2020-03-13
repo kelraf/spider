@@ -107,6 +107,7 @@ defmodule SpiderWeb.Router do
     post "/transporter-containers", TransporterContainerController, :create
     get "/transporter-containers", TransporterContainerController, :index # Belongs to admins
     get "/transporter-containers/:id", TransporterContainerController, :show
+    get "/transporter-containers/business/:business_id", TransporterContainerController, :get_transporter_containers_using_business_id
     put "/transporter-containers/:id", TransporterContainerController, :update
     delete "/transporter-containers/:id", TransporterContainerController, :delete
     # Transporter Container Routes End
