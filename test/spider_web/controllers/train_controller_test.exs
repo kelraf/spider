@@ -4,9 +4,9 @@ defmodule SpiderWeb.TrainControllerTest do
   alias Spider.Trains
   alias Spider.Trains.Train
 
-  @create_attrs %{unique_number: "some unique_number"}
-  @update_attrs %{unique_number: "some updated unique_number"}
-  @invalid_attrs %{unique_number: nil}
+  @create_attrs %{role: "some role", unique_number: "some unique_number"}
+  @update_attrs %{role: "some updated role", unique_number: "some updated unique_number"}
+  @invalid_attrs %{role: nil, unique_number: nil}
 
   def fixture(:train) do
     {:ok, train} = Trains.create_train(@create_attrs)
@@ -32,6 +32,7 @@ defmodule SpiderWeb.TrainControllerTest do
       conn = get conn, train_path(conn, :show, id)
       assert json_response(conn, 200)["data"] == %{
         "id" => id,
+        "role" => "some role",
         "unique_number" => "some unique_number"}
     end
 
@@ -51,6 +52,7 @@ defmodule SpiderWeb.TrainControllerTest do
       conn = get conn, train_path(conn, :show, id)
       assert json_response(conn, 200)["data"] == %{
         "id" => id,
+        "role" => "some updated role",
         "unique_number" => "some updated unique_number"}
     end
 
