@@ -11,6 +11,23 @@ defmodule SpiderWeb.TransporterController do
     render(conn, "index.json", transporters: transporters)
   end
 
+  def get_transporters_using_transporter_container_id(conn, %{"transporter_container_id" => transporter_container_id}) do
+    
+    case Transporters.get_transporters_using_transporter_container_id(transporter_container_id) do
+      {:empty, _nonses} ->
+        conn
+        |> json(%{
+          message: "No Transport Containers Related To Your Business"
+        })
+
+      {:ok, transporters} ->
+        conn
+        |> render("index.json", transporters: transporters)
+        
+    end
+
+  end
+
   def create(conn, %{"transporter" => transporter_params}) do
     with {:ok, %Transporter{} = transporter} <- Transporters.create_transporter(transporter_params) do
       conn

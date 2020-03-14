@@ -23,6 +23,6 @@ defmodule Spider.Transporters.Transporter do
   def changeset(transporter, attrs) do
     transporter
     |> cast(attrs, [:transporter_id, :longitude_from, :latitude_from, :longitude_to, :latitude_to, :status, :transporter_container_id, :mode])
-    |> validate_required([:transporter_id, :longitude_from, :latitude_from, :longitude_to, :latitude_to, :status, :transporter_container_id, :mode])
+    |> validate_required([:longitude_from, :latitude_from, :longitude_to, :latitude_to, :status, :transporter_container_id, :mode])
   end
 end

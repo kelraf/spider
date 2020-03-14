@@ -11,13 +11,16 @@ defmodule SpiderWeb.TransporterView do
   end
 
   def render("transporter.json", %{transporter: transporter}) do
-    %{id: transporter.id,
+    %{
+      id: transporter.id,
       transporter_id: transporter.transporter_id,
       logitude_from: transporter.longitude_from,
       latitude_from: transporter.latitude_from,
       longitude_to: transporter.longitude_to,
       latitude_to: transporter.latitude_to,
-      status: transporter.status
+      status: transporter.status,
+      transporter_container_id: transporter.transporter_container_id,
+      mode: transporter.mode
     }
   end
 end

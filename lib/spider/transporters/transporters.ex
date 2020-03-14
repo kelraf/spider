@@ -7,6 +7,7 @@ defmodule Spider.Transporters do
   alias Spider.Repo
 
   alias Spider.Transporters.Transporter
+  alias Spider.Helpers.SpiderData
 
   @doc """
   Returns the list of transporters.
@@ -36,6 +37,25 @@ defmodule Spider.Transporters do
 
   """
   def get_transporter!(id), do: Repo.get!(Transporter, id)
+
+  def get_transporters_using_transporter_container_id(transporter_container_id) do
+    
+    query = from t in Transporter,
+                where: t.transporter_container_id == ^transporter_container_id,
+                select: t
+      
+      transporters= Repo.all(query)
+
+    case transporters |> SpiderData.list_empty? do
+      true -> 
+        {:empty, "Empty"}
+
+      false ->
+        {:ok, transporters}
+        
+    end
+
+  end
 
   @doc """
   Creates a transporter.

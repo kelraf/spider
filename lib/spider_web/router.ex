@@ -115,6 +115,10 @@ defmodule SpiderWeb.Router do
     # Transporter Routes
     post "/transporters", TransporterController, :create
     get "/transporters", TransporterController, :index
+    get "/transporters/:id", TransporterController, :show
+    put "/transporters/:id", TransporterController, :update
+    delete "/transporters/:id", TransporterController, :delete
+    get "/transporters/transporter-container/:transporter_container_id", TransporterController, :get_transporters_using_transporter_container_id
     # Transporter Routes End
 
     # Transtools Routes
