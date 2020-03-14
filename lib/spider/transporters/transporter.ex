@@ -8,7 +8,7 @@ defmodule Spider.Transporters.Transporter do
   schema "transporters" do
     field :latitude_from, :string
     field :latitude_to, :string
-    field :logitude_from, :string
+    field :longitude_from, :string
     field :longitude_to, :string
     field :status, :integer, default: 0
     field :transporter_id, :integer
@@ -22,7 +22,7 @@ defmodule Spider.Transporters.Transporter do
   @doc false
   def changeset(transporter, attrs) do
     transporter
-    |> cast(attrs, [:transporter_id, :logitude_from, :latitude_from, :longitude_to, :latitude_to, :status, :transporter_container_id, :mode])
-    |> validate_required([:transporter_id, :logitude_from, :latitude_from, :longitude_to, :latitude_to, :status, :transporter_container_id, :mode])
+    |> cast(attrs, [:transporter_id, :longitude_from, :latitude_from, :longitude_to, :latitude_to, :status, :transporter_container_id, :mode])
+    |> validate_required([:transporter_id, :longitude_from, :latitude_from, :longitude_to, :latitude_to, :status, :transporter_container_id, :mode])
   end
 end

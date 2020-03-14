@@ -4,7 +4,7 @@ defmodule Spider.Repo.Migrations.CreateTransporters do
   def change do
     create table(:transporters) do
       add :transporter_id, :integer
-      add :logitude_from, :string
+      add :longitude_from, :string
       add :latitude_from, :string
       add :longitude_to, :string
       add :latitude_to, :string
