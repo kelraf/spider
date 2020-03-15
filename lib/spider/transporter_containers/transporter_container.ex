@@ -4,13 +4,16 @@ defmodule Spider.TransporterContainers.TransporterContainer do
 
   alias Spider.Accounts.User
   alias Spider.Businesses.Business
+  alias Spider.Transporters.Transporter
 
   schema "transportercontainer" do
     field :order_id, :integer
-    field :status, :integer
+    field :status, :integer, default: 0
 
     belongs_to(:user, User)
     belongs_to(:business, Business)
+
+    has_many(:transporters, Transporter)
 
     timestamps()
   end

@@ -116,10 +116,19 @@ defmodule SpiderWeb.Router do
     post "/transporters", TransporterController, :create
     get "/transporters", TransporterController, :index
     get "/transporters/:id", TransporterController, :show
+    get "/transporters/transporter-container/:transporter_container_id", TransporterController, :get_transporters_using_transporter_container_id
     put "/transporters/:id", TransporterController, :update
     delete "/transporters/:id", TransporterController, :delete
-    get "/transporters/transporter-container/:transporter_container_id", TransporterController, :get_transporters_using_transporter_container_id
     # Transporter Routes End
+
+    # Order Container Routes
+    post "/order-containers", OrderContainerController, :create
+    get "/order-containers", OrderContainerController, :index # Belongs to Admins
+    get "/order-containers/:id", OrderContainerController, :show 
+    get "/order-containers/business/:business_id", OrderContainerController, :get_order_container_using_business_id
+    put "/order-containers/:id", OrderContainerController, :update
+    delete "/order-containers/:id", OrderContainerController, :delete 
+    # Order Container Rounts End
 
     # Transtools Routes
     post "/transtools", TranstoolController, :create

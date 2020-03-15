@@ -44,7 +44,7 @@ defmodule Spider.TransporterContainers do
                 where: tc.business_id == ^business_id,
                 select: tc
       
-      transporter_containers = Repo.all(query)
+      transporter_containers = Repo.all(query) |> Repo.preload(:transporters)
 
     case transporter_containers |> SpiderData.list_empty? do
       true -> 

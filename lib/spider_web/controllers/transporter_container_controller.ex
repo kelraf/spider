@@ -1,13 +1,14 @@
 defmodule SpiderWeb.TransporterContainerController do
   use SpiderWeb, :controller
 
+  alias Spider.Repo
   alias Spider.TransporterContainers
   alias Spider.TransporterContainers.TransporterContainer
 
   action_fallback SpiderWeb.FallbackController
 
   def index(conn, _params) do
-    transportercontainer = TransporterContainers.list_transportercontainer()
+    transportercontainer = TransporterContainers.list_transportercontainer() |> Repo.preload(:transporters)
     render(conn, "index.json", transportercontainer: transportercontainer)
   end
 
@@ -33,12 +34,12 @@ defmodule SpiderWeb.TransporterContainerController do
       conn
       |> put_status(:created)
       # |> put_resp_header("location", transporter_container_path(conn, :show, transporter_container))
-      |> render("show.json", transporter_container: transporter_container)
+      |> render("show.json", transporter_container: transporter_container |> Repo.preload(:transporters))
     end
   end
 
   def show(conn, %{"id" => id}) do
-    transporter_container = TransporterContainers.get_transporter_container!(id)
+    transporter_container = TransporterContainers.get_transporter_container!(id) |> Repo.preload(:transporters)
     render(conn, "show.json", transporter_container: transporter_container)
   end
 
@@ -46,7 +47,7 @@ defmodule SpiderWeb.TransporterContainerController do
     transporter_container = TransporterContainers.get_transporter_container!(id)
 
     with {:ok, %TransporterContainer{} = transporter_container} <- TransporterContainers.update_transporter_container(transporter_container, transporter_container_params) do
-      render(conn, "show.json", transporter_container: transporter_container)
+      render(conn, "show.json", transporter_container: transporter_container |> Repo.preload(:transporters))
     end
   end
 
