@@ -9,7 +9,7 @@ defmodule Spider.Livestocks.Livestock do
   schema "livestocks" do
 
     field :category, :string
-    field :number, :integer
+    field :quantity, :integer
     field :type, :string
 
     belongs_to(:user, User)
@@ -21,7 +21,7 @@ defmodule Spider.Livestocks.Livestock do
   @doc false
   def changeset(livestock, attrs) do
     livestock
-    |> cast(attrs, [:type, :category, :number, :user_id, :business_id])
-    |> validate_required([:type, :category, :number, :user_id, :business_id])
+    |> cast(attrs, [:type, :category, :quantity, :user_id, :business_id])
+    |> validate_required([:type, :category, :quantity, :user_id, :business_id])
   end
 end

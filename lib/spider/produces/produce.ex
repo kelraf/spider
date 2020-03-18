@@ -5,9 +5,8 @@ defmodule Spider.Produces.Produce do
   alias Spider.Accounts.User
   alias Spider.Businesses.Business
 
-
   schema "produces" do
-    field :amount, :integer
+    field :quantity, :integer
     field :category, :string
     field :type, :string
     field :units, :string
@@ -21,7 +20,7 @@ defmodule Spider.Produces.Produce do
   @doc false
   def changeset(produce, attrs) do
     produce
-    |> cast(attrs, [:type, :category, :amount, :units, :user_id, :business_id])
-    |> validate_required([:type, :category, :amount, :units, :user_id, :business_id])
+    |> cast(attrs, [:type, :category, :quantity, :units, :user_id, :business_id])
+    |> validate_required([:type, :category, :quantity, :units, :user_id, :business_id])
   end
 end

@@ -7,6 +7,7 @@ defmodule Spider.Livestocks do
   alias Spider.Repo
 
   alias Spider.Livestocks.Livestock
+  alias Spider.Helpers.SpiderData
 
   @doc """
   Returns the list of livestocks.
@@ -36,6 +37,25 @@ defmodule Spider.Livestocks do
 
   """
   def get_livestock!(id), do: Repo.get!(Livestock, id)
+
+  def get_livestocks_using_business_id(business_id) do
+    
+    query = from l in Livestock,
+                where: l.business_id == ^business_id,
+                select: l
+      
+      livestocks = Repo.all(query)
+
+    case livestocks |> SpiderData.list_empty? do
+      true -> 
+        {:empty, "Empty"}
+
+      false ->
+        {:ok, livestocks}
+        
+    end
+
+  end
 
   @doc """
   Creates a livestock.

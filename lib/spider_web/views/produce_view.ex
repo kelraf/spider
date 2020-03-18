@@ -15,7 +15,7 @@ defmodule SpiderWeb.ProduceView do
       id: produce.id,
       type: produce.type,
       category: produce.category,
-      amount: produce.amount,
+      quantity: produce.quantity,
       units: produce.units,
       user_id: produce.user_id,
       business_id: produce.business_id

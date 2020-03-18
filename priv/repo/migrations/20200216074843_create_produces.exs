@@ -5,7 +5,7 @@ defmodule Spider.Repo.Migrations.CreateProduces do
     create table(:produces) do
       add :type, :string
       add :category, :string
-      add :amount, :integer
+      add :quantity, :integer
       add :units, :string
 
       add :user_id, references(:users, on_delete: :nothing)

@@ -15,7 +15,7 @@ defmodule SpiderWeb.LivestockView do
       id: livestock.id,
       type: livestock.type,
       category: livestock.category,
-      number: livestock.number,
+      quantity: livestock.quantity,
       user_id: livestock.user_id,
       business_id: livestock.business_id
     }

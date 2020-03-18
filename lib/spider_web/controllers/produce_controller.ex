@@ -11,11 +11,28 @@ defmodule SpiderWeb.ProduceController do
     render(conn, "index.json", produces: produces)
   end
 
+  def get_produces_using_business_id(conn, %{"business_id" => business_id}) do
+    
+    case Produces.get_produces_using_business_id(business_id) do
+      {:empty, _nonses} ->
+        conn
+        |> json(%{
+          message: "No Produces Related To Your Business"
+        })
+
+      {:ok, produces} ->
+        conn
+        |> render("index.json", produces: produces)
+        
+    end
+
+  end
+
   def create(conn, %{"produce" => produce_params}) do
     with {:ok, %Produce{} = produce} <- Produces.create_produce(produce_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", produce_path(conn, :show, produce))
+      # |> put_resp_header("location", produce_path(conn, :show, produce))
       |> render("show.json", produce: produce)
     end
   end

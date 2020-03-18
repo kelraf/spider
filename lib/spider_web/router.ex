@@ -147,10 +147,30 @@ defmodule SpiderWeb.Router do
     delete "/transtooluserrels/:id", TranstoolUserRelController, :delete
     # transtooluserrels Routes End
 
-    resources "/livestocks", LivestockController
-    resources "/produces", ProduceController
-    resources "/products", ProductController
+    # Livestock Routes
+    post "/livestocks", LivestockController, :create
+    get "/livestocks", LivestockController, :index
+    get "/livestocks/:id", LivestockController, :show
+    get "/livestocks/business/:business_id", LivestockController, :get_livestocks_using_business_id
+    put "/livestocks/:id", LivestockController, :update
+    # Livestock Routes End
 
+    # Produces Routes
+    # resources "/produces", ProduceController
+    post "/produces", ProduceController, :create
+    get "/produces", ProduceController, :index
+    get "/produces/:id", ProduceController, :show
+    get "/produces/business/:business_id", ProduceController, :get_produces_using_business_id
+    put "/produces/:id", ProduceController, :update
+    # Produces Routes End
+
+    # Products Router
+    # resources "/products", ProductController
+    post "/products", ProductController, :create
+    get "/products", ProductController, :index
+    get "/products/:id", ProductController, :show
+    put "/products/:id", ProductController, :update
+    # Products Routers Ends
   end
   
 end
