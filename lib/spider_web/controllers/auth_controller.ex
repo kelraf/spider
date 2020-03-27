@@ -13,14 +13,16 @@ defmodule SpiderWeb.AuthController do
       {:error, message} ->
         conn
         |> json(%{
-          message: message
+          message: message,
+          status: "auth_error"
         })
 
       {:not_verified, message} ->
 
         conn
         |> json(%{
-          message: message
+          message: message,
+          status: "not_verified"
         })
 
       {:ok, user} ->
@@ -30,12 +32,14 @@ defmodule SpiderWeb.AuthController do
             conn
             |> put_req_header("authorization", "Bearer #{token}")
             |> json(%{
+              status: "success",
               token: token
             })
 
           {:error, _reason} ->
             conn
             |> json(%{
+              status: "gen_token_error",
               error: "Oops Something went wrong. Please Try Again"
             })
         end

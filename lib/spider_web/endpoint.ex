@@ -1,6 +1,8 @@
 defmodule SpiderWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :spider
 
+  plug CORSPlug
+
   socket "/socket", SpiderWeb.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.

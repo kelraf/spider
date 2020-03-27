@@ -47,8 +47,7 @@ defmodule Spider.Businesses.Business do
       :registration_number,
       :business_type,
       :category,
-      :user_id,
-      :country_calling_code
+      :user_id
     ])
     |> validate_length(:business_name, min: 2, max: 100)
     |> BusinessToolKit.validate_business_type()
