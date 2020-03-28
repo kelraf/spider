@@ -33,7 +33,7 @@ defmodule SpiderWeb.Router do
 
     # Verification Starts
     post "/auth/send/code", VerificationController, :sms_sender
-    post "/auth/verify/code", VerificationController, :verify_code
+    post "/auth/verify/code/:id", VerificationController, :verify_code
     # Verification ends
 
     # Users Start

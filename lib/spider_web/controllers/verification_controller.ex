@@ -17,7 +17,7 @@ defmodule SpiderWeb.VerificationController do
                 })
             {:error, _} ->
                 # Generate a random code and Send it in an sms
-                code = Enum.random(2000..99999)
+                code = Enum.random(1000..9999)
                 phone_number = user_params["phone_number"]
 
                 spider_code = %{
@@ -52,114 +52,94 @@ defmodule SpiderWeb.VerificationController do
 
     end
 
-    def verify_code(conn, %{"user" => user_params}) do
+    def verify_code(conn, %{"id" => id, "user" => user_params}) do
 
-        phone_number = user_params["phone_number"]
+        user = Accounts.get_user!(id)
+
+        phone_number = user.phone_number
+
         code = user_params["code"]
 
-        cond do
+        case VerificationAgentToolKit |> VerificationAgentToolKit.get phone_number do
 
-            byte_size(phone_number) < 10 ->
+            nil ->
+                 
+                # Generate a random code and Send it in an sms
+                code = Enum.random(1000..9999)
+
+                spider_code = %{
+                    code: code,
+                    created: NaiveDateTime.utc_now,
+                    status: 1
+                }
+
+                VerificationAgentToolKit.put VerificationAgentToolKit, phone_number, spider_code
+
+                Task.start(fn -> 
+                    Process.sleep(90000);
+                    VerificationAgentToolKit.delete_one VerificationAgentToolKit, phone_number
+                end)
+
                 conn
                 |> json(%{
-                  errors: %{
-                    phone_number: ["Invalid Phone Number"]
-                  }
+                    errors: %{
+                        error: "Code Expired. Please Try Again"
+                    }
                 })
-        
-            byte_size(phone_number) > 15 ->
-            conn
-            |> json(%{
-                errors: %{
-                    phone_number: ["Invalid Phone Number"]
-                }
-            })
-        
-            true ->
 
-                case VerificationAgentToolKit |> VerificationAgentToolKit.get phone_number do
+            verification_details ->
 
-                    nil ->
-                         
-                        # Generate a random code and Send it in an sms
-                        code = Enum.random(2000..99999)
-                        phone_number = user_params["phone_number"]
-
-                        spider_code = %{
-                            code: code,
-                            created: NaiveDateTime.utc_now,
-                            status: 1
-                        }
-
-                        VerificationAgentToolKit.put VerificationAgentToolKit, phone_number, spider_code
-
-                        Task.start(fn -> 
-                            Process.sleep(90000);
-                            VerificationAgentToolKit.delete_one VerificationAgentToolKit, phone_number
-                        end)
-
+                case %{"phone_number" => phone_number} |> UserToolKit.get_user_by_phone false  do
+                    {:error, message} ->
                         conn
                         |> json(%{
-                            errors: %{
-                                error: "Code Expired. Please Try Again"
-                            }
+                            message: message
                         })
+                    {:ok, user} ->
+                        if verification_details.code == user_params["code"] do
 
-                    verification_details ->
+                            user = Accounts.get_user!(user.id)
 
-                        case user_params |> UserToolKit.get_user_by_phone false  do
-                            {:error, message} ->
+                            user_data =  %{
+                                "status" => 1,
+                                "phone_number" => user.phone_number,
+                                "password_hash" => user.password_hash,
+                                "first_name" => user.first_name,
+                                "last_name" => user.last_name,
+                                "pin" => user.pin
+                            }
+
+                            with {:ok, %User{} = user} <- Accounts.update_user(user, user_data) do
                                 conn
                                 |> json(%{
-                                    message: message
+                                    data: %{
+                                        id: user.id,
+                                        phone_number: user.phone_number,
+                                        email: user.email,
+                                        password_hash: user.password_hash,
+                                        first_name: user.first_name,
+                                        last_name: user.last_name,
+                                        role: user.role,
+                                        status: user.status,
+                                        national_id_number: user.national_id_number,
+                                        pin: user.pin,
+                                        country_name: user.country_name,
+                                        country_calling_code: user.country_calling_code,
+                                        currency: user.currency,
+                                        currency_name: user.currency_name,
+                                        continent_code: user.continent_code,
+                                        latitude: user.latitude,
+                                        longitude: user.longitude
+                                    },
+                                    more: verification_details
                                 })
-                            {:ok, user} ->
-                                if verification_details.code == user_params["code"] do
-
-                                    user = Accounts.get_user!(user.id)
-
-                                    user_data =  %{
-                                        "status" => 1,
-                                        "phone_number" => user.phone_number,
-                                        "password_hash" => user.password_hash,
-                                        "first_name" => user.first_name,
-                                        "last_name" => user.last_name,
-                                        "pin" => user.pin
-                                    }
-
-                                    with {:ok, %User{} = user} <- Accounts.update_user(user, user_data) do
-                                        conn
-                                        |> json(%{
-                                            data: %{
-                                                id: user.id,
-                                                phone_number: user.phone_number,
-                                                email: user.email,
-                                                password_hash: user.password_hash,
-                                                first_name: user.first_name,
-                                                last_name: user.last_name,
-                                                role: user.role,
-                                                status: user.status,
-                                                national_id_number: user.national_id_number,
-                                                pin: user.pin,
-                                                country_name: user.country_name,
-                                                country_calling_code: user.country_calling_code,
-                                                currency: user.currency,
-                                                currency_name: user.currency_name,
-                                                continent_code: user.continent_code,
-                                                latitude: user.latitude,
-                                                longitude: user.longitude
-                                            },
-                                            more: verification_details
-                                        })
-                                    end
-                                else
-                                    conn
-                                    |> json(%{
-                                        message: "Invalid Code"
-                                    })
-                                end
+                            end
+                        else
+                            conn
+                            |> json(%{
+                                message: "Invalid Code"
+                            })
                         end
-
                 end
 
         end

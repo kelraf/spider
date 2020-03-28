@@ -59,6 +59,7 @@ defmodule SpiderWeb.UserController do
             end)
 
             conn
+            |> put_status(:found)
             |> json(%{
               message: "It Seems Like you already have an account. Please Reply with the code sent to #{user_params["phone_number"]} to activate Your Account.",
               data: %{
