@@ -37,9 +37,10 @@ config :spider, Spider.Guardian,
   verify_issuer: true,
   secret_key: "CBmqCdkBw8jOSlGzi6A0WdhDyU1N03W5oc3hoks9xVgS+0u/muUsmPkfTRBVy6ki"
 
-config :cors_plug,
-  max_age: 86400,
-  methods: ["GET", "POST", "PUT", "DELETE"]
+# config :cors_plug,
+#   origin: ["http://localhost:8081"],
+#   max_age: 86400,
+#   methods: ["GET", "POST", "PUT", "DELETE"]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

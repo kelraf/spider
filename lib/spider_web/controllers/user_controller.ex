@@ -42,7 +42,7 @@ defmodule SpiderWeb.UserController do
           {:ok, user} ->
 
             # Generate a random code and Send it in an sms
-            code = Enum.random(2000..99999)
+            code = Enum.random(1000..9999)
             phone_number = user_params["phone_number"]
 
             spider_code = %{
@@ -88,7 +88,7 @@ defmodule SpiderWeb.UserController do
             with {:ok, %User{} = user} <- Accounts.create_user(user_params) do
 
               # Generate a random code and Send it in an sms
-              code = Enum.random(2000..99999)
+              code = Enum.random(1000..9999)
               phone_number = user_params["phone_number"]
 
               spider_code = %{
