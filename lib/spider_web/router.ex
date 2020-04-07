@@ -47,6 +47,7 @@ defmodule SpiderWeb.Router do
   # Other scopes may use custom stacks.
   scope "/api", SpiderWeb do
     
+    # pipe_through [:api, :jwt_auth]
     pipe_through [:api]
 
     # Users Starts
@@ -64,6 +65,15 @@ defmodule SpiderWeb.Router do
     delete "/businesses/:id", BusinessController, :delete
     get "/businesses/user/:user_id", BusinessController, :get_businesses_using_user_id
     # End of business routes
+
+    # Business Assets Routes
+    post "/business-assets", BusinessAssetController, :create
+    get "/business-assets", BusinessAssetController, :index
+    get "/business-assets/:id", BusinessAssetController, :show
+    put "/business-assets/:id", BusinessAssetController, :update
+    get "/business-assets/business/:id", BusinessAssetController, :get_business_assets_using_business_id
+    delete "/business-assets/:id", BusinessAssetController, :delete
+    # Business Assets Routes Ends
     
     # Groups Routes
     resources "/groups", GroupController

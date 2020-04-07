@@ -9,7 +9,7 @@ defmodule SpiderWeb.TransporterContainerController do
 
   def index(conn, _params) do
     transportercontainer = TransporterContainers.list_transportercontainer() |> Repo.preload(:transporters)
-    render(conn, "index.json", transportercontainer: transportercontainer)
+    render(conn, "index.json", transportercontainer: transportercontainer) 
   end
 
   def get_transporter_containers_using_business_id(conn, %{"business_id" => business_id}) do

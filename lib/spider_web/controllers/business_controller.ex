@@ -5,11 +5,13 @@ defmodule SpiderWeb.BusinessController do
   alias Spider.Businesses.Business
   alias Spider.Groups
   alias Spider.Groups.Group
+  alias Spider.Repo
+  alias Spider.BusinessToolKit
 
   action_fallback(SpiderWeb.FallbackController)
 
   def index(conn, _params) do
-    businesses = Businesses.list_businesses()
+    businesses = Businesses.list_businesses() |> Repo.preload(:business_assets) |> Repo.preload(:user)
     render(conn, "index.json", businesses: businesses)
   end
 
@@ -18,11 +20,15 @@ defmodule SpiderWeb.BusinessController do
     case Businesses.get_businesses_using_user_id(user_id) do
       {:empty, message} ->
         conn
+        |> put_status(:not_found)
         |> json(%{
           message: message
         })
 
       {:ok, businesses} ->
+
+        businesses = businesses |> Repo.preload(:business_assets) |> Repo.preload(:user)
+
         conn
         |> render("index.json", businesses: businesses)
     end
@@ -42,7 +48,7 @@ defmodule SpiderWeb.BusinessController do
      
       Task.start(fn -> 
 
-        Process.sleep(90000);
+        Process.sleep(10000);
 
         if business.category in ["group_ranch", "association", "co-oparative"] do
           Groups.create_group(group_params)
@@ -50,10 +56,17 @@ defmodule SpiderWeb.BusinessController do
 
       end) 
 
+      Task.start(fn -> 
+        
+        Process.sleep(10000);
+        BusinessToolKit.create_default_asset(business)
+        
+      end)
+
       conn
       |> put_status(:created)
       |> put_resp_header("location", business_path(conn, :show, business))
-      |> render("show.json", business: business)
+      |> render("show.json", business: business |> Repo.preload(:business_assets) |> Repo.preload(:user))
 
     end
 
@@ -61,7 +74,7 @@ defmodule SpiderWeb.BusinessController do
 
   def show(conn, %{"id" => id}) do
 
-    business = Businesses.get_business!(id)
+    business = Businesses.get_business!(id) |> Repo.preload(:business_assets) |> Repo.preload(:user)
     render(conn, "show.json", business: business)
 
   end
@@ -71,7 +84,7 @@ defmodule SpiderWeb.BusinessController do
     business = Businesses.get_business!(id)
 
     with {:ok, %Business{} = business} <- Businesses.update_business(business, business_params) do
-      render(conn, "show.json", business: business)
+      render(conn, "show.json", business: business  |> Repo.preload(:business_assets) |> Repo.preload(:user))
     end
 
   end

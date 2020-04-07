@@ -24,11 +24,14 @@ defmodule Spider.UserToolKit do
   end
 
   def passwords(changeset, action) do
+
     if action == "update" do
 
       raw_password = get_field(changeset, :raw_password)
       confirm_password = get_field(changeset, :confirm_password)
       password_hash = get_field(changeset, :password_hash)
+      current_password = get_field(changeset, :current_password)
+      current_password_hash = get_field(changeset, :current_password_hash)
 
       if raw_password == nil and confirm_password == nil or password_hash == nil do
         changeset
@@ -38,6 +41,10 @@ defmodule Spider.UserToolKit do
             add_error(changeset, :raw_password, "Your password is too short")
           raw_password !== confirm_password ->
             add_error(changeset, :raw_password, "Your passwords must match")
+          current_password_hash == nil ->
+            add_error(changeset, :current_password_hash, "Oops Something Went Wrong")
+          current_password |> Comeonin.Bcrypt.checkpw(current_password_hash) !== true ->
+            add_error(changeset, :current_password, "Current Password is Invalid")
           true -> 
             put_change(changeset, :password_hash, Comeonin.Bcrypt.hashpwsalt(raw_password))
         end

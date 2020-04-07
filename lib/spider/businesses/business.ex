@@ -4,6 +4,7 @@ defmodule Spider.Businesses.Business do
 
   alias Spider.Accounts.User
   alias Spider.BusinessToolKit
+  alias Spider.BusinessAssets.BusinessAsset
 
   schema "businesses" do
     field(:business_name, :string)
@@ -20,6 +21,7 @@ defmodule Spider.Businesses.Business do
     field(:longitude, :string)
 
     belongs_to(:user, User)
+    has_many(:business_assets, BusinessAsset)
 
     timestamps()
   end

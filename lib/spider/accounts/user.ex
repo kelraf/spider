@@ -13,6 +13,8 @@ defmodule Spider.Accounts.User do
     field(:national_id_number, :integer)
     field(:raw_password, :string, virtual: true)
     field(:confirm_password, :string, virtual: true)
+    field(:current_password, :string, virtual: true)
+    field(:current_password_hash, :string, virtual: true)
     field(:password_hash, :string)
     field(:phone_number, :string)
     field(:role, :string)
@@ -37,6 +39,8 @@ defmodule Spider.Accounts.User do
       :raw_password,
       :confirm_password,
       :password_hash,
+      :current_password,
+      :current_password_hash,
       :first_name,
       :last_name,
       :role,
