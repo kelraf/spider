@@ -7,7 +7,7 @@ defmodule Spider.Vehicles.Vehicle do
 
   schema "vehicles" do
     field :registration_number, :string
-    field :role, :string
+    field :type, :string
 
     belongs_to(:user, User)
     belongs_to(:business, Business)
@@ -18,8 +18,8 @@ defmodule Spider.Vehicles.Vehicle do
   @doc false
   def changeset(vehicle, attrs) do
     vehicle
-    |> cast(attrs, [:registration_number, :role, :user_id, :business_id])
-    |> validate_required([:registration_number, :role, :user_id, :business_id])
+    |> cast(attrs, [:registration_number, :type, :user_id, :business_id])
+    |> validate_required([:registration_number, :type, :user_id, :business_id])
     |> unique_constraint(:registration_number)
   end
 end

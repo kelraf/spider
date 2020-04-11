@@ -14,7 +14,7 @@ defmodule SpiderWeb.VehicleView do
     %{
       id: vehicle.id,
       registration_number: vehicle.registration_number,
-      role: vehicle.role,
+      type: vehicle.type,
       user_id: vehicle.user_id,
       business_id: vehicle.business_id
     }

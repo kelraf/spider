@@ -48,7 +48,7 @@ defmodule SpiderWeb.BusinessController do
      
       Task.start(fn -> 
 
-        Process.sleep(10000);
+        Process.sleep(2000);
 
         if business.category in ["group_ranch", "association", "co-oparative"] do
           Groups.create_group(group_params)
@@ -58,7 +58,7 @@ defmodule SpiderWeb.BusinessController do
 
       Task.start(fn -> 
         
-        Process.sleep(10000);
+        Process.sleep(2000);
         BusinessToolKit.create_default_asset(business)
         
       end)

@@ -110,6 +110,13 @@ defmodule Spider.BusinessToolKit do
               }
   
               BusinessAssets.create_business_asset(business_asset_one)
+
+              business_asset_two = %{
+                business_id: business.id,
+                asset_name: "produce"
+              }
+  
+              BusinessAssets.create_business_asset(business_asset_two)
   
             business.business_type == "transport-air" ->
   

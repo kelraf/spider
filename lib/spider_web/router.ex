@@ -47,8 +47,8 @@ defmodule SpiderWeb.Router do
   # Other scopes may use custom stacks.
   scope "/api", SpiderWeb do
     
-    # pipe_through [:api, :jwt_auth]
-    pipe_through [:api]
+    pipe_through [:api, :jwt_auth]
+    # pipe_through [:api]
 
     # Users Starts
     get "/users", UserController, :index # Belongs to Admins
