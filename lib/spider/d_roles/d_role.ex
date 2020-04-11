@@ -1,17 +1,17 @@
-defmodule Spider.AdminTransporterRoles.AdminTransporterRole do
+defmodule Spider.DRoles.DRole do
   use Ecto.Schema
   import Ecto.Changeset
 
 
-  schema "admintransporterroles" do
+  schema "droles" do
     field :role, :string
 
     timestamps()
   end
 
   @doc false
-  def changeset(admin_transporter_role, attrs) do
-    admin_transporter_role
+  def changeset(d_role, attrs) do
+    d_role
     |> cast(attrs, [:role])
     |> validate_required([:role])
   end

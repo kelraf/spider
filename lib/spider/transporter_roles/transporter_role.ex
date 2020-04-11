@@ -14,8 +14,6 @@ defmodule Spider.TransporterRoles.TransporterRole do
 
     belongs_to(:admin_transporter_role, AdminTransporterRole)
     belongs_to(:vehicle, Vehicle)
-    belongs_to(:flight, Flight)
-    belongs_to(:train, Train)
 
     timestamps()
   end
@@ -23,7 +21,7 @@ defmodule Spider.TransporterRoles.TransporterRole do
   @doc false
   def changeset(transporter_role, attrs) do
     transporter_role
-    |> cast(attrs, [:admin_transporter_role_id, :vehicle_id, :flight_id, :train_id])
+    |> cast(attrs, [:admin_transporter_role_id, :vehicle_id])
     |> validate_required([:status])
   end
 end
