@@ -4,7 +4,7 @@ defmodule Spider.Repo.Migrations.CreateTrains do
   def change do
     create table(:trains) do
       add :unique_number, :string
-      add :role, :string
+      add :status, :string
 
       add :user_id, references(:users, on_delete: :nothing)
       add :business_id, references(:businesses, on_delete: :delete_all)

@@ -14,9 +14,20 @@ defmodule SpiderWeb.TrainView do
     %{
       id: train.id,
       unique_number: train.unique_number,
-      role: train.role,
       business_id: train.business_id,
-      user_id: train.user_id
+      status: train.status,
+      user_id: train.user_id,
+      troles: render_many(train.troles, TrainView, "t_role.json", as: :t_role)
     }
   end
+
+  def render("t_role.json", %{t_role: t_role}) do
+    %{
+      id: t_role.id,
+      capacity: t_role.capacity,
+      train_id: t_role.train_id,
+      drole_id: t_role.drole_id
+    }
+  end
+
 end

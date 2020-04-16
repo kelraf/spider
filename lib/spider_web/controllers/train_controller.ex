@@ -3,11 +3,12 @@ defmodule SpiderWeb.TrainController do
 
   alias Spider.Trains
   alias Spider.Trains.Train
+  alias Spider.Repo
 
   action_fallback SpiderWeb.FallbackController
 
   def index(conn, _params) do
-    trains = Trains.list_trains()
+    trains = Trains.list_trains() |> Repo.preload(:troles)
     render(conn, "index.json", trains: trains)
   end
 
@@ -22,7 +23,7 @@ defmodule SpiderWeb.TrainController do
 
       {:ok, trains} ->
         conn
-        |> render("index.json", trains: trains)
+        |> render("index.json", trains: trains |> Repo.preload(:troles))
         
     end
 
@@ -33,12 +34,12 @@ defmodule SpiderWeb.TrainController do
       conn
       |> put_status(:created)
       # |> put_resp_header("location", train_path(conn, :show, train))
-      |> render("show.json", train: train)
+      |> render("show.json", train: train |> Repo.preload(:troles))
     end
   end
 
   def show(conn, %{"id" => id}) do
-    train = Trains.get_train!(id)
+    train = Trains.get_train!(id)  |> Repo.preload(:troles)
     render(conn, "show.json", train: train)
   end
 
@@ -46,7 +47,7 @@ defmodule SpiderWeb.TrainController do
     train = Trains.get_train!(id)
 
     with {:ok, %Train{} = train} <- Trains.update_train(train, train_params) do
-      render(conn, "show.json", train: train)
+      render(conn, "show.json", train: train  |> Repo.preload(:troles))
     end
   end
 

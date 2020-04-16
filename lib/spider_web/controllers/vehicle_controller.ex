@@ -3,11 +3,12 @@ defmodule SpiderWeb.VehicleController do
 
   alias Spider.Vehicles
   alias Spider.Vehicles.Vehicle
+  alias Spider.Repo
 
   action_fallback SpiderWeb.FallbackController
 
   def index(conn, _params) do
-    vehicles = Vehicles.list_vehicles()
+    vehicles = Vehicles.list_vehicles() |> Repo.preload(:vroles)
     render(conn, "index.json", vehicles: vehicles)
   end
 
@@ -22,7 +23,7 @@ defmodule SpiderWeb.VehicleController do
 
       {:ok, vehicles} ->
         conn
-        |> render("index.json", vehicles: vehicles)
+        |> render("index.json", vehicles: vehicles |> Repo.preload(:vroles))
         
     end
 
@@ -33,12 +34,12 @@ defmodule SpiderWeb.VehicleController do
       conn
       |> put_status(:created)
       # |> put_resp_header("location", vehicle_path(conn, :show, vehicle))
-      |> render("show.json", vehicle: vehicle)
+      |> render("show.json", vehicle: vehicle |> Repo.preload(:vroles))
     end
   end
 
   def show(conn, %{"id" => id}) do
-    vehicle = Vehicles.get_vehicle!(id)
+    vehicle = Vehicles.get_vehicle!(id) |> Repo.preload(:vroles)
     render(conn, "show.json", vehicle: vehicle)
   end
 
@@ -46,7 +47,7 @@ defmodule SpiderWeb.VehicleController do
     vehicle = Vehicles.get_vehicle!(id)
 
     with {:ok, %Vehicle{} = vehicle} <- Vehicles.update_vehicle(vehicle, vehicle_params) do
-      render(conn, "show.json", vehicle: vehicle)
+      render(conn, "show.json", vehicle: vehicle |> Repo.preload(:vroles))
     end
   end
 

@@ -4,7 +4,8 @@ defmodule Spider.Repo.Migrations.CreateFlights do
   def change do
     create table(:flights) do
       add :unique_number, :string
-      add :role, :string
+      add :type, :string
+      add :status, :string
 
       add :user_id, references(:users, on_delete: :nothing)
       add :business_id, references(:businesses, on_delete: :delete_all)

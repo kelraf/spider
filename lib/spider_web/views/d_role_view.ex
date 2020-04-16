@@ -11,7 +11,10 @@ defmodule SpiderWeb.DRoleView do
   end
 
   def render("d_role.json", %{d_role: d_role}) do
-    %{id: d_role.id,
-      role: d_role.role}
+    %{
+      id: d_role.id,
+      role: d_role.role,
+      capacity_units: d_role.capacity_units
+    }
   end
 end

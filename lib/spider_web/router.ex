@@ -47,8 +47,8 @@ defmodule SpiderWeb.Router do
   # Other scopes may use custom stacks.
   scope "/api", SpiderWeb do
     
-    pipe_through [:api, :jwt_auth]
-    # pipe_through [:api]
+    # pipe_through [:api, :jwt_auth]
+    pipe_through [:api]
 
     # Users Starts
     get "/users", UserController, :index # Belongs to Admins
@@ -183,6 +183,45 @@ defmodule SpiderWeb.Router do
     get "/products/:id", ProductController, :show
     put "/products/:id", ProductController, :update
     # Products Routers Ends
+
+    # Defined Roles i.e DRoles
+    post "/d-roles", DRoleController, :create
+    get "/d-roles", DRoleController, :index
+    get "/d-roles/:id", DRoleController, :show
+    # End of Defined Roles
+
+    # Vehicle Roles i.e VRole
+    post "/v-roles", VRoleController, :create
+    get "/v-roles", VRoleController, :index
+    get "/v-roles/:id", VRoleController, :show
+    put "/v-roles/:id", VRoleController, :update
+    delete "/v-roles/:id", VRoleController, :delete
+    # End Vehicle Roles
+
+    # Vessles Roles i.e ERole
+    post "/e-roles", ERoleController, :create
+    get "/e-roles", ERoleController, :index
+    get "/e-roles/:id", ERoleController, :show
+    put "/e-roles/:id", ERoleController, :update
+    delete "/e-roles/:id", ERoleController, :delete
+    # End Vessles Roles
+
+     # Train Roles i.e TRole
+     post "/t-roles", TRoleController, :create
+     get "/t-roles", TRoleController, :index
+     get "/t-roles/:id", TRoleController, :show
+     put "/t-roles/:id", TRoleController, :update
+     delete "/t-roles/:id", TRoleController, :delete
+     # End Train Roles
+
+     # Flight Roles i.e FRole
+     post "/f-roles", FroleController, :create
+     get "/f-roles", FroleController, :index
+     get "/f-roles/:id", FroleController, :show
+     put "/f-roles/:id", FroleController, :update
+     delete "/f-roles/:id", FroleController, :delete
+     # End Flight Roles
+
   end
   
 end

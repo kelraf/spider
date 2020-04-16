@@ -15,7 +15,7 @@ defmodule SpiderWeb.VRoleController do
     with {:ok, %VRole{} = v_role} <- VRoles.create_v_role(v_role_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", v_role_path(conn, :show, v_role))
+      # |> put_resp_header("location", v_role_path(conn, :show, v_role))
       |> render("show.json", v_role: v_role)
     end
   end

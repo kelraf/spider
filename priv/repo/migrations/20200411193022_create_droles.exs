@@ -3,7 +3,9 @@ defmodule Spider.Repo.Migrations.CreateDroles do
 
   def change do
     create table(:droles) do
+      
       add :role, :string
+      add :capacity_units, :string
 
       timestamps()
     end

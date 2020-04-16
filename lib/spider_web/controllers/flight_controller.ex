@@ -3,11 +3,12 @@ defmodule SpiderWeb.FlightController do
 
   alias Spider.Flights
   alias Spider.Flights.Flight
+  alias Spider.Repo
 
   action_fallback SpiderWeb.FallbackController
 
   def index(conn, _params) do
-    flights = Flights.list_flights()
+    flights = Flights.list_flights() |> Repo.preload(:froles)
     render(conn, "index.json", flights: flights)
   end
 
@@ -22,7 +23,7 @@ defmodule SpiderWeb.FlightController do
 
       {:ok, flights} ->
         conn
-        |> render("index.json", flights: flights)
+        |> render("index.json", flights: flights |> Repo.preload(:froles))
         
     end
 
@@ -33,12 +34,12 @@ defmodule SpiderWeb.FlightController do
       conn
       |> put_status(:created)
       # |> put_resp_header("location", flight_path(conn, :show, flight))
-      |> render("show.json", flight: flight)
+      |> render("show.json", flight: flight |> Repo.preload(:froles))
     end
   end
 
   def show(conn, %{"id" => id}) do
-    flight = Flights.get_flight!(id)
+    flight = Flights.get_flight!(id) |> Repo.preload(:froles)
     render(conn, "show.json", flight: flight)
   end
 
@@ -46,7 +47,7 @@ defmodule SpiderWeb.FlightController do
     flight = Flights.get_flight!(id)
 
     with {:ok, %Flight{} = flight} <- Flights.update_flight(flight, flight_params) do
-      render(conn, "show.json", flight: flight)
+      render(conn, "show.json", flight: flight |> Repo.preload(:froles))
     end
   end
 

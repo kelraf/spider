@@ -4,7 +4,9 @@ defmodule Spider.DRoles.DRole do
 
 
   schema "droles" do
+
     field :role, :string
+    field :capacity_units, :string
 
     timestamps()
   end
@@ -12,7 +14,7 @@ defmodule Spider.DRoles.DRole do
   @doc false
   def changeset(d_role, attrs) do
     d_role
-    |> cast(attrs, [:role])
-    |> validate_required([:role])
+    |> cast(attrs, [:role, :capacity_units])
+    |> validate_required([:role, :capacity_units])
   end
 end

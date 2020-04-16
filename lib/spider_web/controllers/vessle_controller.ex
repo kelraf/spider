@@ -3,11 +3,12 @@ defmodule SpiderWeb.VessleController do
 
   alias Spider.Vessles
   alias Spider.Vessles.Vessle
+  alias Spider.Repo
 
   action_fallback SpiderWeb.FallbackController
 
   def index(conn, _params) do
-    vessles = Vessles.list_vessles()
+    vessles = Vessles.list_vessles() |> Repo.preload(:eroles)
     render(conn, "index.json", vessles: vessles)
   end
 
@@ -22,7 +23,7 @@ defmodule SpiderWeb.VessleController do
 
       {:ok, vessles} ->
         conn
-        |> render("index.json", vessles: vessles)
+        |> render("index.json", vessles: vessles |> Repo.preload(:eroles))
         
     end
 
@@ -33,12 +34,12 @@ defmodule SpiderWeb.VessleController do
       conn
       |> put_status(:created)
       # |> put_resp_header("location", vessle_path(conn, :show, vessle))
-      |> render("show.json", vessle: vessle)
+      |> render("show.json", vessle: vessle |> Repo.preload(:eroles))
     end
   end
 
   def show(conn, %{"id" => id}) do
-    vessle = Vessles.get_vessle!(id)
+    vessle = Vessles.get_vessle!(id) |> Repo.preload(:eroles)
     render(conn, "show.json", vessle: vessle)
   end
 
@@ -46,7 +47,7 @@ defmodule SpiderWeb.VessleController do
     vessle = Vessles.get_vessle!(id)
 
     with {:ok, %Vessle{} = vessle} <- Vessles.update_vessle(vessle, vessle_params) do
-      render(conn, "show.json", vessle: vessle)
+      render(conn, "show.json", vessle: vessle |> Repo.preload(:eroles))
     end
   end
 

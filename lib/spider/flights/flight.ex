@@ -4,13 +4,17 @@ defmodule Spider.Flights.Flight do
 
   alias Spider.Accounts.User
   alias Spider.Businesses.Business
+  alias Spider.Froles.Frole
 
   schema "flights" do
-    field :role, :string
+    field :type, :string
+    field :status, :string, default: "available"
     field :unique_number, :string
 
     belongs_to(:user, User)
     belongs_to(:business, Business)
+
+    has_many(:froles, Frole)
  
     timestamps()
   end
@@ -18,8 +22,8 @@ defmodule Spider.Flights.Flight do
   @doc false
   def changeset(flight, attrs) do
     flight
-    |> cast(attrs, [:unique_number, :role, :user_id, :business_id])
-    |> validate_required([:unique_number, :role, :user_id, :business_id])
+    |> cast(attrs, [:unique_number, :type, :status, :user_id, :business_id])
+    |> validate_required([:unique_number, :type, :status, :user_id, :business_id])
     |> unique_constraint(:unique_number)
   end
 end

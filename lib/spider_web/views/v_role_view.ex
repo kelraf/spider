@@ -11,6 +11,11 @@ defmodule SpiderWeb.VRoleView do
   end
 
   def render("v_role.json", %{v_role: v_role}) do
-    %{id: v_role.id}
+    %{
+      id: v_role.id,
+      drole_id: v_role.drole_id,
+      vehicle_id: v_role.vehicle_id,
+      capacity: v_role.capacity,
+    }
   end
 end
