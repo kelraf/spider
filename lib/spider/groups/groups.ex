@@ -7,6 +7,8 @@ defmodule Spider.Groups do
   alias Spider.Repo
 
   alias Spider.Groups.Group
+  alias  Spider.TranstoolKit
+  alias Spider.Helpers.SpiderData
 
   @doc """
   Returns the list of groups.
@@ -36,6 +38,58 @@ defmodule Spider.Groups do
 
   """
   def get_group!(id), do: Repo.get!(Group, id)
+
+  def get_group(business_id) do
+
+    query = from g in Group,
+                where: g.business_id == ^business_id,
+                select: g
+
+    group = Repo.all query
+
+    case group |> TranstoolKit.list_empty do
+
+      true ->
+
+        {:empty, "Empty"}
+
+      false ->
+
+        group = group |> Repo.preload(:user) |> Repo.preload(:business)
+
+        users = Enum.map(group, fn g ->
+
+          %{
+            first_name: g.user.first_name,
+            last_name: g.user.last_name,
+            phone_number: g.user.phone_number,
+            user_id: g.user.id
+          }
+
+        end)
+
+        case group |> SpiderData.list_head do
+
+          {:empty} ->
+            {:empty, "Empty"}
+
+          {:ok, group_user} ->
+              
+            group = %{
+              id: group_user.id,
+              business_name: group_user.business.business_name,
+              business_id: group_user.business.id,
+              members: users
+            }
+    
+            {:ok, group}
+
+        end
+
+        
+    end
+
+  end
 
   @doc """
   Creates a group.

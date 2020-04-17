@@ -4,16 +4,16 @@ defmodule Spider.Livestocks.Livestock do
 
   alias Spider.Accounts.User
   alias Spider.Businesses.Business
+  alias Spider.DLivestocks.DLivestock
 
 
   schema "livestocks" do
 
-    field :category, :string
     field :quantity, :integer
-    field :type, :string
 
     belongs_to(:user, User)
     belongs_to(:business, Business)
+    belongs_to(:dlivestock, DLivestock)
 
     timestamps()
   end
@@ -21,7 +21,7 @@ defmodule Spider.Livestocks.Livestock do
   @doc false
   def changeset(livestock, attrs) do
     livestock
-    |> cast(attrs, [:type, :category, :quantity, :user_id, :business_id])
-    |> validate_required([:type, :category, :quantity, :user_id, :business_id])
+    |> cast(attrs, [:dlivestock_id, :quantity, :user_id, :business_id])
+    |> validate_required([:dlivestock_id, :quantity, :user_id, :business_id])
   end
 end
