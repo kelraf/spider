@@ -18,6 +18,7 @@ defmodule SpiderWeb.TrainController do
       {:empty, _rubish} ->
         conn
         |> json(%{
+          data: [],
           message: "No Trains Related Your Business"
         })
 

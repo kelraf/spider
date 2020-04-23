@@ -11,6 +11,24 @@ defmodule SpiderWeb.ProductController do
     render(conn, "index.json", products: products)
   end
 
+  def get_products_using_business_id(conn, %{"business_id" => business_id}) do
+    
+    case Products.get_products_using_business_id(business_id) do
+      {:empty, _rubish} ->
+        conn
+        |> json(%{
+          data: [],
+          message: "No Products Related To This Business"
+        })
+
+      {:ok, products} ->
+        conn
+        |> render("index.json", products: products)
+        
+    end
+
+  end
+
   def create(conn, %{"product" => product_params}) do
     with {:ok, %Product{} = product} <- Products.create_product(product_params) do
       conn

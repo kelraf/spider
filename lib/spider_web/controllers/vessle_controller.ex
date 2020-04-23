@@ -18,6 +18,7 @@ defmodule SpiderWeb.VessleController do
       {:empty, _rubish} ->
         conn
         |> json(%{
+          data: [],
           message: "No Vessels Related Your Business"
         })
 

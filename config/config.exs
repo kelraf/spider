@@ -37,6 +37,11 @@ config :spider, Spider.Guardian,
   verify_issuer: true,
   secret_key: "CBmqCdkBw8jOSlGzi6A0WdhDyU1N03W5oc3hoks9xVgS+0u/muUsmPkfTRBVy6ki"
 
+
+config :arc,
+  storage: Arc.Storage.Local, # or  Arc.Storage.S3
+  # bucket: {:system, "AWS_S3_BUCKET"} # if using Amazon S3
+
 # config :cors_plug,
 #   origin: ["http://localhost:8081"],
 #   max_age: 86400,

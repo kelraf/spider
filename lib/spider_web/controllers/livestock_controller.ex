@@ -3,11 +3,13 @@ defmodule SpiderWeb.LivestockController do
 
   alias Spider.Livestocks
   alias Spider.Livestocks.Livestock
+  alias Spider.Repo
+  alias Spider.TLivestocks
 
   action_fallback SpiderWeb.FallbackController
 
   def index(conn, _params) do
-    livestocks = Livestocks.list_livestocks()
+    livestocks = Livestocks.list_livestocks() |> Repo.preload(:tlivestocks)
     render(conn, "index.json", livestocks: livestocks)
   end
 
@@ -17,12 +19,13 @@ defmodule SpiderWeb.LivestockController do
       {:empty, _nonses} ->
         conn
         |> json(%{
-          message: "No Livestocks Related To Your Business"
+          data: [],
+          message: "No Livestocks Related To Your Business."
         })
 
       {:ok, livestocks} ->
         conn
-        |> render("index.json", livestocks: livestocks)
+        |> render("index.json", livestocks: livestocks |> Repo.preload(:tlivestocks))
         
     end
 
@@ -30,15 +33,23 @@ defmodule SpiderWeb.LivestockController do
 
   def create(conn, %{"livestock" => livestock_params}) do
     with {:ok, %Livestock{} = livestock} <- Livestocks.create_livestock(livestock_params) do
+
+      t_livestock = %{
+        livestock_id: livestock.id,
+        quantity: livestock.quantity
+      }
+
+      Task.start(fn -> TLivestocks.create_t_livestock(t_livestock) end)
+
       conn
       |> put_status(:created)
       # |> put_resp_header("location", livestock_path(conn, :show, livestock))
-      |> render("show.json", livestock: livestock)
+      |> render("show.json", livestock: livestock |> Repo.preload(:tlivestocks))
     end
   end
 
   def show(conn, %{"id" => id}) do
-    livestock = Livestocks.get_livestock!(id)
+    livestock = Livestocks.get_livestock!(id) |> Repo.preload(:tlivestocks)
     render(conn, "show.json", livestock: livestock)
   end
 
@@ -46,7 +57,15 @@ defmodule SpiderWeb.LivestockController do
     livestock = Livestocks.get_livestock!(id)
 
     with {:ok, %Livestock{} = livestock} <- Livestocks.update_livestock(livestock, livestock_params) do
-      render(conn, "show.json", livestock: livestock)
+
+      t_livestock = %{
+        livestock_id: livestock.id,
+        quantity: livestock.quantity
+      }
+
+      Task.start(fn -> TLivestocks.create_t_livestock(t_livestock) end)
+
+      render(conn, "show.json", livestock: livestock |> Repo.preload(:tlivestocks))
     end
   end
 

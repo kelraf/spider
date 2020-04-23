@@ -18,6 +18,7 @@ defmodule SpiderWeb.VehicleController do
       {:empty, _nonses} ->
         conn
         |> json(%{
+          data: [],
           message: "No Vehicles Related Your Business"
         })
 

@@ -3,13 +3,12 @@ defmodule Spider.Repo.Migrations.CreateProduces do
 
   def change do
     create table(:produces) do
-      add :type, :string
-      add :category, :string
+
       add :quantity, :integer
-      add :units, :string
 
       add :user_id, references(:users, on_delete: :nothing)
-      add :business_id, references(:businesses, on_delete: :nothing)
+      add :business_id, references(:businesses, on_delete: :delete_all)
+      add :dproduce_id, references(:dproduces, on_delete: :delete_all)
 
       timestamps()
     end

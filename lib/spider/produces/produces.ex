@@ -89,7 +89,7 @@ defmodule Spider.Produces do
   """
   def update_produce(%Produce{} = produce, attrs) do
     produce
-    |> Produce.changeset(attrs)
+    |> Produce.changeset(attrs, "update")
     |> Repo.update()
   end
 

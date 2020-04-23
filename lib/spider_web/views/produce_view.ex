@@ -13,10 +13,8 @@ defmodule SpiderWeb.ProduceView do
   def render("produce.json", %{produce: produce}) do
     %{
       id: produce.id,
-      type: produce.type,
-      category: produce.category,
       quantity: produce.quantity,
-      units: produce.units,
+      dproduce_id: produce.dproduce_id,
       user_id: produce.user_id,
       business_id: produce.business_id
     }

@@ -16,6 +16,6 @@ defmodule Spider.DLivestocks.DLivestock do
   def changeset(d_livestock, attrs) do
     d_livestock
     |> cast(attrs, [:reference, :type, :breed, :category])
-    |> validate_required([:reference, :type, :breed, :category])
+    |> validate_required([:reference, :breed])
   end
 end

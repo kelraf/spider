@@ -159,11 +159,20 @@ defmodule SpiderWeb.Router do
     delete "/transtooluserrels/:id", TranstoolUserRelController, :delete
     # transtooluserrels Routes End
 
+    # Defined LiveStock
+    post "/d-livestock", DLivestockController, :create
+    get "/d-livestock", DLivestockController, :index
+    get "/d-livestock/:id", DLivestockController, :show
+    put "/d-livestock/:id", DLivestockController, :update
+    delete "/d-livestock/:id", DLivestockController, :delete
+    # End Defined LiveStock
+
     # Livestock Routes
     post "/livestocks", LivestockController, :create
     get "/livestocks", LivestockController, :index
     get "/livestocks/:id", LivestockController, :show
     get "/livestocks/business/:business_id", LivestockController, :get_livestocks_using_business_id
+    delete "/livestocks/:id", LivestockController, :delete
     put "/livestocks/:id", LivestockController, :update
     # Livestock Routes End
 
@@ -176,12 +185,21 @@ defmodule SpiderWeb.Router do
     put "/produces/:id", ProduceController, :update
     # Produces Routes End
 
+    # Defined Produce
+    post "/d-produces", DProduceController, :create
+    get "/d-produces", DProduceController, :index
+    get "/d-produces/:id", DProduceController, :show
+    put "/d-produces/:id", DProduceController, :update
+    delete "/d-produces/:id", DProduceController, :delete
+    # End Defined Produce
+
     # Products Router
     # resources "/products", ProductController
     post "/products", ProductController, :create
     get "/products", ProductController, :index
     get "/products/:id", ProductController, :show
     put "/products/:id", ProductController, :update
+    get "/products/business/:business_id", ProductController, :get_products_using_business_id
     # Products Routers Ends
 
     # Defined Roles i.e DRoles

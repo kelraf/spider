@@ -7,6 +7,7 @@ defmodule Spider.Products do
   alias Spider.Repo
 
   alias Spider.Products.Product
+  alias Spider.Helpers.SpiderData
 
   @doc """
   Returns the list of products.
@@ -36,6 +37,25 @@ defmodule Spider.Products do
 
   """
   def get_product!(id), do: Repo.get!(Product, id)
+
+  def get_products_using_business_id(business_id) do
+    
+    query = from p in Product,
+                where: p.business_id == ^business_id,
+                select: p
+
+    products = Repo.all(query)
+
+    case products |> SpiderData.list_empty? do
+      true -> 
+        {:empty, "Empty"}
+
+      false ->
+        {:ok, products}
+        
+    end
+
+  end
 
   @doc """
   Creates a product.

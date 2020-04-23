@@ -17,7 +17,8 @@ defmodule SpiderWeb.ProduceController do
       {:empty, _nonses} ->
         conn
         |> json(%{
-          message: "No Produces Related To Your Business"
+          data: [],
+          message: "No Produces Related To Your Business Yet"
         })
 
       {:ok, produces} ->

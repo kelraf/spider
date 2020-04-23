@@ -89,7 +89,7 @@ defmodule Spider.Livestocks do
   """
   def update_livestock(%Livestock{} = livestock, attrs) do
     livestock
-    |> Livestock.changeset(attrs)
+    |> Livestock.changeset(attrs, "update")
     |> Repo.update()
   end
 

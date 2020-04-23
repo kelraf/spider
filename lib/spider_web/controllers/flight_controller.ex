@@ -18,6 +18,7 @@ defmodule SpiderWeb.FlightController do
       {:empty, _nonses} ->
         conn
         |> json(%{
+          data: [],
           message: "No Flights Related To Your Business"
         })
 
