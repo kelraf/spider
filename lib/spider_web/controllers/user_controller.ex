@@ -6,11 +6,12 @@ defmodule SpiderWeb.UserController do
   alias Spider.UserToolKit
   alias Spider.Sms
   alias Spider.VerificationAgentToolKit
+  alias Spider.Repo
 
   action_fallback SpiderWeb.FallbackController
 
   def index(conn, _params) do
-    users = Accounts.list_users()
+    users = Accounts.list_users() |> Repo.preload(:avatar)
     render(conn, "index.json", users: users)
   end
 
@@ -107,7 +108,7 @@ defmodule SpiderWeb.UserController do
               conn
               |> put_status(:created)
               |> put_resp_header("location", user_path(conn, :show, user))
-              |> render("show.json", user: user)
+              |> render("show.json", user: user |> Repo.preload(:avatar))
 
             end
             
@@ -117,7 +118,7 @@ defmodule SpiderWeb.UserController do
   end
 
   def show(conn, %{"id" => id}) do
-    user = Accounts.get_user!(id)
+    user = Accounts.get_user!(id) |> Repo.preload(:avatar)
     render(conn, "show.json", user: user)
   end
 
@@ -126,7 +127,7 @@ defmodule SpiderWeb.UserController do
     user = Accounts.get_user!(id)
 
     with {:ok, %User{} = user} <- Accounts.update_user(user, user_params) do
-      render(conn, "show.json", user: user)
+      render(conn, "show.json", user: user |> Repo.preload(:avatar))
     end
     
   end

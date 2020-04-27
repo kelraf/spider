@@ -28,3 +28,4 @@ npm-debug.log
 ssh-key
 ssh-key.pub
 .history
+/uploads

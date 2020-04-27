@@ -1,6 +1,7 @@
 defmodule SpiderWeb.UserView do
   use SpiderWeb, :view
   alias SpiderWeb.UserView
+  alias SpiderWeb.AvatarView
 
   def render("index.json", %{users: users}) do
     %{data: render_many(users, UserView, "user.json")}
@@ -28,7 +29,8 @@ defmodule SpiderWeb.UserView do
       currency_name: user.currency_name,
       continent_code: user.continent_code,
       latitude: user.latitude,
-      longitude: user.longitude
+      longitude: user.longitude,
+      avatar: render_one(user.avatar, AvatarView, "avatar.json", as: :avatar)
     }
   end
 end

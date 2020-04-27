@@ -37,7 +37,6 @@ defmodule Spider.Context.GroupToolKit do
     
                                 true ->
                                     changeset
-    
                             end
                             
                         end

@@ -39,7 +39,7 @@ config :spider, Spider.Guardian,
 
 
 config :arc,
-  storage: Arc.Storage.Local, # or  Arc.Storage.S3
+  storage: Arc.Storage.Local # or  Arc.Storage.S3
   # bucket: {:system, "AWS_S3_BUCKET"} # if using Amazon S3
 
 # config :cors_plug,

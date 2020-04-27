@@ -27,6 +27,8 @@ defmodule Spider.Accounts.User do
     field(:latitude, :string)
     field(:longitude, :string)
 
+    has_one(:avatar, Spider.Avatars.Avatar)
+
     timestamps()
   end
 

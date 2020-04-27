@@ -240,6 +240,22 @@ defmodule SpiderWeb.Router do
      delete "/f-roles/:id", FroleController, :delete
      # End Flight Roles
 
+     # Image Uploads i.e FRole
+     post "/image-uploads", ImageUploadController, :create
+     get "/image-uploads", ImageUploadController, :index
+     get "/image-uploads/:id", ImageUploadController, :show
+     put "/image-uploads/:id", ImageUploadController, :update
+     delete "/image-uploads/:id", ImageUploadController, :delete
+     # End Image Uploads
+
+     # Avatars i.e FRole
+     post "/avatars", AvatarController, :create
+     get "/avatars", AvatarController, :index
+     get "/avatars/:id", AvatarController, :show
+     put "/avatars/:id", AvatarController, :update
+     delete "/avatars/:id", AvatarController, :delete
+     # End Avatars
+
   end
   
 end
