@@ -3,11 +3,12 @@ defmodule SpiderWeb.ProductController do
 
   alias Spider.Products
   alias Spider.Products.Product
+  alias Spider.Repo
 
   action_fallback SpiderWeb.FallbackController
 
   def index(conn, _params) do
-    products = Products.list_products()
+    products = Products.list_products() |> Repo.preload([product_container_images: [:products_images]])
     render(conn, "index.json", products: products)
   end
 
@@ -23,7 +24,7 @@ defmodule SpiderWeb.ProductController do
 
       {:ok, products} ->
         conn
-        |> render("index.json", products: products)
+        |> render("index.json", products: products |> Repo.preload([product_container_images: [:products_images]]))
         
     end
 
@@ -34,12 +35,12 @@ defmodule SpiderWeb.ProductController do
       conn
       |> put_status(:created)
       # |> put_resp_header("location", product_path(conn, :show, product))
-      |> render("show.json", product: product)
+      |> render("show.json", product: product |> Repo.preload([product_container_images: [:products_images]]))
     end
   end
 
   def show(conn, %{"id" => id}) do
-    product = Products.get_product!(id)
+    product = Products.get_product!(id) |> Repo.preload([product_container_images: [:products_images]])
     render(conn, "show.json", product: product)
   end
 
@@ -47,7 +48,7 @@ defmodule SpiderWeb.ProductController do
     product = Products.get_product!(id)
 
     with {:ok, %Product{} = product} <- Products.update_product(product, product_params) do
-      render(conn, "show.json", product: product)
+      render(conn, "show.json", product: product |> Repo.preload([product_container_images: [:products_images]]))
     end
   end
 

@@ -20,8 +20,9 @@ defmodule SpiderWeb.BusinessController do
     case Businesses.get_businesses_using_user_id(user_id) do
       {:empty, message} ->
         conn
-        |> put_status(:not_found)
+        |> put_status(:ok)
         |> json(%{
+          data: [],
           message: message
         })
 
@@ -48,9 +49,7 @@ defmodule SpiderWeb.BusinessController do
      
       Task.start(fn -> 
 
-        Process.sleep(2000);
-
-        if business.category in ["group_ranch", "association", "co-oparative"] do
+        if business.business_type in ["group_ranch", "association", "co-oparative"] do
           Groups.create_group(group_params)
         end
 
@@ -58,7 +57,6 @@ defmodule SpiderWeb.BusinessController do
 
       Task.start(fn -> 
         
-        Process.sleep(2000);
         BusinessToolKit.create_default_asset(business)
         
       end)

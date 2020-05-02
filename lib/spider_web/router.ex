@@ -202,6 +202,22 @@ defmodule SpiderWeb.Router do
     get "/products/business/:business_id", ProductController, :get_products_using_business_id
     # Products Routers Ends
 
+    # Product Images Container
+    post "/products-images-containers", ProductImagesContainerController, :create
+    get "/products-images-containers", ProductImagesContainerController, :index
+    get "/products-images-containers/:id", ProductImagesContainerController, :show
+    put "/products-images-containers/:id", ProductImagesContainerController, :update
+    delete "/products-images-containers/:id", ProductImagesContainerController, :delete
+    # Product Images Container
+
+    # Product Images
+    post "/products-images", ProductImageController, :create
+    get "/products-images", ProductImageController, :index
+    get "/products-images/:id", ProductImageController, :show
+    put "/products-images/:id", ProductImageController, :update
+    delete "/products-images/:id", ProductImageController, :delete
+    # Product Images
+
     # Defined Roles i.e DRoles
     post "/d-roles", DRoleController, :create
     get "/d-roles", DRoleController, :index

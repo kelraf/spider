@@ -4,15 +4,16 @@ defmodule Spider.BusinessToolKit do
     import Ecto.Changeset
 
     alias Spider.BusinessAssets
+    alias Spider.Toolkit.Constants.Business
 
-    def validate_business_type(changeset) do
+    def validate_business_sub_category(changeset) do
 
-        case get_field(changeset, :business_type) do
+        case get_field(changeset, :sub_category) do
             nil -> 
                 changeset
-            business_type ->
-                if business_type not in ["supplier", "transport-air", "transport-road", "transport-water", "transport-rail", "farmer", "slaughter_house", "abattoir"] do
-                    add_error(changeset, :business_type, "Unknown Business Type")
+              sub_category ->
+                if sub_category not in Business.business_sub_categories() do
+                    add_error(changeset, :sub_category, "Business Sub Category Is Invalid")
                 else
                     changeset
                 end
@@ -22,12 +23,27 @@ defmodule Spider.BusinessToolKit do
 
     def validate_business_category(changeset) do
 
-        case get_field(changeset, :category) do
+      case get_field(changeset, :category) do
+          nil -> 
+              changeset
+          category ->
+            if category not in Business.business_categories() do
+                add_error(changeset, :category, "Business Category Is Invalid")
+            else
+                changeset
+            end
+      end
+
+  end
+
+    def validate_business_type(changeset) do
+
+        case get_field(changeset, :business_type) do
             nil -> 
                 changeset
-            category -> 
-                if category not in ["sole_proprietor", "group_ranch", "association", "co-oparative"] do
-                    add_error(changeset, :category, "Unknown Business Category")
+              business_type -> 
+                if business_type not in ["sole_proprietor", "group_ranch", "association", "co-oparative"] do
+                    add_error(changeset, :business_type, "Unknown Business Type")
                 else
                     changeset
                 end
@@ -54,20 +70,24 @@ defmodule Spider.BusinessToolKit do
 
         cond do
 
-            business.business_type == "supplier" -> 
+            # <<<<---------------------- pasture-and-feeds ----------------->>>>>
+
+            business.sub_category == "pasture-and-feeds" -> 
   
               business_asset = %{
                 business_id: business.id,
-                asset_name: "product"
+                asset_name: "products"
               }
   
               BusinessAssets.create_business_asset(business_asset)
-  
-            business.business_type == "farmer" ->
+              
+            # <<<<---------------------- Livestock Farmar ----------------->>>>>
+
+            business.sub_category == "livestock-farmer" ->
   
               business_asset = %{
                 business_id: business.id,
-                asset_name: "livestock"
+                asset_name: "livestocks"
               }
   
               BusinessAssets.create_business_asset(business_asset)
@@ -78,12 +98,14 @@ defmodule Spider.BusinessToolKit do
               }
   
               BusinessAssets.create_business_asset(business_asset_one)
+
+            # <<<<-------- Slaughter House -------->>>>>
   
-            business.business_type == "slaughter_house" ->
+            business.sub_category == "slaughter-house" ->
   
               business_asset = %{
                 business_id: business.id,
-                asset_name: "livestock"
+                asset_name: "livestocks"
               }
   
               BusinessAssets.create_business_asset(business_asset)
@@ -94,19 +116,21 @@ defmodule Spider.BusinessToolKit do
               }
   
               BusinessAssets.create_business_asset(business_asset_one)
+
+            # <<<<-------- Abattoir -------->>>>>
   
-            business.business_type == "abattoir" ->
+            business.sub_category == "abattoir" ->
   
               business_asset = %{
                 business_id: business.id,
-                asset_name: "livestock"
+                asset_name: "livestocks"
               }
   
               BusinessAssets.create_business_asset(business_asset)
   
               business_asset_one = %{
                 business_id: business.id,
-                asset_name: "product"
+                asset_name: "products"
               }
   
               BusinessAssets.create_business_asset(business_asset_one)
@@ -117,8 +141,116 @@ defmodule Spider.BusinessToolKit do
               }
   
               BusinessAssets.create_business_asset(business_asset_two)
+
+            # <<<<-------- accesories-and-equipments -------->>>>>
   
-            business.business_type == "transport-air" ->
+            business.sub_category == "accesories-and-equipments" ->
+  
+              business_asset = %{
+                business_id: business.id,
+                asset_name: "products"
+              }
+  
+              BusinessAssets.create_business_asset(business_asset)
+
+            # <<<<-------- vetcare -------->>>>>
+  
+            business.sub_category == "vetcare" ->
+  
+              business_asset = %{
+                business_id: business.id,
+                asset_name: "vehicles"
+              }
+  
+              BusinessAssets.create_business_asset(business_asset)
+
+            # <<<<-------- agrovet -------->>>>>
+  
+            business.sub_category == "agrovet" ->
+  
+              business_asset = %{
+                business_id: business.id,
+                asset_name: "products"
+              }
+  
+              BusinessAssets.create_business_asset(business_asset)
+
+            # <<<<-------- value-addition -------->>>>>
+  
+            business.sub_category == "value-addition" ->
+  
+              business_asset = %{
+                business_id: business.id,
+                asset_name: "products"
+              }
+  
+              BusinessAssets.create_business_asset(business_asset)
+
+              business_asset_one = %{
+                business_id: business.id,
+                asset_name: "produce"
+              }
+  
+              BusinessAssets.create_business_asset(business_asset_one)
+
+            # <<<<-------- distributor -------->>>>>
+  
+            business.sub_category == "distributor" ->
+  
+              business_asset = %{
+                business_id: business.id,
+                asset_name: "products"
+              }
+  
+              BusinessAssets.create_business_asset(business_asset)
+
+              business_asset_one = %{
+                business_id: business.id,
+                asset_name: "produce"
+              }
+  
+              BusinessAssets.create_business_asset(business_asset_one)
+
+            # <<<<-------- wholesaler -------->>>>>
+  
+            business.sub_category == "wholesaler" ->
+  
+              business_asset = %{
+                business_id: business.id,
+                asset_name: "products"
+              }
+  
+              BusinessAssets.create_business_asset(business_asset)
+
+              business_asset_one = %{
+                business_id: business.id,
+                asset_name: "produce"
+              }
+  
+              BusinessAssets.create_business_asset(business_asset_one)
+
+
+            # <<<<-------- retailer -------->>>>>
+  
+            business.sub_category == "retailer" ->
+  
+              business_asset = %{
+                business_id: business.id,
+                asset_name: "products"
+              }
+  
+              BusinessAssets.create_business_asset(business_asset)
+
+              business_asset_one = %{
+                business_id: business.id,
+                asset_name: "produce"
+              }
+  
+              BusinessAssets.create_business_asset(business_asset_one)
+
+            # <<<<-------- logistics-and-freight -------->>>>>
+  
+            business.sub_category == "logistics-and-freight" ->
   
               business_asset = %{
                 business_id: business.id,
@@ -126,33 +258,74 @@ defmodule Spider.BusinessToolKit do
               }
   
               BusinessAssets.create_business_asset(business_asset)
+
+              business_asset_one = %{
+                business_id: business.id,
+                asset_name: "trains"
+              }
   
-            business.business_type == "transport-water" ->
+              BusinessAssets.create_business_asset(business_asset_one)
+
+            # <<<<-------- storage-and-warehousing -------->>>>>
+  
+            business.sub_category == "storage-and-warehousing" ->
   
               business_asset = %{
                 business_id: business.id,
-                asset_name: "vessle"
+                asset_name: "products"
               }
   
               BusinessAssets.create_business_asset(business_asset)
+
+              business_asset_one = %{
+                business_id: business.id,
+                asset_name: "produce"
+              }
   
-            business.business_type == "transport-rail" ->
+              BusinessAssets.create_business_asset(business_asset_one)
+
+            # <<<<-------- branding-and-packaging -------->>>>>
+  
+            business.sub_category == "branding-and-packaging" ->
   
               business_asset = %{
                 business_id: business.id,
-                asset_name: "train"
+                asset_name: "products"
               }
   
               BusinessAssets.create_business_asset(business_asset)
+
+              business_asset_one = %{
+                business_id: business.id,
+                asset_name: "produce"
+              }
   
-            business.business_type == "transport-road" ->
+              BusinessAssets.create_business_asset(business_asset_one)
+
+            # <<<<-------- handling-and-delivary -------->>>>>
+  
+            business.sub_category == "handling-and-delivary" ->
   
               business_asset = %{
                 business_id: business.id,
-                asset_name: "vehicle"
+                asset_name: "products"
               }
   
               BusinessAssets.create_business_asset(business_asset)
+
+              business_asset_one = %{
+                business_id: business.id,
+                asset_name: "produce"
+              }
+  
+              BusinessAssets.create_business_asset(business_asset_one)
+
+              business_asset_two = %{
+                business_id: business.id,
+                asset_name: "vehicles"
+              }
+  
+              BusinessAssets.create_business_asset(business_asset_two)
   
           end
 

@@ -1,4 +1,4 @@
-defmodule Spider.Avatar do
+defmodule Spider.ProductsImagesUploader do
   use Arc.Definition
 
   # Include ecto support (requires package arc_ecto installed):
@@ -26,13 +26,12 @@ defmodule Spider.Avatar do
 
   # Override the persisted filenames:
   def filename(version, {file, scope}) do
-    "spider_#{scope.uuid}_#{scope.user_id}"
-    # .#{Path.extname(file.file_name)}
+    "spider_#{scope.uuid}_#{scope.product_images_container_id}_#{scope.product_id}"
   end
 
   # Override the storage directory:
   def storage_dir(version, {file, scope}) do
-    "uploads/user/avatars/"
+    "uploads/product/"
   end
 
   # Provide a default URL if there hasn't been a file uploaded

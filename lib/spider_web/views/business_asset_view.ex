@@ -14,7 +14,8 @@ defmodule SpiderWeb.BusinessAssetView do
     %{
       id: business_asset.id,
       asset_name: business_asset.asset_name,
-      business_id: business_asset.business_id
+      business_id: business_asset.business_id,
+      status: business_asset.status
     }
   end
 end

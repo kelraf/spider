@@ -132,11 +132,11 @@ defmodule Spider.UserToolKit do
   def validate_roles(changeset) do
 
     case get_field(changeset, :role) do
-      "spider-010-norm" -> 
+      "spider-trader-001" -> 
         changeset
-      "group_business_creator" -> 
+      "spider-buyer-001" -> 
         changeset
-      "group_member" ->
+      "spider-business-member" ->
         changeset
       "multi" -> 
         changeset

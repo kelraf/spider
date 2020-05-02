@@ -19,6 +19,7 @@ defmodule SpiderWeb.BusinessView do
       registration_number: business.registration_number,
       business_type: business.business_type,
       category: business.category,
+      sub_category: business.sub_category,
       user_id: business.user_id,
       country_name: business.country_name,
       country_calling_code: business.country_calling_code,

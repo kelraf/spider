@@ -4,6 +4,7 @@ defmodule Spider.Products.Product do
 
   alias Spider.Accounts.User
   alias Spider.Businesses.Business
+  alias Spider.ProductImagesContainers.ProductImagesContainer
 
 
   schema "products" do
@@ -15,6 +16,8 @@ defmodule Spider.Products.Product do
 
     belongs_to(:user, User)
     belongs_to(:business, Business)
+
+    has_one(:product_container_images, ProductImagesContainer)
 
     timestamps()
   end

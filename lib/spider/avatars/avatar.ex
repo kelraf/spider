@@ -27,7 +27,6 @@ defmodule Spider.Avatars.Avatar do
     |> validate_required([:avatar, :user_id, :uuid])
     |> validate_one_user_with_one_image(action)
     |> create_image_name
-    |> IO.inspect
   end
 
   defp populate_uuid(changeset) do
@@ -80,6 +79,6 @@ defmodule Spider.Avatars.Avatar do
             end
         end
     end
-  end
+  end 
   
 end

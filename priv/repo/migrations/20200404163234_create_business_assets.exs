@@ -4,8 +4,8 @@ defmodule Spider.Repo.Migrations.CreateBusinessAssets do
   def change do
     create table(:business_assets) do
       add :asset_name, :string
-
       add :business_id, references(:businesses, on_delete: :delete_all)
+      add :status, :integer
 
       timestamps()
     end

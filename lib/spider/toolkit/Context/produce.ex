@@ -31,10 +31,8 @@ defmodule Spider.Context.Produce do
     
                                 false -> 
                                     add_error(changeset, :quantity, "Oops!! Resource Already Exists. Please Just Update.")
-    
                                 true ->
                                     changeset
-    
                             end
                         end
                             

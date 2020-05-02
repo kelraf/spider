@@ -89,7 +89,7 @@ defmodule Spider.BusinessAssets do
   """
   def update_business_asset(%BusinessAsset{} = business_asset, attrs) do
     business_asset
-    |> BusinessAsset.changeset(attrs)
+    |> BusinessAsset.changeset(attrs, "update")
     |> Repo.update()
   end
 

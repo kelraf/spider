@@ -9,6 +9,8 @@ defmodule Spider.Repo.Migrations.CreateProducts do
       add :category, :string
       add :quantity, :integer
       add :units, :string
+      add :price, :integer
+      add :status, :integer
 
       add :user_id, references(:users, on_delete: :nothing)
       add :business_id, references(:businesses, on_delete: :nothing)
