@@ -34,7 +34,7 @@ defmodule SpiderWeb.VehicleController do
     with {:ok, %Vehicle{} = vehicle} <- Vehicles.create_vehicle(vehicle_params) do
       conn
       |> put_status(:created)
-      # |> put_resp_header("location", vehicle_path(conn, :show, vehicle))
+      |> put_resp_header("location", vehicle_path(conn, :show, vehicle))
       |> render("show.json", vehicle: vehicle |> Repo.preload(:vroles))
     end
   end

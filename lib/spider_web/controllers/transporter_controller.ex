@@ -32,7 +32,7 @@ defmodule SpiderWeb.TransporterController do
     with {:ok, %Transporter{} = transporter} <- Transporters.create_transporter(transporter_params) do
       conn
       |> put_status(:created)
-      # |> put_resp_header("location", transporter_path(conn, :show, transporter))
+      |> put_resp_header("location", transporter_path(conn, :show, transporter))
       |> render("show.json", transporter: transporter)
     end
   end

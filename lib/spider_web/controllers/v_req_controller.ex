@@ -15,7 +15,7 @@ defmodule SpiderWeb.VReqController do
     with {:ok, %VReq{} = v_req} <- VReqs.create_v_req(v_req_params) do
       conn
       |> put_status(:created)
-      # |> put_resp_header("location", v_req_path(conn, :show, v_req))
+      |> put_resp_header("location", v_req_path(conn, :show, v_req))
       |> render("show.json", v_req: v_req)
     end
   end

@@ -32,7 +32,7 @@ defmodule SpiderWeb.OrderContainerController do
     with {:ok, %OrderContainer{} = order_container} <- OrderContainers.create_order_container(order_container_params) do
       conn
       |> put_status(:created)
-      # |> put_resp_header("location", order_container_path(conn, :show, order_container))
+      |> put_resp_header("location", order_container_path(conn, :show, order_container))
       |> render("show.json", order_container: order_container)
     end
   end

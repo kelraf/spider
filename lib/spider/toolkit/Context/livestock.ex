@@ -43,4 +43,18 @@ defmodule Spider.Context.Livestock do
 
     end
 
+    def validate_min_price(changeset) do
+        IO.inspect changeset
+        case get_field(changeset, :price) do
+          nil ->
+            changeset
+          price ->
+            if price >= 200 do
+              changeset
+            else 
+              add_error(changeset, :price, "Price is too low")
+            end
+        end
+      end
+
 end

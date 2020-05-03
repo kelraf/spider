@@ -34,7 +34,7 @@ defmodule SpiderWeb.BusinessAssetController do
     with {:ok, %BusinessAsset{} = business_asset} <- BusinessAssets.create_business_asset(business_asset_params) do
       conn
       |> put_status(:created)
-      # |> put_resp_header("location", business_asset_path(conn, :show, business_asset))
+      |> put_resp_header("location", business_asset_path(conn, :show, business_asset))
       |> render("show.json", business_asset: business_asset)
     end
   end

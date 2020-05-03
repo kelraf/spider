@@ -16,6 +16,7 @@ defmodule SpiderWeb.LivestockView do
       id: livestock.id,
       dlivestock_id: livestock.dlivestock_id,
       quantity: livestock.quantity,
+      price: livestock.price,
       user_id: livestock.user_id,
       business_id: livestock.business_id,
       tlivestocks: render_many(livestock.tlivestocks, TLivestockView, "t_livestock.json", as: :t_livestock)

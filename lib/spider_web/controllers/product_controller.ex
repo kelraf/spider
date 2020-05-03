@@ -34,7 +34,7 @@ defmodule SpiderWeb.ProductController do
     with {:ok, %Product{} = product} <- Products.create_product(product_params) do
       conn
       |> put_status(:created)
-      # |> put_resp_header("location", product_path(conn, :show, product))
+      |> put_resp_header("location", product_path(conn, :show, product))
       |> render("show.json", product: product |> Repo.preload([product_container_images: [:products_images]]))
     end
   end

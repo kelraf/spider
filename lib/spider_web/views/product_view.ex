@@ -19,6 +19,7 @@ defmodule SpiderWeb.ProductView do
       category: product.category,
       quantity: product.quantity,
       units: product.units,
+      price: product.price,
       user_id: product.user_id,
       business_id: product.business_id,
       product_container_images: render_one(product.product_container_images, ProductImagesContainerView, "product_images_container.json", as: :product_images_container)

@@ -13,6 +13,7 @@ defmodule Spider.Products.Product do
     field :quantity, :integer
     field :type, :string
     field :units, :string
+    field :price, :integer
 
     belongs_to(:user, User)
     belongs_to(:business, Business)
@@ -25,7 +26,22 @@ defmodule Spider.Products.Product do
   @doc false
   def changeset(product, attrs) do
     product
-    |> cast(attrs, [:name, :type, :category, :quantity, :units, :user_id, :business_id])
-    |> validate_required([:name, :type, :category, :quantity, :units, :user_id, :business_id])
+    |> cast(attrs, [:name, :type, :price, :category, :quantity, :units, :user_id, :business_id])
+    |> validate_required([:name, :type, :price, :category, :quantity, :units, :user_id, :business_id])
+    |> validate_min_price()
   end
+
+  defp validate_min_price(changeset) do
+    case get_field(changeset, :price) do
+      nil ->
+        changeset
+      price ->
+        if price >= 200 do
+          changeset
+        else 
+          add_error(changeset, :price, "Price is too low")
+        end
+    end
+  end
+  
 end

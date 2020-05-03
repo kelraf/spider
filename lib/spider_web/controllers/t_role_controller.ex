@@ -15,7 +15,7 @@ defmodule SpiderWeb.TRoleController do
     with {:ok, %TRole{} = t_role} <- TRoles.create_t_role(t_role_params) do
       conn
       |> put_status(:created)
-      # |> put_resp_header("location", t_role_path(conn, :show, t_role))
+      |> put_resp_header("location", t_role_path(conn, :show, t_role))
       |> render("show.json", t_role: t_role)
     end
   end

@@ -12,6 +12,7 @@ defmodule Spider.Livestocks.Livestock do
   schema "livestocks" do
 
     field :quantity, :integer
+    field :price, :integer
 
     belongs_to(:user, User)
     belongs_to(:business, Business)
@@ -25,8 +26,9 @@ defmodule Spider.Livestocks.Livestock do
   @doc false
   def changeset(livestock, attrs, action \\ "create") do
     livestock
-    |> cast(attrs, [:dlivestock_id, :quantity, :user_id, :business_id])
-    |> validate_required([:dlivestock_id, :quantity, :user_id, :business_id])
+    |> cast(attrs, [:dlivestock_id, :quantity, :price, :user_id, :business_id])
+    |> validate_required([:dlivestock_id, :quantity, :price, :user_id, :business_id])
+    |> Livestock.validate_min_price()
     |> Livestock.validate_one_for_one_business_livestock(action)
   end
 end

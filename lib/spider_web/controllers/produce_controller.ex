@@ -33,7 +33,7 @@ defmodule SpiderWeb.ProduceController do
     with {:ok, %Produce{} = produce} <- Produces.create_produce(produce_params) do
       conn
       |> put_status(:created)
-      # |> put_resp_header("location", produce_path(conn, :show, produce))
+      |> put_resp_header("location", produce_path(conn, :show, produce))
       |> render("show.json", produce: produce)
     end
   end

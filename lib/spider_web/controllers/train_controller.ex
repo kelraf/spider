@@ -34,7 +34,7 @@ defmodule SpiderWeb.TrainController do
     with {:ok, %Train{} = train} <- Trains.create_train(train_params) do
       conn
       |> put_status(:created)
-      # |> put_resp_header("location", train_path(conn, :show, train))
+      |> put_resp_header("location", train_path(conn, :show, train))
       |> render("show.json", train: train |> Repo.preload(:troles))
     end
   end
