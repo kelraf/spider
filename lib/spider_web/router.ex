@@ -142,6 +142,39 @@ defmodule SpiderWeb.Router do
     delete "/order-containers/:id", OrderContainerController, :delete 
     # Order Container Rounts End
 
+    # LiveStocks Order Container Routes
+    post "/livestock-order-containers", LivestockOrderContainerController, :create
+    get "/livestock-order-containers", LivestockOrderContainerController, :index # Belongs to Admins
+    get "/livestock-order-containers/:id", LivestockOrderContainerController, :show 
+    # get "/livestock-order-containers/business/:business_id", LivestockOrderContainerController, :get_order_container_using_business_id
+    put "/livestock-order-containers/:id", LivestockOrderContainerController, :update
+    delete "/livestock-order-containers/:id", LivestockOrderContainerController, :delete 
+    # LiveStocks Order Container Rounts End
+
+    # LiveStocks Orders Routes
+    post "/livestock-orders", LivestockOrderController, :create
+    get "/livestock-orders", LivestockOrderController, :index # Belongs to Admins
+    get "/livestock-orders/:id", LivestockOrderController, :show 
+    put "/livestock-orders/:id", LivestockOrderController, :update
+    delete "/livestock-orders/:id", LivestockOrderController, :delete 
+    # LiveStocks Orders Rounts End
+
+    # Center Orders Routes
+    post "/center-orders", CenterOrderController, :create
+    get "/center-orders", CenterOrderController, :index # Belongs to Admins
+    get "/center-orders/:id", CenterOrderController, :show 
+    put "/center-orders/:id", CenterOrderController, :update
+    delete "/center-orders/:id", CenterOrderController, :delete 
+    # Center Orders Rounts End
+
+    # Center Orders Routes
+    post "/livestock-sales", LivestockSaleController, :create
+    get "/livestock-sales", LivestockSaleController, :index # Belongs to Admins
+    get "/livestock-sales/:id", LivestockSaleController, :show 
+    put "/livestock-sales/:id", LivestockSaleController, :update
+    delete "/livestock-sales/:id", LivestockSaleController, :delete 
+    # Center Orders Rounts End
+
     # Transtools Routes
     post "/transtools", TranstoolController, :create
     get "/transtools", TranstoolController, :index # Belongs to admins
@@ -167,6 +200,14 @@ defmodule SpiderWeb.Router do
     delete "/d-livestock/:id", DLivestockController, :delete
     # End Defined LiveStock
 
+    # Defined LiveStock
+    post "/d-livestock-images", DlivestockImageController, :create
+    get "/d-livestock-images", DlivestockImageController, :index
+    get "/d-livestock-images/:id", DlivestockImageController, :show
+    put "/d-livestock-images/:id", DLlvestockImageController, :update
+    delete "/d-livestock-images/:id", DlivestockImageController, :delete
+    # End Defined LiveStock
+
     # Livestock Routes
     post "/livestocks", LivestockController, :create
     get "/livestocks", LivestockController, :index
@@ -177,7 +218,6 @@ defmodule SpiderWeb.Router do
     # Livestock Routes End
 
     # Produces Routes
-    # resources "/produces", ProduceController
     post "/produces", ProduceController, :create
     get "/produces", ProduceController, :index
     get "/produces/:id", ProduceController, :show
@@ -194,7 +234,6 @@ defmodule SpiderWeb.Router do
     # End Defined Produce
 
     # Products Router
-    # resources "/products", ProductController
     post "/products", ProductController, :create
     get "/products", ProductController, :index
     get "/products/:id", ProductController, :show
@@ -256,7 +295,7 @@ defmodule SpiderWeb.Router do
      delete "/f-roles/:id", FroleController, :delete
      # End Flight Roles
 
-     # Image Uploads i.e FRole
+     # Image Uploads
      post "/image-uploads", ImageUploadController, :create
      get "/image-uploads", ImageUploadController, :index
      get "/image-uploads/:id", ImageUploadController, :show
@@ -264,7 +303,7 @@ defmodule SpiderWeb.Router do
      delete "/image-uploads/:id", ImageUploadController, :delete
      # End Image Uploads
 
-     # Avatars i.e FRole
+     # Avatars 
      post "/avatars", AvatarController, :create
      get "/avatars", AvatarController, :index
      get "/avatars/:id", AvatarController, :show

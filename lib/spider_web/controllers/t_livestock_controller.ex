@@ -15,7 +15,7 @@ defmodule SpiderWeb.TLivestockController do
     with {:ok, %TLivestock{} = t_livestock} <- TLivestocks.create_t_livestock(t_livestock_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", t_livestock_path(conn, :show, t_livestock))
+      # |> put_resp_header("location", t_livestock_path(conn, :show, t_livestock))
       |> render("show.json", t_livestock: t_livestock)
     end
   end

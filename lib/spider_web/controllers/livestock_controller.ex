@@ -34,6 +34,7 @@ defmodule SpiderWeb.LivestockController do
   end
 
   def create(conn, %{"livestock" => livestock_params}) do
+
     with {:ok, %Livestock{} = livestock} <- Livestocks.create_livestock(livestock_params) do
 
       t_livestock = %{
@@ -41,13 +42,15 @@ defmodule SpiderWeb.LivestockController do
         quantity: livestock.quantity
       }
 
-      Task.start(fn -> TLivestocks.create_t_livestock(t_livestock) end)
+      # Task.start(fn -> TLivestocks.create_t_livestock(t_livestock) end)
+      TLivestocks.create_t_livestock(t_livestock)
 
       conn
       |> put_status(:created)
       |> put_resp_header("location", livestock_path(conn, :show, livestock))
       |> render("show.json", livestock: livestock |> Repo.preload(:tlivestocks))
     end
+    
   end
 
   def show(conn, %{"id" => id}) do
@@ -68,7 +71,8 @@ defmodule SpiderWeb.LivestockController do
         quantity: livestock.quantity
       }
 
-      Task.start(fn -> TLivestocks.create_t_livestock(t_livestock) end)
+      # Task.start(fn -> TLivestocks.create_t_livestock(t_livestock) end)
+      TLivestocks.create_t_livestock(t_livestock)
 
       render(conn, "show.json", livestock: livestock |> Repo.preload(:tlivestocks))
 
