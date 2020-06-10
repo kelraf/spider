@@ -30,14 +30,14 @@ defmodule Spider.Context.LivestockOrder do
                 nil ->
                     changeset
                 livestock_order_container_id ->
-                    case get_field(changeset, :dlivestock_id) do
+                    case get_field(changeset, :d_livestock_id) do
                         nil ->
                             changeset
-                        dlivestock_id ->
+                        d_livestock_id ->
 
                             query = from(
                                 l in LivestockOrder,
-                                where: l.livestock_order_container_id == ^livestock_order_container_id and l.dlivestock_id == ^dlivestock_id,
+                                where: l.livestock_order_container_id == ^livestock_order_container_id and l.d_livestock_id == ^d_livestock_id,
                                 select: l
                             )
     

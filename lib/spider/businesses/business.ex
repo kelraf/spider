@@ -20,6 +20,7 @@ defmodule Spider.Businesses.Business do
     field(:country_calling_code, :string)
     field(:latitude, :string)
     field(:longitude, :string)
+    field(:exception, :boolean, virtual: true)
 
     belongs_to(:user, User)
     has_many(:business_assets, BusinessAsset)
@@ -44,8 +45,10 @@ defmodule Spider.Businesses.Business do
       :currency_name,
       :continent_code,
       :latitude,
-      :longitude
+      :longitude,
+      :exception
     ])
+    |> BusinessToolKit.validate_business_type()
     |> validate_required([
       :business_name,
       :registration_number,
@@ -55,7 +58,6 @@ defmodule Spider.Businesses.Business do
       :user_id
     ])
     |> validate_length(:business_name, min: 2, max: 100)
-    |> BusinessToolKit.validate_business_type()
     |> BusinessToolKit.validate_business_sub_category()
     |> BusinessToolKit.validate_business_category()
     |> validate_length(:registration_number, min: 2)

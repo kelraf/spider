@@ -33,14 +33,14 @@ defmodule Spider.Context.LivestockSales do
                 nil ->
                     changeset
                 livestock_order_container_id ->
-                    case get_field(changeset, :dlivestock_id) do
+                    case get_field(changeset, :d_livestock_id) do
                         nil ->
                             changeset
-                        dlivestock_id ->
+                        d_livestock_id ->
 
                             query = from(
                                 l in LivestockOrder,
-                                where: l.livestock_order_container_id == ^livestock_order_container_id and l.dlivestock_id == ^dlivestock_id,
+                                where: l.livestock_order_container_id == ^livestock_order_container_id and l.d_livestock_id == ^d_livestock_id,
                                 select: l
                             )
     
@@ -72,7 +72,7 @@ defmodule Spider.Context.LivestockSales do
                             co in CenterOrder,
                             where: co.id == ^center_order_id,
                             left_join: l in Livestock,
-                            on: co.dlivestock_id == l.dlivestock_id and l.business_id == ^business_id,
+                            on: co.d_livestock_id == l.d_livestock_id and l.business_id == ^business_id,
                             left_join: lo in LivestockOrder,
                             on: co.livestock_order_id == lo.id,
                             select: {co, l, lo}
@@ -287,7 +287,7 @@ defmodule Spider.Context.LivestockSales do
                                     co in CenterOrder,
                                     where: co.id == ^center_order_id,
                                     left_join: l in Livestock,
-                                    on: co.dlivestock_id == l.dlivestock_id and l.business_id == ^business_id,
+                                    on: co.d_livestock_id == l.d_livestock_id and l.business_id == ^business_id,
                                     left_join: lo in LivestockOrder,
                                     on: co.livestock_order_id == lo.id,
                                     left_join: ls in LivestockSale,

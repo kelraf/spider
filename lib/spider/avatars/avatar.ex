@@ -10,9 +10,8 @@ defmodule Spider.Avatars.Avatar do
   alias Spider.Repo
 
   schema "avatars" do
-
-    field :avatar, Spider.Avatar.Type
-    field :uuid, :string
+    field(:avatar, Spider.Avatar.Type)
+    field(:uuid, :string)
 
     belongs_to(:user, User)
     timestamps()
@@ -30,55 +29,62 @@ defmodule Spider.Avatars.Avatar do
   end
 
   defp populate_uuid(changeset) do
-    put_change(changeset, :uuid, Ecto.UUID.generate)
+    put_change(changeset, :uuid, Ecto.UUID.generate())
   end
 
   defp validate_one_user_with_one_image(changeset, action) do
-
     if action == "update" do
       changeset
     else
       case get_field(changeset, :user_id) do
         nil ->
-            changeset
+          changeset
+
         user_id ->
-            query = from(
-                a in Avatar,
-                where: a.user_id == ^user_id,
-                select: a
+          query =
+            from(
+              a in Avatar,
+              where: a.user_id == ^user_id,
+              select: a
             )
 
-            case Repo.all(query) |> SpiderData.list_empty? do
+          case Repo.all(query) |> SpiderData.list_empty?() do
+            false ->
+              add_error(changeset, :user_id, "Oparation Impossible. Please Just Update")
 
-                false -> 
-                  add_error(changeset, :user_id, "Oparation Impossible. Please Just Update")
-                true ->
-                  changeset
-            end
+            true ->
+              changeset
+          end
       end
     end
-
   end
 
   defp create_image_name(changeset) do
-    
     case get_field(changeset, :user_id) do
       nil ->
         changeset
+
       user_id ->
         case get_field(changeset, :avatar) do
-          nil -> 
+          nil ->
             changeset
-          avatar -> 
+
+          avatar ->
             case get_field(changeset, :uuid) do
-              nil -> 
+              nil ->
                 changeset
+
               uuid ->
-                new_avatar = Map.put(avatar, :file_name, "spider_#{uuid}_#{user_id}#{Path.extname(avatar.file_name)}")
+                new_avatar =
+                  Map.put(
+                    avatar,
+                    :file_name,
+                    "spider_#{uuid}_#{user_id}#{Path.extname(avatar.file_name)}"
+                  )
+
                 put_change(changeset, :avatar, new_avatar)
             end
         end
     end
-  end 
-  
+  end
 end

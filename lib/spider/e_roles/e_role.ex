@@ -6,7 +6,7 @@ defmodule Spider.ERoles.ERole do
   alias Spider.Vessles.Vessle
 
   schema "eroles" do
-    field :capacity, :integer
+    field(:capacity, :integer)
 
     belongs_to(:drole, DRole)
     belongs_to(:vessle, Vessle)

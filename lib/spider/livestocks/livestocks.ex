@@ -57,6 +57,23 @@ defmodule Spider.Livestocks do
 
   end
 
+  def get_livestock_using_d_livestock_id(d_livestock_id) do
+    query = from l in Livestock,
+                where: l.d_livestock_id == ^d_livestock_id,
+                select: l
+      
+      livestocks = Repo.all(query)
+
+    case livestocks |> SpiderData.list_empty? do
+      true -> 
+        {:empty, "Empty"}
+
+      false ->
+        {:ok, livestocks}
+        
+    end
+  end
+
   @doc """
   Creates a livestock.
 

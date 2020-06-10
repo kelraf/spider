@@ -58,7 +58,7 @@ defmodule Spider.Context.CenterOrders do
             nil ->
                 changeset
             status ->
-                if status not in ["in-progress", "offline", "online", "complete"] do
+                if status not in ["offline", "online", "complete"] do
                     add_error(changeset, :status, "is invalid")
                 else
                     changeset

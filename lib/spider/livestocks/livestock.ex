@@ -16,7 +16,7 @@ defmodule Spider.Livestocks.Livestock do
 
     belongs_to(:user, User)
     belongs_to(:business, Business)
-    belongs_to(:dlivestock, DLivestock)
+    belongs_to(:d_livestock, DLivestock)
 
     has_many(:tlivestocks, TLivestock)
 
@@ -26,8 +26,8 @@ defmodule Spider.Livestocks.Livestock do
   @doc false
   def changeset(livestock, attrs, action \\ "create") do
     livestock
-    |> cast(attrs, [:dlivestock_id, :quantity, :price, :user_id, :business_id])
-    |> validate_required([:dlivestock_id, :quantity, :price, :user_id, :business_id])
+    |> cast(attrs, [:d_livestock_id, :quantity, :price, :user_id, :business_id])
+    |> validate_required([:d_livestock_id, :quantity, :price, :user_id, :business_id])
     |> Livestock.validate_min_price()
     |> Livestock.validate_one_for_one_business_livestock(action)
   end

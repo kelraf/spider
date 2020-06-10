@@ -10,7 +10,7 @@ defmodule SpiderWeb.LivestockController do
 
   def index(conn, _params) do
 
-    livestocks = Livestocks.list_livestocks() |> Repo.preload(:tlivestocks)
+    livestocks = Livestocks.list_livestocks() |> Repo.preload([:tlivestocks, :business])
     render(conn, "index.json", livestocks: livestocks)
 
   end
@@ -27,7 +27,27 @@ defmodule SpiderWeb.LivestockController do
 
       {:ok, livestocks} ->
         conn
-        |> render("index.json", livestocks: livestocks |> Repo.preload(:tlivestocks))
+        |> render("index.json", livestocks: livestocks |> Repo.preload([:tlivestocks, :business]))
+        
+    end
+
+  end
+
+  def get_livestock_using_d_livestock_id(conn, %{"d_livestock_id" => d_livestock_id}) do
+    
+    case Livestocks.get_livestock_using_d_livestock_id(d_livestock_id) do
+      {:empty, _nonses} ->
+        conn
+        |> json(%{
+          data: [],
+          message: "No Livestocks Related To This D Livestock."
+        })
+
+      {:ok, livestocks} ->
+
+        livestocks = livestocks |> Repo.preload([:tlivestocks, :business])
+        conn
+        |> render("index.json", livestocks: livestocks)
         
     end
 
@@ -48,14 +68,14 @@ defmodule SpiderWeb.LivestockController do
       conn
       |> put_status(:created)
       |> put_resp_header("location", livestock_path(conn, :show, livestock))
-      |> render("show.json", livestock: livestock |> Repo.preload(:tlivestocks))
+      |> render("show.json", livestock: livestock |> Repo.preload([:tlivestocks, :business]))
     end
     
   end
 
   def show(conn, %{"id" => id}) do
 
-    livestock = Livestocks.get_livestock!(id) |> Repo.preload(:tlivestocks)
+    livestock = Livestocks.get_livestock!(id) |> Repo.preload([:tlivestocks, :business])
     render(conn, "show.json", livestock: livestock)
 
   end
@@ -74,7 +94,7 @@ defmodule SpiderWeb.LivestockController do
       # Task.start(fn -> TLivestocks.create_t_livestock(t_livestock) end)
       TLivestocks.create_t_livestock(t_livestock)
 
-      render(conn, "show.json", livestock: livestock |> Repo.preload(:tlivestocks))
+      render(conn, "show.json", livestock: livestock |> Repo.preload([:tlivestocks, :business]))
 
     end
 

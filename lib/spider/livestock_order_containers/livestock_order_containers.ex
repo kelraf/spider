@@ -7,6 +7,7 @@ defmodule Spider.LivestockOrderContainers do
   alias Spider.Repo
 
   alias Spider.LivestockOrderContainers.LivestockOrderContainer
+  alias Spider.Context.LivestockOrderStagesCenterOrders
 
   @doc """
   Returns the list of livestock_order_containers.
@@ -53,6 +54,7 @@ defmodule Spider.LivestockOrderContainers do
     %LivestockOrderContainer{}
     |> LivestockOrderContainer.changeset(attrs)
     |> Repo.insert()
+    |> LivestockOrderStagesCenterOrders.spawn_task()
   end
 
   @doc """

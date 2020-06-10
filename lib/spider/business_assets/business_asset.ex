@@ -3,14 +3,14 @@ defmodule Spider.BusinessAssets.BusinessAsset do
   import Ecto.Changeset
   import Ecto.Query, only: [from: 2]
 
-    alias Spider.Repo
-    alias Spider.Helpers.SpiderData
+  alias Spider.Repo
+  alias Spider.Helpers.SpiderData
 
   alias Spider.Businesses.Business
 
   schema "business_assets" do
-    field :asset_name, :string
-    field :status, :integer, default: 2
+    field(:asset_name, :string)
+    field(:status, :integer, default: 2)
 
     belongs_to(:business, Business)
 
@@ -27,32 +27,35 @@ defmodule Spider.BusinessAssets.BusinessAsset do
 
   defp validate_one_asset_per_business(changeset, action) do
     case get_field(changeset, :asset_name) do
-      nil -> 
+      nil ->
         changeset
+
       asset_name ->
+        case get_field(changeset, :business_id) do
+          nil ->
+            changeset
+          business_id ->
 
-        if action == "update" do
-          changeset
-        else
-
-            query = from(
-                a in __MODULE__,
-                where: a.asset_name == ^asset_name,
-                select: a
-            )
-
-            case Repo.all(query) |> SpiderData.list_empty? do
-
-                false -> 
-                    add_error(changeset, :asset_name, "Asset Name Exists")
+            if action == "update" do
+              changeset
+            else
+              query =
+                from(
+                  a in __MODULE__,
+                  where: a.asset_name == ^asset_name and a.business_id == ^business_id,
+                  select: a
+                )
+    
+              case Repo.all(query) |> SpiderData.list_empty?() do
+                false ->
+                  add_error(changeset, :asset_name, "Asset Name Exists")
+    
                 true ->
-                    changeset
+                  changeset
+              end
             end
-            
+
         end
-
     end
-
   end
-
 end

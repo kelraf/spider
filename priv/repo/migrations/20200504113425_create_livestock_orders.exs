@@ -8,7 +8,7 @@ defmodule Spider.Repo.Migrations.CreateLivestockOrders do
       add :total_cost, :integer
       add :quantity, :integer
       add :livestock_order_container_id, references(:livestock_order_containers, on_delete: :delete_all)
-      add :dlivestock_id, references(:dlivestock, on_delete: :nothing)
+      add :d_livestock_id, references(:dlivestock, on_delete: :nothing)
 
       timestamps()
     end

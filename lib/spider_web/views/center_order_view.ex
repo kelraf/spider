@@ -1,4 +1,4 @@
-defmodule SpiderWeb.CenterOrderView do 
+defmodule SpiderWeb.CenterOrderView do
   use SpiderWeb, :view
   alias SpiderWeb.CenterOrderView
   alias SpiderWeb.LivestockSaleView
@@ -19,10 +19,15 @@ defmodule SpiderWeb.CenterOrderView do
       status: center_order.status,
       price_per_animal: center_order.price_per_animal,
       total_price: center_order.total_price,
-      dlivestock_id: center_order.dlivestock_id,
+      who_can_see: center_order.who_can_see,
+      description: center_order.description,
+      d_livestock_id: center_order.d_livestock_id,
       livestock_order_id: center_order.livestock_order_id,
       total_price_available: center_order.total_price_available,
-      livestock_sales: render_many(center_order.livestock_sales, LivestockSaleView, "livestock_sale.json", as: :livestock_sale)
+      livestock_sales:
+        render_many(center_order.livestock_sales, LivestockSaleView, "livestock_sale.json",
+          as: :livestock_sale
+        )
     }
   end
 end

@@ -3,6 +3,7 @@ defmodule SpiderWeb.LivestockOrderView do
   alias SpiderWeb.LivestockOrderView
   alias SpiderWeb.CenterOrderView
   alias SpiderWeb.DLivestockView
+  alias SpiderWeb.LivestockOrderStageView
 
   def render("index.json", %{livestock_orders: livestock_orders}) do
     %{data: render_many(livestock_orders, LivestockOrderView, "livestock_order.json")}
@@ -18,10 +19,10 @@ defmodule SpiderWeb.LivestockOrderView do
       price: livestock_order.price,
       total_cost: livestock_order.total_cost,
       quantity: livestock_order.quantity,
-      dlivestock_id: livestock_order.dlivestock_id,
+      d_livestock_id: livestock_order.d_livestock_id,
       livestock_order_container_id: livestock_order.livestock_order_container_id,
-      dlivestock: render_one(livestock_order.dlivestock, DLivestockView, "d_livestock.json", as: :d_livestock),
-      center_order: render_one(livestock_order.center_order, CenterOrderView, "center_order.json", as: :center_order)
+      d_livestock: render_one(livestock_order.d_livestock, DLivestockView, "d_livestock.json", as: :d_livestock),
+      livestock_order_stages: render_many(livestock_order.livestock_order_stages, LivestockOrderStageView, "livestock_order_stage.json", as: :livestock_order_stage)
     }
   end
 end
