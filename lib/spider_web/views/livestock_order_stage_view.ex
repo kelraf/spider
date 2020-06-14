@@ -4,6 +4,7 @@ defmodule SpiderWeb.LivestockOrderStageView do
   alias SpiderWeb.CenterOrderView
   alias SpiderWeb.CCPLOrderView
   alias SpiderWeb.ExportZoneLivestockOrderView
+  alias SpiderWeb.LivestockOrderProcessingStageView
 
   def render("index.json", %{livestock_order_stages: livestock_order_stages}) do
     %{
@@ -33,7 +34,8 @@ defmodule SpiderWeb.LivestockOrderStageView do
         render_many(livestock_order_stage.c_c_p_l_orders, CCPLOrderView, "ccpl_order.json",
           as: :ccpl_order
         ),
-      export_zone_livestock_order: render_one(livestock_order_stage.export_zone_livestock_order, ExportZoneLivestockOrderView, "export_zone_livestock_order.json", as: :export_zone_livestock_order)
+      export_zone_livestock_order: render_one(livestock_order_stage.export_zone_livestock_order, ExportZoneLivestockOrderView, "export_zone_livestock_order.json", as: :export_zone_livestock_order),
+      livestock_order_processing_stages: render_many(livestock_order_stage.livestock_order_processing_stages, LivestockOrderProcessingStageView, "livestock_order_processing_stage.json", as: :livestock_order_processing_stage)
     }
   end
 end

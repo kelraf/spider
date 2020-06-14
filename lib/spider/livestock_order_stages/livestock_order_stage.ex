@@ -7,6 +7,7 @@ defmodule Spider.LivestockOrderStages.LivestockOrderStage do
   alias Spider.Repo
   alias Spider.CCPLOrders.CCPLOrder
   alias Spider.ExportZoneLivestockOrders.ExportZoneLivestockOrder
+  alias Spider.LivestockOrderProcessingStages.LivestockOrderProcessingStage
 
   schema "livestock_order_stages" do
     field(:stage_name, :string)
@@ -18,14 +19,17 @@ defmodule Spider.LivestockOrderStages.LivestockOrderStage do
     has_one(:center_order, CenterOrder)
     has_one(:export_zone_livestock_order ,Spider.ExportZoneLivestockOrders.ExportZoneLivestockOrder)
     has_many(:c_c_p_l_orders, CCPLOrder)
+    has_many(:livestock_order_processing_stages, LivestockOrderProcessingStage)
 
     timestamps()
   end
 
   @doc false
   def changeset(livestock_order_stage, attrs) do
+
     livestock_order_stage
     |> cast(attrs, [:stage_name, :status, :livestock_order_id])
     |> validate_required([:stage_name, :status])
+
   end
 end

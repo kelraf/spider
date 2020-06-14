@@ -15,7 +15,29 @@ defmodule SpiderWeb.LivestockOrderStageController do
       "index.json",
       livestock_order_stages:
         livestock_order_stages
-        |> Repo.preload([center_order: [:livestock_sales], c_c_p_l_orders: [], export_zone_livestock_order: [export_zone_bundler: [business: [business_assets: [], user: []]]]])
+        |> Repo.preload(
+          [
+            center_order: [:livestock_sales], 
+            c_c_p_l_orders: [], 
+            livestock_order_processing_stages: [
+              livestock_order_slaughter_order: [
+                livestock_order_slaughter_order_outputs: [],
+                business: [
+                  business_assets: [], 
+                  user: []
+                ]
+              ]
+            ], 
+            export_zone_livestock_order: [
+              export_zone_bundler: [
+                business: [
+                  business_assets: [], 
+                  user: []
+                ]
+              ]
+            ]
+          ]
+        )
     )
   end
 
@@ -31,7 +53,29 @@ defmodule SpiderWeb.LivestockOrderStageController do
       |> render("show.json",
         livestock_order_stage:
           livestock_order_stage
-          |> Repo.preload([center_order: [:livestock_sales], c_c_p_l_orders: [], export_zone_livestock_order: [export_zone_bundler: [business: [business_assets: [], user: []]]]])
+          |> Repo.preload(
+            [
+              center_order: [:livestock_sales], 
+              c_c_p_l_orders: [],  
+              livestock_order_processing_stages: [
+                livestock_order_slaughter_order: [
+                  livestock_order_slaughter_order_outputs: [],
+                  business: [
+                    business_assets: [], 
+                    user: []
+                  ]
+                ]
+              ], 
+              export_zone_livestock_order: [
+                export_zone_bundler: [
+                  business: [
+                    business_assets: [], 
+                    user: []
+                  ]
+                ]
+              ]
+            ]
+          )
       )
     end
   end
@@ -42,7 +86,29 @@ defmodule SpiderWeb.LivestockOrderStageController do
     render(conn, "show.json",
       livestock_order_stage:
         livestock_order_stage
-        |> Repo.preload([center_order: [:livestock_sales], c_c_p_l_orders: [], export_zone_livestock_order: [export_zone_bundler: [business: [business_assets: [], user: []]]]])
+        |> Repo.preload(
+          [
+            center_order: [:livestock_sales], 
+            c_c_p_l_orders: [],  
+            livestock_order_processing_stages: [
+              livestock_order_slaughter_order: [
+                livestock_order_slaughter_order_outputs: [],
+                business: [
+                  business_assets: [], 
+                  user: []
+                ]
+              ]
+            ], 
+            export_zone_livestock_order: [
+              export_zone_bundler: [
+                business: [
+                  business_assets: [], 
+                  user: []
+                ]
+              ]
+            ]
+          ]
+        )
     )
   end
 
@@ -57,7 +123,29 @@ defmodule SpiderWeb.LivestockOrderStageController do
       render(conn, "show.json",
         livestock_order_stage:
           livestock_order_stage
-          |> Repo.preload([center_order: [:livestock_sales], c_c_p_l_orders: [], export_zone_livestock_order: [export_zone_bundler: [business: [business_assets: [], user: []]]]])
+          |> Repo.preload(
+            [
+              center_order: [:livestock_sales], 
+              c_c_p_l_orders: [], 
+              livestock_order_processing_stages: [
+                livestock_order_slaughter_order: [
+                  livestock_order_slaughter_order_outputs: [],
+                  business: [
+                    business_assets: [], 
+                    user: []
+                  ]
+                ]
+              ], 
+              export_zone_livestock_order: [
+                export_zone_bundler: [
+                  business: [
+                    business_assets: [], 
+                    user: []
+                  ]
+                ]
+              ]
+            ]
+          )
       )
     end
   end

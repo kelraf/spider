@@ -298,6 +298,15 @@ defmodule SpiderWeb.Router do
     delete("/d-livestock/:id", DLivestockController, :delete)
     # End Defined LiveStock
 
+     # d_livestock_slaughter_outputs
+     post("/d-livestock-slaughter-outputs", DLivestockSlaughterOutputController, :create)
+     get("/d-livestock-slaughter-outputs", DLivestockSlaughterOutputController, :index)
+     get("/d-livestock-slaughter-outputs/d-livestocks/:d_livestock_id", DLivestockSlaughterOutputController, :get_d_livestock_slaughter_outputs_using_d_livestock_id)
+     get("/d-livestock-slaughter-outputs/:id", DLivestockSlaughterOutputController, :show)
+     put("/d-livestock-slaughter-outputs/:id", DLivestockSlaughterOutputController, :update)
+     delete("/d-livestock-slaughter-outputs/:id", DLivestockSlaughterOutputController, :delete)
+     # End d_livestock_slaughter_outputs
+
     # Defined LiveStock
     post("/d-livestock-images", DlivestockImageController, :create)
     get("/d-livestock-images", DlivestockImageController, :index)

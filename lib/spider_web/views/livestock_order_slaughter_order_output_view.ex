@@ -13,10 +13,9 @@ defmodule SpiderWeb.LivestockOrderSlaughterOrderOutputView do
   def render("livestock_order_slaughter_order_output.json", %{livestock_order_slaughter_order_output: livestock_order_slaughter_order_output}) do
     %{
       id: livestock_order_slaughter_order_output.id,
-      output_name: livestock_order_slaughter_order_output.output_name,
       quantity: livestock_order_slaughter_order_output.quantity,
-      units: livestock_order_slaughter_order_output.units,
       status: livestock_order_slaughter_order_output.status,
+      d_livestock_slaughter_output_id: livestock_order_slaughter_order_output.d_livestock_slaughter_output_id,
       livestock_order_slaughter_order_id: livestock_order_slaughter_order_output.livestock_order_slaughter_order_id,
       livestock_order_id: livestock_order_slaughter_order_output.livestock_order_id,
       livestock_order_stage_id: livestock_order_slaughter_order_output.livestock_order_stage_id,

@@ -8,6 +8,7 @@ defmodule Spider.Repo.Migrations.CreateLivestockOrderSlaughterOrders do
       add :description, :string
       add :dates, :map, default: %{}
 
+      add :business_id, references(:businesses, on_delete: :nothing)
       add :livestock_order_processing_stage_id, references(:livestock_order_processing_stages, on_delete: :delete_all)
       add :livestock_order_stage_id, references(:livestock_order_stages, on_delete: :delete_all)
       add :livestock_order_id, references(:livestock_orders, on_delete: :delete_all)

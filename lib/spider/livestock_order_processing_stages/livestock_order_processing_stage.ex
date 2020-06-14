@@ -4,6 +4,7 @@ defmodule Spider.LivestockOrderProcessingStages.LivestockOrderProcessingStage do
 
   alias Spider.LivestockOrders.LivestockOrder
   alias Spider.LivestockOrderStages.LivestockOrderStage
+  alias Spider.LivestockOrderSlaughterOrders.LivestockOrderSlaughterOrder
 
   schema "livestock_order_processing_stages" do
     field :stage_name, :string
@@ -11,6 +12,7 @@ defmodule Spider.LivestockOrderProcessingStages.LivestockOrderProcessingStage do
 
     belongs_to(:livestock_order, LivestockOrder)
     belongs_to(:livestock_order_stage, LivestockOrderStage)
+    has_one(:livestock_order_slaughter_order, LivestockOrderSlaughterOrder)
 
     timestamps()
   end
