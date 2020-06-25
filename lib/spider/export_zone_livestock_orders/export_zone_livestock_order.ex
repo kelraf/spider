@@ -8,6 +8,7 @@ defmodule Spider.ExportZoneLivestockOrders.ExportZoneLivestockOrder do
 
   schema "export_zone_livestock_orders" do
     field :dates, :map, default: %{}
+    field :status, :integer, default: 1
 
     belongs_to(:export_zone_bundler, ExportZoneBundler)
     belongs_to(:livestock_order_stage, LivestockOrderStage)
@@ -19,7 +20,7 @@ defmodule Spider.ExportZoneLivestockOrders.ExportZoneLivestockOrder do
   @doc false
   def changeset(export_zone_livestock_order, attrs) do
     export_zone_livestock_order
-    |> cast(attrs, [:dates, :export_zone_bundler_id, :livestock_order_stage_id, :livestock_order_id])
-    |> validate_required([:dates, :export_zone_bundler_id, :livestock_order_stage_id, :livestock_order_id])
+    |> cast(attrs, [:dates, :status, :export_zone_bundler_id, :livestock_order_stage_id, :livestock_order_id])
+    |> validate_required([:dates, :status, :export_zone_bundler_id, :livestock_order_stage_id, :livestock_order_id])
   end
 end

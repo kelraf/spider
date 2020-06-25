@@ -11,7 +11,11 @@ defmodule SpiderWeb.LivestockController do
   def index(conn, _params) do
 
     livestocks = Livestocks.list_livestocks() |> Repo.preload([:tlivestocks, :business])
-    render(conn, "index.json", livestocks: livestocks)
+    render(
+      conn, 
+      "index.json", 
+      livestocks: livestocks
+    )
 
   end
 
@@ -47,7 +51,10 @@ defmodule SpiderWeb.LivestockController do
 
         livestocks = livestocks |> Repo.preload([:tlivestocks, :business])
         conn
-        |> render("index.json", livestocks: livestocks)
+        |> render(
+          "index.json", 
+          livestocks: livestocks
+        )
         
     end
 

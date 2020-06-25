@@ -112,7 +112,6 @@ defmodule Spider.LivestockSales do
 
           center_order = CenterOrder.changeset(%CenterOrder{} = livestock_sale_changeset.changes.center_order_item.center_order, livestock_sale_changeset.changes.center_order_item.new_center_order_params, "update") |> Repo.update!()
           livestock = Livestock.changeset(%Livestock{} = livestock_sale_changeset.changes.livestock_item.livestock, livestock_sale_changeset.changes.livestock_item.new_livestock_params, "update") |> Repo.update!()
-          # IO.inspect {center_order, livestock}
           livestock_sale
 
       end
@@ -135,7 +134,6 @@ defmodule Spider.LivestockSales do
 
           center_order = CenterOrder.changeset(%CenterOrder{} = livestock_sale_changeset.changes.center_order_item.center_order, livestock_sale_changeset.changes.center_order_item.new_center_order_params, "update") |> Repo.update!()
           livestock = Livestock.changeset(%Livestock{} = livestock_sale_changeset.changes.livestock_item.livestock, livestock_sale_changeset.changes.livestock_item.new_livestock_params, "update") |> Repo.update!()
-          # IO.inspect {center_order, livestock}
           livestock_sale
 
       end

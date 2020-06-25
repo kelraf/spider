@@ -69,6 +69,7 @@ defmodule SpiderWeb.Router do
     # Belongs to Admins
     get("/export-zone-bundlers", ExportZoneBundlerController, :index)
     get("/export-zone-bundlers/:id", ExportZoneBundlerController, :show)
+    get("/export-zone-bundlers/business/:business_id", ExportZoneBundlerController, :get_by_business_id)
     put("/export-zone-bundlers/:id", ExportZoneBundlerController, :update)
     delete("/export-zone-bundlers/:id", ExportZoneBundlerController, :delete)
     # End of export-zone-bundler routes
@@ -142,6 +143,15 @@ defmodule SpiderWeb.Router do
     put("/trains/:id", TrainController, :update)
     delete("/trains/:id", TrainController, :delete)
     # Trains Routes End
+
+    # SlaughterOrderBundler Routes
+    post("/slaughter-order-bundlers", SlaughterOrderBundlerController, :create)
+    # Belongs Admins
+    get("/slaughter-order-bundlers", SlaughterOrderBundlerController, :index)
+    get("/slaughter-order-bundlers/:id", SlaughterOrderBundlerController, :show)
+    put("/slaughter-order-bundlers/:id", SlaughterOrderBundlerController, :update)
+    delete("/slaughter-order-bundlers/:id", SlaughterOrderBundlerController, :delete)
+    # SlaughterOrderBundler Routes End
 
     # Vessle Router
     post("/vessles", VessleController, :create)

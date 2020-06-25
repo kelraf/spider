@@ -4,7 +4,7 @@ defmodule Spider.Repo.Migrations.CreateExportZoneLivestockOrders do
   def change do
     create table(:export_zone_livestock_orders) do
       add :dates, :map, default: %{}
-      add :description, :string
+      add :description, :text
       add :status, :integer
 
       add :export_zone_bundler_id, references(:export_zone_bundler, on_delete: :delete_all)

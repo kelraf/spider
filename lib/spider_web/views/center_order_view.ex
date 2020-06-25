@@ -2,6 +2,7 @@ defmodule SpiderWeb.CenterOrderView do
   use SpiderWeb, :view
   alias SpiderWeb.CenterOrderView
   alias SpiderWeb.LivestockSaleView
+  alias SpiderWeb.DLivestockView
 
   def render("index.json", %{center_orders: center_orders}) do
     %{data: render_many(center_orders, CenterOrderView, "center_order.json")}
@@ -27,7 +28,8 @@ defmodule SpiderWeb.CenterOrderView do
       livestock_sales:
         render_many(center_order.livestock_sales, LivestockSaleView, "livestock_sale.json",
           as: :livestock_sale
-        )
+        ),
+        d_livestock: render_one(center_order.d_livestock, DLivestockView, "d_livestock.json", as: :d_livestock)
     }
   end
 end

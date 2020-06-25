@@ -31,7 +31,6 @@ defmodule Spider.Context.LivestockOrderContainer do
                             )
     
                             case Repo.all(query) |> SpiderData.list_empty? do
-    
                                 false -> 
                                     add_error(changeset, :incomplete_order, "This Business Has Uncompleted Order")
                                 true ->

@@ -16,7 +16,9 @@ defmodule SpiderWeb.LivestockOrderProcessingStageController do
       |> Repo.preload(
         [
           livestock_order_slaughter_order: [
-            livestock_order_slaughter_order_outputs: [],
+            livestock_order_slaughter_order_outputs: [
+              d_livestock_slaughter_output: []
+            ],
             business: [
               business_assets: [],
               user: []
@@ -38,7 +40,9 @@ defmodule SpiderWeb.LivestockOrderProcessingStageController do
         |> Repo.preload(
           [
             livestock_order_slaughter_order: [
-              livestock_order_slaughter_order_outputs: [],
+              livestock_order_slaughter_order_outputs: [
+                d_livestock_slaughter_output: []
+              ],
               business: [
                 business_assets: [],
                 user: []
@@ -59,7 +63,9 @@ defmodule SpiderWeb.LivestockOrderProcessingStageController do
       |> Repo.preload(
         [
           livestock_order_slaughter_order: [
-            livestock_order_slaughter_order_outputs: [],
+            livestock_order_slaughter_order_outputs: [
+              d_livestock_slaughter_output: []
+            ],
             business: [
               business_assets: [],
               user: []
@@ -81,7 +87,11 @@ defmodule SpiderWeb.LivestockOrderProcessingStageController do
         |> Repo.preload(
           [
             livestock_order_slaughter_order: [
-              livestock_order_slaughter_order_outputs: [],
+              livestock_order_slaughter_order_outputs: [
+                d_livestock_slaughter_output: [
+                  d_livestock_slaughter_output: []
+                ]
+              ],
               business: [
                 business_assets: [],
                 user: []

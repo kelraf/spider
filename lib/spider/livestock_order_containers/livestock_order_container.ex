@@ -28,6 +28,6 @@ defmodule Spider.LivestockOrderContainers.LivestockOrderContainer do
     |> cast(attrs, [:status, :payment_status, :business_from_id, :channel, :user_id, :business_id])
     |> cast_assoc(:livestock_orders)
     |> validate_required([:status, :payment_status, :business_from_id, :user_id, :business_id])
-    |> LivestockOrderContainer.check_uncompleted_order_container(action)
+    # |> LivestockOrderContainer.check_uncompleted_order_container(action)
   end
 end

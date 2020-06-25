@@ -3,12 +3,15 @@ defmodule Spider.ExportZoneBundlers.ExportZoneBundler do
   import Ecto.Changeset
 
   alias Spider.Businesses.Business
+  alias Spider.ExportZoneLivestockOrders.ExportZoneLivestockOrder
 
 
   schema "export_zone_bundler" do
     field :capacity, :integer
     field :size, :string
     belongs_to(:business, Business)
+
+    has_many(:export_zone_livestock_orders, ExportZoneLivestockOrder)
 
     timestamps()
   end

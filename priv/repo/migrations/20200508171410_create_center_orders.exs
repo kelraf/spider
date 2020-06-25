@@ -6,7 +6,7 @@ defmodule Spider.Repo.Migrations.CreateCenterOrders do
       add(:required_animals, :integer)
       add(:available_animals, :integer)
       add(:status, :string)
-      add(:description, :string)
+      add(:description, :text)
       add(:price_per_animal, :integer)
       add(:total_price, :integer)
       add(:who_can_see, {:array, :jsonb})

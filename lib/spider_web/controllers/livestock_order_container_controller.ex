@@ -20,18 +20,44 @@ defmodule SpiderWeb.LivestockOrderContainerController do
           livestock_orders: [
             d_livestock: [:d_livestock_images],
             livestock_order_stages: [
-              center_order: [:livestock_sales], 
+              center_order: [
+                livestock_sales: [
+                  business: [
+                    user: [],
+                    business_assets: []
+                  ], 
+                  d_livestock: [
+                    d_livestock_images: []
+                  ]
+                ], 
+                d_livestock: [
+                  d_livestock_images: []
+                ]
+              ], 
               c_c_p_l_orders: [], 
               livestock_order_processing_stages: [
                 livestock_order_slaughter_order: [
-                  livestock_order_slaughter_order_outputs: []
+                  livestock_order_slaughter_order_outputs: [
+                    d_livestock_slaughter_output: []
+                  ],
+                  business: [
+                    business_assets: [],
+                    user: []
+                  ]
                 ]
               ], 
-              export_zone_livestock_order: [
+              export_zone_livestock_orders: [
                 export_zone_bundler: [
                   business: [
                     business_assets: [], 
                     user: []
+                  ],
+                  export_zone_livestock_orders: [
+                    livestock_order: [
+                      d_livestock: [
+                        d_livestock_images: []
+                      ]
+                    ]
                   ]
                 ]
               ]
@@ -68,23 +94,43 @@ defmodule SpiderWeb.LivestockOrderContainerController do
                 ],
                 livestock_order_stages: [
                   center_order: [
-                    livestock_sales: []
+                    livestock_sales: [
+                      business: [
+                        user: [],
+                        business_assets: []
+                      ], 
+                      d_livestock: [
+                        d_livestock_images: []
+                      ]
+                    ], 
+                    d_livestock: [
+                      d_livestock_images: []
+                    ]
                   ], 
                   c_c_p_l_orders: [], 
                   livestock_order_processing_stages: [
                     livestock_order_slaughter_order: [
-                      livestock_order_slaughter_order_outputs: [],
+                      livestock_order_slaughter_order_outputs: [
+                        d_livestock_slaughter_output: []
+                      ],
                       business: [
                         business_assets: [],
                         user: []
                       ]
                     ]
                   ], 
-                  export_zone_livestock_order: [
+                  export_zone_livestock_orders: [
                     export_zone_bundler: [
                       business: [
                         business_assets: [], 
                         user: []
+                      ],
+                      export_zone_livestock_orders: [
+                        livestock_order: [
+                          d_livestock: [
+                            d_livestock_images: []
+                          ]
+                        ]
                       ]
                     ]
 
@@ -110,22 +156,44 @@ defmodule SpiderWeb.LivestockOrderContainerController do
           livestock_orders: [
             d_livestock: [:d_livestock_images],
             livestock_order_stages: [
-              center_order: [:livestock_sales], 
+              center_order: [
+                livestock_sales: [
+                  business: [
+                    user: [],
+                    business_assets: []
+                  ], 
+                  d_livestock: [
+                    d_livestock_images: []
+                  ]
+                ], 
+                d_livestock: [
+                  d_livestock_images: []
+                ]
+              ], 
               c_c_p_l_orders: [], 
               livestock_order_processing_stages: [
                 livestock_order_slaughter_order: [
-                  livestock_order_slaughter_order_outputs: [],
+                  livestock_order_slaughter_order_outputs: [
+                    d_livestock_slaughter_output: []
+                  ],
                   business: [
                     business_assets: [],
                     user: []
                   ]
                 ]
               ], 
-              export_zone_livestock_order: [
+              export_zone_livestock_orders: [
                 export_zone_bundler: [
                   business: [
                     business_assets: [], 
                     user: []
+                  ],
+                  export_zone_livestock_orders: [
+                    livestock_order: [
+                      d_livestock: [
+                        d_livestock_images: []
+                      ]
+                    ]
                   ]
                 ]
               ]
@@ -146,23 +214,43 @@ defmodule SpiderWeb.LivestockOrderContainerController do
           ],
           livestock_order_stages: [
             center_order: [
-              :livestock_sales
+              livestock_sales: [
+                business: [
+                  user: [],
+                  business_assets: []
+                ], 
+                d_livestock: [
+                  d_livestock_images: []
+                ]
+              ], 
+              d_livestock: [
+                d_livestock_images: []
+              ]
             ], 
             c_c_p_l_orders: [], 
             livestock_order_processing_stages: [
               livestock_order_slaughter_order: [
-                livestock_order_slaughter_order_outputs: [],
+                livestock_order_slaughter_order_outputs: [
+                  d_livestock_slaughter_output: []
+                ],
                 business: [
                   business_assets: [],
                   user: []
                 ]
               ]
             ], 
-            export_zone_livestock_order: [
+            export_zone_livestock_orders: [
               export_zone_bundler: [
                 business: [
                   business_assets: [], 
                   user: []
+                ],
+                export_zone_livestock_orders: [
+                  livestock_order: [
+                    d_livestock: [
+                      d_livestock_images: []
+                    ]
+                  ]
                 ]
               ]
             ]
@@ -188,23 +276,43 @@ defmodule SpiderWeb.LivestockOrderContainerController do
               ],
               livestock_order_stages: [
                 center_order: [
-                  :livestock_sales
+                  livestock_sales: [
+                    business: [
+                      user: [],
+                      business_assets: []
+                    ], 
+                    d_livestock: [
+                      d_livestock_images: []
+                    ]
+                  ], 
+                  d_livestock: [
+                    d_livestock_images: []
+                  ]
                 ], 
                 c_c_p_l_orders: [], 
                 livestock_order_processing_stages: [
                   livestock_order_slaughter_order: [
-                    livestock_order_slaughter_order_outputs: [],
+                    livestock_order_slaughter_order_outputs: [
+                      d_livestock_slaughter_output: []
+                    ],
                     business: [
                       business_assets: [],
                       user: []
                     ]
                   ]
                 ], 
-                export_zone_livestock_order: [
+                export_zone_livestock_orders: [
                   export_zone_bundler: [
                     business: [
                       business_assets: [], 
                       user: []
+                    ],
+                    export_zone_livestock_orders: [
+                      livestock_order: [
+                        d_livestock: [
+                          d_livestock_images: []
+                        ]
+                      ]
                     ]
                   ]
                 ]

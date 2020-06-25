@@ -6,7 +6,7 @@ defmodule Spider.Repo.Migrations.CreateLivestockOrderStages do
       add(:stage_name, :string)
       add(:status, :integer)
       add(:stage_number, :integer)
-      add(:description, :string)
+      add(:description, :text)
       add(:livestock_order_id, references(:livestock_orders, on_delete: :delete_all))
 
       timestamps()

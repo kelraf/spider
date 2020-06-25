@@ -15,10 +15,12 @@ defmodule SpiderWeb.ExportZoneLivestockOrderView do
     %{
       id: export_zone_livestock_order.id,
       dates: export_zone_livestock_order.dates,
+      status: export_zone_livestock_order.status,
       export_zone_bundler_id: export_zone_livestock_order.export_zone_bundler_id,
       livestock_order_stage_id: export_zone_livestock_order.livestock_order_stage_id,
       livestock_order_id: export_zone_livestock_order.livestock_order_id,
-      export_zone_bundler: render_one(export_zone_livestock_order.export_zone_bundler, ExportZoneBundlerView, "export_zone_bundler.json", as: :export_zone_bundler)
+      export_zone_bundler: render_one(export_zone_livestock_order.export_zone_bundler, ExportZoneBundlerView, "export_zone_bundler.json", as: :export_zone_bundler),
     }
   end
+
 end
