@@ -61,6 +61,14 @@ defmodule SpiderWeb.BusinessController do
         
       end)
 
+      Task.start(fn -> 
+      
+        if business.sub_category in ["slaughter-house", "abattoir"] do
+          Spider.SlaughterOrderBundlers.create_slaughter_order_bundler %{business_id: business.id}
+        end
+
+      end)
+
       conn
       |> put_status(:created)
       |> put_resp_header("location", business_path(conn, :show, business))

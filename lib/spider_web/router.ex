@@ -149,6 +149,7 @@ defmodule SpiderWeb.Router do
     # Belongs Admins
     get("/slaughter-order-bundlers", SlaughterOrderBundlerController, :index)
     get("/slaughter-order-bundlers/:id", SlaughterOrderBundlerController, :show)
+    get("/slaughter-order-bundlers/business/:business_id", SlaughterOrderBundlerController, :get_by_business_id)
     put("/slaughter-order-bundlers/:id", SlaughterOrderBundlerController, :update)
     delete("/slaughter-order-bundlers/:id", SlaughterOrderBundlerController, :delete)
     # SlaughterOrderBundler Routes End

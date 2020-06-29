@@ -15,7 +15,7 @@ defmodule SpiderWeb.LivestockOrderProcessingStageController do
       livestock_order_processing_stages: livestock_order_processing_stages
       |> Repo.preload(
         [
-          livestock_order_slaughter_order: [
+          livestock_order_slaughter_orders: [
             livestock_order_slaughter_order_outputs: [
               d_livestock_slaughter_output: []
             ],
@@ -39,7 +39,7 @@ defmodule SpiderWeb.LivestockOrderProcessingStageController do
         livestock_order_processing_stage: livestock_order_processing_stage 
         |> Repo.preload(
           [
-            livestock_order_slaughter_order: [
+            livestock_order_slaughter_orders: [
               livestock_order_slaughter_order_outputs: [
                 d_livestock_slaughter_output: []
               ],
@@ -62,7 +62,7 @@ defmodule SpiderWeb.LivestockOrderProcessingStageController do
       livestock_order_processing_stage: livestock_order_processing_stage
       |> Repo.preload(
         [
-          livestock_order_slaughter_order: [
+          livestock_order_slaughter_orders: [
             livestock_order_slaughter_order_outputs: [
               d_livestock_slaughter_output: []
             ],
@@ -86,7 +86,7 @@ defmodule SpiderWeb.LivestockOrderProcessingStageController do
         livestock_order_processing_stage: livestock_order_processing_stage 
         |> Repo.preload(
           [
-            livestock_order_slaughter_order: [
+            livestock_order_slaughter_orders: [
               livestock_order_slaughter_order_outputs: [
                 d_livestock_slaughter_output: [
                   d_livestock_slaughter_output: []

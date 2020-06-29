@@ -12,7 +12,7 @@ defmodule Spider.LivestockOrderProcessingStages.LivestockOrderProcessingStage do
 
     belongs_to(:livestock_order, LivestockOrder)
     belongs_to(:livestock_order_stage, LivestockOrderStage)
-    has_one(:livestock_order_slaughter_order, LivestockOrderSlaughterOrder)
+    has_many(:livestock_order_slaughter_orders, LivestockOrderSlaughterOrder)
 
     timestamps()
   end

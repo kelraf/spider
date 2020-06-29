@@ -20,6 +20,11 @@ defmodule SpiderWeb.LivestockOrderSlaughterOrderController do
           business: [
             business_assets: [],
             user: []
+          ],
+          livestock_order: [
+            d_livestock: [
+              d_livestock_images: []
+            ]
           ]
         ]
       )
@@ -42,6 +47,11 @@ defmodule SpiderWeb.LivestockOrderSlaughterOrderController do
             business: [
               business_assets: [],
               user: []
+            ],
+            livestock_order: [
+              d_livestock: [
+                d_livestock_images: []
+              ]
             ]
           ]
         ) 
@@ -62,6 +72,11 @@ defmodule SpiderWeb.LivestockOrderSlaughterOrderController do
           business: [
             business_assets: [],
             user: []
+          ],
+          livestock_order: [
+            d_livestock: [
+              d_livestock_images: []
+            ]
           ]
         ]
       ) 
@@ -84,6 +99,11 @@ defmodule SpiderWeb.LivestockOrderSlaughterOrderController do
             business: [
               business_assets: [],
               user: []
+            ],
+            livestock_order: [
+              d_livestock: [
+                d_livestock_images: []
+              ]
             ]
           ]
         )

@@ -17,7 +17,7 @@ defmodule Spider.LivestockOrderStages.LivestockOrderStage do
     belongs_to(:livestock_order, LivestockOrder)
 
     has_one(:center_order, CenterOrder)
-    has_many(:export_zone_livestock_orders ,Spider.ExportZoneLivestockOrders.ExportZoneLivestockOrder)
+    has_many(:export_zone_livestock_orders, Spider.ExportZoneLivestockOrders.ExportZoneLivestockOrder)
     has_many(:c_c_p_l_orders, CCPLOrder)
     has_many(:livestock_order_processing_stages, LivestockOrderProcessingStage)
 
