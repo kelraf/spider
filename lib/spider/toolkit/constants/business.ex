@@ -17,7 +17,9 @@ defmodule Spider.Toolkit.Constants.Business do
             "logistics-and-freight",
             "storage-and-warehousing",
             "branding-and-packaging",
-            "handling-and-delivary"
+            "handling-and-delivary",
+            "feedlot",
+            "export-zone"
         ]
     end
 
@@ -26,7 +28,8 @@ defmodule Spider.Toolkit.Constants.Business do
             "producer-chain-groups",
             "processer-chain-groups",
             "supply-chain-groups",
-            "storage-chain-groups"
+            "storage-chain-groups",
+            "entity"
         ]
     end
 

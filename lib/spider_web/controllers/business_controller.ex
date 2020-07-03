@@ -69,6 +69,22 @@ defmodule SpiderWeb.BusinessController do
 
       end)
 
+      Task.start(fn -> 
+      
+        if business.sub_category in ["export-zone"] do
+          Spider.ExportZoneBundlers.create_export_zone_bundler %{business_id: business.id}
+        end
+
+      end)
+
+      Task.start(fn ->
+      
+        if business.sub_category in ["feedlot"] do
+          Spider.FeedLotBundlers.create_feed_lot_bundler(%{business_id: business.id})
+        end
+
+      end)
+
       conn
       |> put_status(:created)
       |> put_resp_header("location", business_path(conn, :show, business))

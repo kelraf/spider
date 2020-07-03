@@ -49,7 +49,7 @@ defmodule SpiderWeb.ExportZoneBundlerView do
       total_cost: livestock_order.total_cost,
       quantity: livestock_order.quantity,
       d_livestock_id: livestock_order.d_livestock_id,
-      d_livestock: render_one(livestock_order.d_livestock, DLivestockView, "d_livestock.json", as: :d_livestock),
+      d_livestock: render_one(livestock_order.d_livestock, DLivestockView, "d_livestock.json", as: :d_livestock)
     }
   end
 

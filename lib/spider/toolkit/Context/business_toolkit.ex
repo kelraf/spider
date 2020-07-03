@@ -364,6 +364,10 @@ defmodule Spider.BusinessToolKit do
               }
   
               BusinessAssets.create_business_asset(business_asset_two)
+
+            true -> 
+
+              IO.puts("Do Nothing")
   
           end
 

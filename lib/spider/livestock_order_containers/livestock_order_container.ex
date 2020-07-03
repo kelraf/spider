@@ -8,7 +8,7 @@ defmodule Spider.LivestockOrderContainers.LivestockOrderContainer do
   alias Spider.Repo
 
   schema "livestock_order_containers" do
-    field(:channel, :string)
+    field(:channel, :string, default: "channel")
     field(:status, :integer, default: 1)
     field(:business_from_id, :integer)
     field(:payment_status, :string, default: "pending")

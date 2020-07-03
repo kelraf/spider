@@ -8,6 +8,7 @@ defmodule Spider.LivestockOrderStages.LivestockOrderStage do
   alias Spider.CCPLOrders.CCPLOrder
   alias Spider.ExportZoneLivestockOrders.ExportZoneLivestockOrder
   alias Spider.LivestockOrderProcessingStages.LivestockOrderProcessingStage
+  alias Spider.FeedLotLivestockOrders.FeedLotLivestockOrder
 
   schema "livestock_order_stages" do
     field(:stage_name, :string)
@@ -20,6 +21,7 @@ defmodule Spider.LivestockOrderStages.LivestockOrderStage do
     has_many(:export_zone_livestock_orders, Spider.ExportZoneLivestockOrders.ExportZoneLivestockOrder)
     has_many(:c_c_p_l_orders, CCPLOrder)
     has_many(:livestock_order_processing_stages, LivestockOrderProcessingStage)
+    has_many(:feed_lot_livestock_orders, FeedLotLivestockOrder)
 
     timestamps()
   end

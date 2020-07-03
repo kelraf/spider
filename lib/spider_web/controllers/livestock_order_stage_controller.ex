@@ -62,6 +62,21 @@ defmodule SpiderWeb.LivestockOrderStageController do
                   ]
                 ]
               ]
+            ],
+            feed_lot_livestock_orders: [
+              feed_lot_bundler: [
+                business: [
+                  business_assets: [], 
+                  user: []
+                ],
+                feed_lot_livestock_orders: [
+                  livestock_order: [
+                    d_livestock: [
+                      d_livestock_images: []
+                    ]
+                  ]
+                ]
+              ]
             ]
           ]
         )
@@ -120,6 +135,21 @@ defmodule SpiderWeb.LivestockOrderStageController do
                     user: []
                   ],
                   export_zone_livestock_orders: [
+                    livestock_order: [
+                      d_livestock: [
+                        d_livestock_images: []
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              feed_lot_livestock_orders: [
+                feed_lot_bundler: [
+                  business: [
+                    business_assets: [], 
+                    user: []
+                  ],
+                  feed_lot_livestock_orders: [
                     livestock_order: [
                       d_livestock: [
                         d_livestock_images: []
@@ -187,6 +217,21 @@ defmodule SpiderWeb.LivestockOrderStageController do
                   ]
                 ]
               ]
+            ],
+            feed_lot_livestock_orders: [
+              feed_lot_bundler: [
+                business: [
+                  business_assets: [], 
+                  user: []
+                ],
+                feed_lot_livestock_orders: [
+                  livestock_order: [
+                    d_livestock: [
+                      d_livestock_images: []
+                    ]
+                  ]
+                ]
+              ]
             ]
           ]
         )
@@ -244,6 +289,21 @@ defmodule SpiderWeb.LivestockOrderStageController do
                     user: []
                   ],
                   export_zone_livestock_orders: [
+                    livestock_order: [
+                      d_livestock: [
+                        d_livestock_images: []
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              feed_lot_livestock_orders: [
+                feed_lot_bundler: [
+                  business: [
+                    business_assets: [], 
+                    user: []
+                  ],
+                  feed_lot_livestock_orders: [
                     livestock_order: [
                       d_livestock: [
                         d_livestock_images: []

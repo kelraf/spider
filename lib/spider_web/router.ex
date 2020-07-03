@@ -72,7 +72,24 @@ defmodule SpiderWeb.Router do
     get("/export-zone-bundlers/business/:business_id", ExportZoneBundlerController, :get_by_business_id)
     put("/export-zone-bundlers/:id", ExportZoneBundlerController, :update)
     delete("/export-zone-bundlers/:id", ExportZoneBundlerController, :delete)
-    # End of export-zone-bundler routes
+    # End of export-zone-bundler routes /feed-lot-livestock-orders
+
+    # feed-lot-bundlers Routes
+    post("/feed-lot-bundlers", FeedLotBundlerController, :create) # Belongs to Admins
+    get("/feed-lot-bundlers", FeedLotBundlerController, :index)
+    get("/feed-lot-bundlers", FeedLotBundlerController, :show)
+    get("/feed-lot-bundlers/business/:business_id", FeedLotBundlerController, :get_by_business_id)
+    put("/feed-lot-bundlers/:id", FeedLotBundlerController, :update)
+    delete("/feed-lot-bundlers/:id", FeedLotBundlerController, :delete)
+    # End of feed-lot-bundlers routes
+
+    # feed-lot-livestock-orders Routes
+    post("/feed-lot-livestock-orders", FeedLotLivestockOrderController, :create) # Belongs to Admins
+    get("/feed-lot-livestock-orders", FeedLotLivestockOrderController, :index)
+    get("/feed-lot-livestock-orders/:id", FeedLotLivestockOrderController, :show)
+    put("/feed-lot-livestock-orders/:id", FeedLotLivestockOrderController, :update)
+    delete("/feed-lot-livestock-orders/:id", FeedLotLivestockOrderController, :delete)
+    # End of feed-lot-livestock-orders routes
 
     # export-zone-livestock-orders Routes
     post("/export-zone-livestock-orders", ExportZoneLivestockOrderController, :create) # Belongs to Admins
