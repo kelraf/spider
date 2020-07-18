@@ -8,82 +8,44 @@ defmodule Spider.BusinessToolKit do
 
     def validate_business_sub_category(changeset) do
 
-      case get_field(changeset, :exception) do
-        nil ->
-          case get_field(changeset, :sub_category) do
-              nil -> 
-                  changeset
-                sub_category ->
-                  if sub_category not in Business.business_sub_categories() do
-                      add_error(changeset, :sub_category, "Business Sub Category Is Invalid")
-                  else
-                      changeset
-                  end
-          end
-        exception -> 
-          case get_field(changeset, :sub_category) do
-            nil -> 
+      case get_field(changeset, :sub_category) do
+          nil -> 
+              changeset
+          sub_category ->
+            if sub_category not in Business.business_sub_categories() do
+                add_error(changeset, :sub_category, "Business Sub Category Is Invalid 1")
+            else
                 changeset
-            sub_category ->
-              if sub_category !== "super-instance" do
-                  add_error(changeset, :sub_category, "Business Sub Category Is Invalid")
-              else
-                  changeset
-              end
-          end
-        end
-        
+            end
+      end
 
     end
 
     def validate_business_category(changeset) do
 
-      case get_field(changeset, :exception) do
-        nil ->
-          case get_field(changeset, :category) do
-            nil -> 
-                changeset
-            category ->
-              if category not in Business.business_categories() do
-                  add_error(changeset, :category, "Business Category Is Invalid")
-              else
-                  changeset
-              end
-        end
-      exception -> 
         case get_field(changeset, :category) do
           nil -> 
               changeset
           category ->
-            if category !== "super-instance" do
-                add_error(changeset, :category, "Business Sub Category Is Invalid")
+            if category not in Business.business_categories() do
+                add_error(changeset, :category, "Business Category Is Invalid")
             else
                 changeset
             end
         end
-      end
 
-  end
+    end
 
     def validate_business_type(changeset) do
 
-      case get_field(changeset, :exception) do
-        nil ->
-          case get_field(changeset, :business_type) do
-              nil -> 
-                  changeset
-              business_type -> 
-                if business_type not in ["sole_proprietor", "group_ranch", "association", "co-oparative"] do
-                    add_error(changeset, :business_type, "Unknown Business Type")
-                else
-                  changeset
-                end
-          end
-        exception -> 
-          if exception do
-            put_change(changeset, :business_type, "super-instance")
+      case get_field(changeset, :business_type) do
+        nil -> 
+            changeset
+        business_type -> 
+          if business_type not in ["sole_proprietor", "group_ranch", "association", "co-oparative", "spider-super-instance", "server", "spider-client"] do
+              add_error(changeset, :business_type, "Unknown Business Type")
           else
-            add_error(changeset, :business_type, "Unknown Business Type Exception")
+            changeset
           end
       end
 

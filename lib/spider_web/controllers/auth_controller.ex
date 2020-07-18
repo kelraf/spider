@@ -3,6 +3,7 @@ defmodule SpiderWeb.AuthController do
 
   alias Spider.Auth
   alias Spider.Guardian
+  alias Spider.Repo
 
   action_fallback SpiderWeb.FallbackController
   
@@ -25,15 +26,28 @@ defmodule SpiderWeb.AuthController do
           status: "not_verified"
         })
 
-      {:ok, user} ->
+      {:ok, user_data_to_encode, user} ->
 
-        case Guardian.encode_and_sign(user) do
-          {:ok, token, _claims} ->
+        case Guardian.encode_and_sign(user_data_to_encode) do
+          {:ok, token, _claims} ->            
+
+            user = user 
+            |> Repo.preload([
+              avatar: [], 
+              business: [
+                business_assets: []
+              ]
+            ])
+            |> processUser()
+            |> processBusiness()
+            |> processBusinessAssets()
+            |> processAvatar()
+
             conn
-            |> put_req_header("authorization", "Bearer #{token}")
             |> json(%{
               status: "success",
-              token: token
+              token: token,
+              data: user
             })
 
           {:error, _reason} ->
@@ -47,6 +61,78 @@ defmodule SpiderWeb.AuthController do
         
     end
 
+  end
+
+  defp processBusiness(user) do
+    case Map.get(user, :business) do
+      nil ->
+        user
+      business -> 
+        business = 
+          business 
+          |> Map.from_struct()
+          |> Map.drop([:__meta__, :user])
+
+        Map.put(user, :business, business)
+
+    end
+  end
+
+  defp processBusinessAssets(user) do
+    case Map.get(user, :business) do
+      nil ->
+        user
+      business -> 
+
+        case Map.get(business, :business_assets) do
+          nil ->
+            business
+          business_assets ->
+
+            business_assets_ = 
+              Enum.map(business_assets, fn business_asset ->
+
+                business_asset
+                |> Map.from_struct()
+                |> Map.drop([:__meta__, :business])
+                |> IO.inspect
+                
+              end)
+
+              IO.inspect business_assets_
+              
+            business = Map.put(business, :business_assets, business_assets_)
+            Map.put(user, :business, business) |> IO.inspect
+
+        end
+
+    end
+  end
+
+  defp processUser(user) do
+
+    user 
+    |> Map.from_struct()
+    |> Map.drop([:__meta__])
+
+  end
+
+  defp processAvatar(user) do
+    case Map.get(user, :avatar) do
+      nil ->
+
+        user
+
+      avatar -> 
+
+        avatar = 
+          avatar 
+          |> Map.from_struct()
+          |> Map.drop([:__meta__, :user])
+
+        Map.put(user, :avatar, avatar)
+
+    end
   end
   
 end

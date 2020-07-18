@@ -59,6 +59,14 @@ defmodule SpiderWeb.UserController do
                 VerificationAgentToolKit.delete_one VerificationAgentToolKit, phone_number
             end)
 
+            Task.start(fn -> 
+              
+              sms_template = "Welcome To AMIC Trade Center. Your Verification Code is #{code}"
+
+              Sms.sendSms(phone_number, sms_template)
+
+            end)
+
             conn
             |> put_status(:found)
             |> json(%{
@@ -103,6 +111,15 @@ defmodule SpiderWeb.UserController do
               Task.start(fn -> 
                   Process.sleep(90000);
                   VerificationAgentToolKit.delete_one VerificationAgentToolKit, phone_number
+              end)
+
+
+              Task.start(fn -> 
+                
+                sms_template = "Welcome To AMIC Trade Center. Your Verification Code is #{code}"
+
+                Sms.sendSms(phone_number, sms_template)
+
               end)
 
               conn

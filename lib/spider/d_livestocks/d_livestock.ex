@@ -6,6 +6,7 @@ defmodule Spider.DLivestocks.DLivestock do
   alias Spider.DlivestockImages.DlivestockImage
   alias Spider.Helpers.SpiderData
   alias Spider.Livestocks.Livestock
+  alias Spider.DLivestockSlaughterOutputs.DLivestockSlaughterOutput
 
 
   schema "dlivestock" do
@@ -16,6 +17,7 @@ defmodule Spider.DLivestocks.DLivestock do
 
     has_many(:d_livestock_images, DlivestockImage)
     has_many(:livestocks, Livestock)
+    has_many(:d_livestock_slaughter_outputs, DLivestockSlaughterOutput)
 
     timestamps()
   end
@@ -24,6 +26,7 @@ defmodule Spider.DLivestocks.DLivestock do
   def changeset(d_livestock, attrs) do
     d_livestock
     |> cast(attrs, [:reference, :type, :breed, :category])
+    |> cast_assoc(:d_livestock_slaughter_outputs)
     |> validate_required([:category, :type])
   end
 

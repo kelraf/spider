@@ -119,25 +119,6 @@ defmodule SpiderWeb.VerificationController do
                                 conn
                                 |> put_status(:ok)
                                 |> json(%{
-                                    # data: %{
-                                    #     id: user.id,
-                                    #     phone_number: user.phone_number,
-                                    #     email: user.email,
-                                    #     password_hash: user.password_hash,
-                                    #     first_name: user.first_name,
-                                    #     last_name: user.last_name,
-                                    #     role: user.role,
-                                    #     status: user.status,
-                                    #     national_id_number: user.national_id_number,
-                                    #     pin: user.pin,
-                                    #     country_name: user.country_name,
-                                    #     country_calling_code: user.country_calling_code,
-                                    #     currency: user.currency,
-                                    #     currency_name: user.currency_name,
-                                    #     continent_code: user.continent_code,
-                                    #     latitude: user.latitude,
-                                    #     longitude: user.longitude
-                                    # },
                                     message: "Successfully Verified Account"
                                 })
                             end

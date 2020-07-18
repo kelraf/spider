@@ -20,6 +20,8 @@ defmodule Spider.Auth do
 
                         user.status == 1 ->
 
+                            user_struct = user
+
                             user = Map.from_struct(user)
                             
                             user_data_to_encode = %{
@@ -29,7 +31,7 @@ defmodule Spider.Auth do
                                 phone_number: user.phone_number
                             }
 
-                            {:ok, user_data_to_encode}
+                            {:ok, user_data_to_encode, user_struct}
                             
                     end
 

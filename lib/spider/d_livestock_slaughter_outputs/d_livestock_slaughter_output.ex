@@ -18,6 +18,6 @@ defmodule Spider.DLivestockSlaughterOutputs.DLivestockSlaughterOutput do
   def changeset(d_livestock_slaughter_output, attrs) do
     d_livestock_slaughter_output
     |> cast(attrs, [:output_name, :units, :checked, :d_livestock_id])
-    |> validate_required([:output_name, :units, :checked, :d_livestock_id])
+    |> validate_required([:output_name, :units, :checked])
   end
 end

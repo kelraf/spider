@@ -11,6 +11,7 @@ defmodule Spider.Repo.Migrations.CreateCenterOrders do
       add(:total_price, :integer)
       add(:who_can_see, {:array, :jsonb})
       add(:total_price_available, :integer)
+      add(:dates, :map, default: %{})
 
       add(:livestock_order_id, references(:livestock_orders, on_delete: :delete_all))
       add(:d_livestock_id, references(:dlivestock, on_delete: :delete_all))

@@ -4,6 +4,7 @@ defmodule Spider.UserToolKit do
   import Ecto.Changeset
 
   alias Spider.Repo
+  alias Spider.Accounts
   alias Spider.Accounts.User
 
   def password_hash(changeset, action) do
@@ -132,13 +133,13 @@ defmodule Spider.UserToolKit do
   def validate_roles(changeset) do
 
     case get_field(changeset, :role) do
-      "spider-trader-001" -> 
+      "spider-member" -> 
         changeset
-      "spider-buyer-001" -> 
+      "spider-client" -> 
         changeset
-      "spider-business-member" ->
+      "spider-server-admin" ->
         changeset
-      "multi" -> 
+      "spider-super-instance-admin" ->
         changeset
       "driver" -> 
         changeset

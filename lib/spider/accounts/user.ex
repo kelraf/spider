@@ -26,8 +26,10 @@ defmodule Spider.Accounts.User do
     field(:country_calling_code, :string)
     field(:latitude, :string)
     field(:longitude, :string)
+    field(:exception, :boolean, virtual: true)
 
     has_one(:avatar, Spider.Avatars.Avatar)
+    has_one(:business, Spider.Businesses.Business)
 
     timestamps()
   end
@@ -55,14 +57,16 @@ defmodule Spider.Accounts.User do
       :currency_name,
       :continent_code,
       :latitude,
-      :longitude
+      :longitude,
+      :exception
     ])
+    |> cast_assoc(:business)
     |> validate_required([
       :phone_number,
       :first_name,
       :last_name,
-      :role
-    ])
+      :role 
+      ])
     # |> validate_length(:raw_password, min: 6, max: 15)
     |> validate_length(:phone_number, min: 10, max: 15)
     |> UserToolKit.validate_roles()

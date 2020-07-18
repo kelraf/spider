@@ -19,7 +19,10 @@ defmodule Spider.Toolkit.Constants.Business do
             "branding-and-packaging",
             "handling-and-delivary",
             "feedlot",
-            "export-zone"
+            "export-zone",
+            "spider-super-instance",
+            "server",
+            "spider-client"
         ]
     end
 
@@ -29,7 +32,10 @@ defmodule Spider.Toolkit.Constants.Business do
             "processer-chain-groups",
             "supply-chain-groups",
             "storage-chain-groups",
-            "entity"
+            "entity",
+            "spider-super-instance",
+            "server",
+            "spider-client"
         ]
     end
 
