@@ -6,6 +6,21 @@ defmodule Spider.BusinessToolKit do
     alias Spider.BusinessAssets
     alias Spider.Toolkit.Constants.Business
 
+    def validate_and_add_business_reg_number(changeset) do
+
+      case get_field(changeset, :business_type) do
+        nil ->
+          changeset
+        business_type ->
+          if business_type == "spider-client" do
+            put_change(changeset, :registration_number, Ecto.UUID.generate())
+          else
+            changeset
+          end
+      end
+      
+    end
+
     def validate_business_sub_category(changeset) do
 
       case get_field(changeset, :sub_category) do

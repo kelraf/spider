@@ -4,8 +4,8 @@ defmodule Spider.DProduces.DProduce do
 
 
   schema "dproduces" do
-    field :category, :string
-    field :reference, :string
+    field :referenced_animal, :string
+    field :produce_name, :string
     field :units, :string
 
     timestamps()
@@ -14,7 +14,7 @@ defmodule Spider.DProduces.DProduce do
   @doc false
   def changeset(d_produce, attrs) do
     d_produce
-    |> cast(attrs, [:reference, :category, :units])
-    |> validate_required([:reference, :units])
+    |> cast(attrs, [:referenced_animal, :produce_name, :units])
+    |> validate_required([:referenced_animal, :produce_name, :units])
   end
 end

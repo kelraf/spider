@@ -457,5 +457,22 @@ defmodule SpiderWeb.Router do
     put("/avatars/:id", AvatarController, :update)
     delete("/avatars/:id", AvatarController, :delete)
     # End Avatars
+
+    # Produce Order Containers Routes
+    post("/produce-order-containers", ProduceOrderContainerController, :create) # Belongs to Admins
+    get("/produce-order-containers", ProduceOrderContainerController, :index)
+    get("/produce-order-containers/:id", ProduceOrderContainerController, :show)
+    put("/produce-order-containers/:id", ProduceOrderContainerController, :update)
+    delete("/produce-order-containers/:id", ProduceOrderContainerController, :delete)
+    # Produce Order Containers Rountes End
+
+    # Produce Orders Routes
+    post("/produce-orders", ProduceOrderController, :create) # Belongs to Admins
+    get("/produce-orders", ProduceOrderController, :index)
+    get("/produce-orders/:id", ProduceOrderController, :show)
+    put("/produce-orders/:id", ProduceOrderController, :update)
+    delete("/produce-orders/:id", ProduceOrderController, :delete)
+    # Produce Orders Rountes End
+
   end
 end

@@ -49,6 +49,7 @@ defmodule Spider.Businesses.Business do
       :exception
     ])
     |> BusinessToolKit.validate_business_type()
+    |> BusinessToolKit.validate_and_add_business_reg_number()
     |> validate_required([
       :business_name,
       :registration_number,

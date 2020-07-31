@@ -11,9 +11,11 @@ defmodule SpiderWeb.DProduceView do
   end
 
   def render("d_produce.json", %{d_produce: d_produce}) do
-    %{id: d_produce.id,
-      reference: d_produce.reference,
-      category: d_produce.category,
-      units: d_produce.units}
+    %{
+      id: d_produce.id,
+      referenced_animal: d_produce.referenced_animal,
+      produce_name: d_produce.produce_name,
+      units: d_produce.units
+    }
   end
 end

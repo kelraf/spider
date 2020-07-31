@@ -4,8 +4,8 @@ defmodule Spider.Repo.Migrations.CreateDproduces do
   def change do
     create table(:dproduces) do
       
-      add :reference, :string
-      add :category, :string
+      add :referenced_animal, :string
+      add :produce_name, :string
       add :units, :string
 
       timestamps()

@@ -15,6 +15,7 @@ defmodule Seeds do
     alias Spider.Accounts
     alias Spider.Businesses
     alias Spider.DLivestocks
+    alias Spider.DProduces
 
     defp create_server_admin_user() do
 
@@ -257,12 +258,41 @@ defmodule Seeds do
         
     end
 
+    def create_d_produce() do
+
+        d_produces = [
+            %{
+                referenced_animal: "Cow",
+                produce_name: "Meat",
+                units: "kgs"
+            },
+            %{
+                referenced_animal: "Goat",
+                produce_name: "Meat",
+                units: "kgs"
+            },
+            %{
+                referenced_animal: "Sheep",
+                produce_name: "Meat",
+                units: "kgs"
+            }
+        ]
+
+        Enum.each(d_produces, fn d_produce -> 
+        
+            DProduces.create_d_produce(d_produce)
+
+        end)
+
+    end
+
     def run() do
 
         create_server_admin_user() |> create_server_admin_business()
         create_super_instance_admin() |> create_super_instance_admin_business()
         create_d_livestocks()
-        
+        create_d_produce()
+
     end
 
 end
