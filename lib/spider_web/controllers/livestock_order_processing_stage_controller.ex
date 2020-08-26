@@ -13,19 +13,7 @@ defmodule SpiderWeb.LivestockOrderProcessingStageController do
       conn, 
       "index.json", 
       livestock_order_processing_stages: livestock_order_processing_stages
-      |> Repo.preload(
-        [
-          livestock_order_slaughter_orders: [
-            livestock_order_slaughter_order_outputs: [
-              d_livestock_slaughter_output: []
-            ],
-            business: [
-              business_assets: [],
-              user: []
-            ]
-          ]
-        ]
-      )
+      |> preloader
     )
   end
 
@@ -37,19 +25,7 @@ defmodule SpiderWeb.LivestockOrderProcessingStageController do
       |> render(
         "show.json", 
         livestock_order_processing_stage: livestock_order_processing_stage 
-        |> Repo.preload(
-          [
-            livestock_order_slaughter_orders: [
-              livestock_order_slaughter_order_outputs: [
-                d_livestock_slaughter_output: []
-              ],
-              business: [
-                business_assets: [],
-                user: []
-              ]
-            ]
-          ]
-        ) 
+        |> preloader 
       )
     end
   end
@@ -60,19 +36,7 @@ defmodule SpiderWeb.LivestockOrderProcessingStageController do
       conn, 
       "show.json", 
       livestock_order_processing_stage: livestock_order_processing_stage
-      |> Repo.preload(
-        [
-          livestock_order_slaughter_orders: [
-            livestock_order_slaughter_order_outputs: [
-              d_livestock_slaughter_output: []
-            ],
-            business: [
-              business_assets: [],
-              user: []
-            ]
-          ]
-        ]
-      )
+      |> preloader
     )
   end
 
@@ -84,21 +48,7 @@ defmodule SpiderWeb.LivestockOrderProcessingStageController do
         conn, 
         "show.json", 
         livestock_order_processing_stage: livestock_order_processing_stage 
-        |> Repo.preload(
-          [
-            livestock_order_slaughter_orders: [
-              livestock_order_slaughter_order_outputs: [
-                d_livestock_slaughter_output: [
-                  d_livestock_slaughter_output: []
-                ]
-              ],
-              business: [
-                business_assets: [],
-                user: []
-              ]
-            ]
-          ]
-        ) 
+        |> preloader
       )
     end
   end
@@ -109,4 +59,29 @@ defmodule SpiderWeb.LivestockOrderProcessingStageController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  defp preloader(resource) do
+
+    resource
+    |> Repo.preload(
+        [
+          livestock_order_slaughter_orders: [
+            livestock_order_slaughter_order_outputs: [
+              d_livestock_slaughter_output: []
+            ],
+            business: [
+              business_assets: [],
+              user: []
+            ],
+            livestock_order: [
+              d_livestock: [
+                d_livestock_images: []
+              ]
+            ]
+          ]
+        ]
+    )
+    
+  end
+
 end

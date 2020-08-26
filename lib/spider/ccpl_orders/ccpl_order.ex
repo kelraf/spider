@@ -8,7 +8,7 @@ defmodule Spider.CCPLOrders.CCPLOrder do
   schema "c_c_p_l_orders" do
     field(:file, Spider.CCPLOrderUploads.Type)
     field(:purpose, :string)
-    field(:uuid, :string, virtual: true)
+    field(:uuid, :string)
 
     belongs_to(:livestock_order_stage, LivestockOrderStage)
 
@@ -18,7 +18,7 @@ defmodule Spider.CCPLOrders.CCPLOrder do
   @doc false
   def changeset(ccpl_order, attrs) do
     ccpl_order
-    |> cast(attrs, [:purpose, :livestock_order_stage_id])
+    |> cast(attrs, [:purpose, :livestock_order_stage_id, :uuid])
     |> put_change(:uuid, Ecto.UUID.generate())
     |> validate_required([:purpose, :uuid, :livestock_order_stage_id])
     |> cast_attachments(attrs, [:file])

@@ -5,6 +5,7 @@ defmodule Spider.ProduceOrders.ProduceOrder do
   alias Spider.ProduceOrderContainers.ProduceOrderContainer
   alias Spider.DProduces.DProduce
   alias Spider.Context.ProduceOrders
+  alias Spider.ProduceOrderStages.ProduceOrderStage
 
   schema "produce_orders" do
 
@@ -14,6 +15,8 @@ defmodule Spider.ProduceOrders.ProduceOrder do
 
     belongs_to(:produce_order_container, ProduceOrderContainer)
     belongs_to(:d_produce, DProduce)
+
+    has_many(:produce_order_stages, ProduceOrderStage)
 
     timestamps()
 

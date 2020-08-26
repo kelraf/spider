@@ -13,9 +13,7 @@ defmodule SpiderWeb.ProduceOrderController do
       conn, 
       "index.json", 
       produce_orders: produce_orders
-      |> Repo.preload([
-        d_produce: []
-      ])
+      |> preloader()
     )
   end
 
@@ -27,9 +25,7 @@ defmodule SpiderWeb.ProduceOrderController do
       |> render(
         "show.json", 
         produce_order: produce_order
-        |> Repo.preload([
-          d_produce: []
-        ])  
+        |> preloader() 
       )
     end
   end
@@ -40,9 +36,7 @@ defmodule SpiderWeb.ProduceOrderController do
       conn, 
       "show.json", 
       produce_order: produce_order
-      |> Repo.preload([
-        d_produce: []
-      ])
+      |> preloader() 
     )
   end
 
@@ -54,9 +48,7 @@ defmodule SpiderWeb.ProduceOrderController do
         conn, 
         "show.json", 
         produce_order: produce_order
-        |> Repo.preload([
-          d_produce: []
-        ])  
+        |> preloader() 
       )
     end
   end
@@ -67,6 +59,20 @@ defmodule SpiderWeb.ProduceOrderController do
     with {:ok, %ProduceOrder{}} <- ProduceOrders.delete_produce_order(produce_order) do
       send_resp(conn, :no_content, "")
     end
-    
+
   end
+
+  defp preloader(resource) do
+
+    resource
+    |> Repo.preload([
+      d_produce: [],
+      produce_order_stages: [
+        produce_center_order: [],
+        c_c_p_p_orders: []
+      ]
+    ]) 
+
+  end
+
 end

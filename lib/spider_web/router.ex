@@ -43,8 +43,8 @@ defmodule SpiderWeb.Router do
 
   # Other scopes may use custom stacks.
   scope "/api", SpiderWeb do
-    pipe_through [:api, :jwt_auth]
-    # pipe_through([:api])
+    # pipe_through [:api, :jwt_auth]
+    pipe_through([:api])
 
     # Users Starts
     # Belongs to Admins
@@ -473,6 +473,30 @@ defmodule SpiderWeb.Router do
     put("/produce-orders/:id", ProduceOrderController, :update)
     delete("/produce-orders/:id", ProduceOrderController, :delete)
     # Produce Orders Rountes End
+
+     # Produce Center Orders Routes
+     post("/produce-order-stages", ProduceOrderStageController, :create) # Belongs to Admins
+     get("/produce-order-stages", ProduceOrderStageController, :index)
+     get("/produce-order-stages/:id", ProduceOrderStageController, :show)
+     put("/produce-order-stages/:id", ProduceOrderStageController, :update)
+     delete("/produce-order-stages/:id", ProduceOrderStageController, :delete)
+     # Produce Order Stages Rountes End
+
+     # Produce Order Stages Routes
+     post("/produce-center-orders", ProduceCenterOrderController, :create) # Belongs to Admins
+     get("/produce-center-orders", ProduceCenterOrderController, :index)
+     get("/produce-center-orders/:id", ProduceCenterOrderController, :show)
+     put("/produce-center-orders/:id", ProduceCenterOrderController, :update)
+     delete("/produce-center-orders/:id", ProduceCenterOrderController, :delete)
+     # Produce Center Orders Rountes End
+
+     # CCPPOrders Routes
+     post("/c-c-p-p-orders", CCPPOrderController, :create) # Belongs to Admins
+     get("/c-c-p-p-orders", CCPPOrderController, :index)
+     get("/c-c-p-p-orders/:id", CCPPOrderController, :show)
+     put("/c-c-p-p-orders/:id", CCPPOrderController, :update)
+     delete("/c-c-p-p-orders/:id", CCPPOrderController, :delete)
+     # CCPPOrders Rountes End
 
   end
 end

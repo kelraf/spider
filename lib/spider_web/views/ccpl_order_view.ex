@@ -11,7 +11,11 @@ defmodule SpiderWeb.CCPLOrderView do
   end
 
   def render("ccpl_order.json", %{ccpl_order: ccpl_order}) do
-    %{id: ccpl_order.id,
-      purpose: ccpl_order.purpose}
+    %{
+      id: ccpl_order.id,
+      purpose: ccpl_order.purpose,
+      file: ccpl_order.file,
+      uuid: ccpl_order.uuid
+    }
   end
 end

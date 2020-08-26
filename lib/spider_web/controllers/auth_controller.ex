@@ -75,7 +75,6 @@ defmodule SpiderWeb.AuthController do
     case Map.get(user, :business) do
       nil ->
         user
-
       business ->
         case Map.get(business, :business_assets) do
           nil ->
@@ -115,6 +114,6 @@ defmodule SpiderWeb.AuthController do
 
         Map.put(user, :avatar, avatar)
     end
-    
+
   end
 end

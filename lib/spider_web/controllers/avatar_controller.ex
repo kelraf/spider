@@ -55,7 +55,10 @@ defmodule SpiderWeb.AvatarController do
 
     attachment = avatar
 
-    path = Spider.Avatar.url({attachment.avatar, attachment}) |> String.split("?") |> List.first
+    path = 
+      Spider.Avatar.url({attachment.avatar, attachment}) 
+      |> String.split("?") 
+      |> List.first
 
     Task.start(fn -> 
       Spider.Avatar.delete({path, attachment})

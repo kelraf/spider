@@ -83,7 +83,7 @@ defmodule SpiderWeb.FeedLotLivestockOrderController do
   end
 
   def update(conn, %{"id" => id, "feed_lot_livestock_order" => feed_lot_livestock_order_params}) do
-    feed_lot_livestock_order = FeedLotLivestockOrders.get_feed_lot_livestock_order!(id)
+    feed_lot_livestock_order = FeedLotLivestockOrders.get_feed_lot_livestock_order!(id) |> IO.inspect
 
     with {:ok, %FeedLotLivestockOrder{} = feed_lot_livestock_order} <- FeedLotLivestockOrders.update_feed_lot_livestock_order(feed_lot_livestock_order, feed_lot_livestock_order_params) do
       render(
@@ -91,7 +91,7 @@ defmodule SpiderWeb.FeedLotLivestockOrderController do
         "show.json", 
         feed_lot_livestock_order: feed_lot_livestock_order
         |> Repo.preload([
-            feed_lot_bundler: [
+            feed_lot_bundler: [ 
               business: [
                 business_assets: [], 
                 user: []

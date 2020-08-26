@@ -1,4 +1,4 @@
-defmodule Spider.CCPLOrderUploads do
+defmodule Spider.CCPPOrderUploads do
   use Arc.Definition
 
   # Include ecto support (requires package arc_ecto installed):
@@ -26,12 +26,12 @@ defmodule Spider.CCPLOrderUploads do
 
   # Override the persisted filenames:
   def filename(version, {file, scope}) do
-    "spider_#{scope.uuid}_#{scope.livestock_order_stage_id}"
+    "spider_#{scope.uuid}_#{scope.produce_order_stage_id}"
   end
 
   # Override the storage directory:
   def storage_dir(version, {file, scope}) do
-    "uploads/c_c_p_l_orders"
+    "uploads/c_c_p_p_orders"
   end
 
   # Provide a default URL if there hasn't been a file uploaded

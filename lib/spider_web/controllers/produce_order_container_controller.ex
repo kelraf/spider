@@ -13,14 +13,7 @@ defmodule SpiderWeb.ProduceOrderContainerController do
       conn, 
       "index.json", 
       produce_order_containers: produce_order_containers
-      |> Repo.preload([
-        produce_orders: [
-          d_produce: []
-        ],
-        user: [
-          avatar: []
-        ]
-      ])
+      |> preloader()
     )
   end
 
@@ -32,14 +25,7 @@ defmodule SpiderWeb.ProduceOrderContainerController do
       |> render(
         "show.json", 
         produce_order_container: produce_order_container
-        |> Repo.preload([
-          produce_orders: [
-            d_produce: []
-          ],
-          user: [
-            avatar: []
-          ]
-        ])
+        |> preloader()
       )
     end
   end
@@ -50,14 +36,7 @@ defmodule SpiderWeb.ProduceOrderContainerController do
       conn, 
       "show.json", 
       produce_order_container: produce_order_container
-      |> Repo.preload([
-        produce_orders: [
-          d_produce: []
-        ],
-        user: [
-          avatar: []
-        ]
-      ])
+      |> preloader()
     )
   end
 
@@ -69,14 +48,7 @@ defmodule SpiderWeb.ProduceOrderContainerController do
         conn, 
         "show.json", 
         produce_order_container: produce_order_container
-        |> Repo.preload([
-          produce_orders: [
-            d_produce: []
-          ],
-          user: [
-            avatar: []
-          ]
-        ])
+        |> preloader()
       )
     end
   end
@@ -87,4 +59,23 @@ defmodule SpiderWeb.ProduceOrderContainerController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  defp preloader(resource) do
+
+    resource
+    |> Repo.preload([
+      produce_orders: [
+        d_produce: [],
+        produce_order_stages: [
+          produce_center_order: [],
+          c_c_p_p_orders: []
+        ],
+      ],
+      user: [
+        avatar: []
+      ]
+    ])
+
+  end
+
 end
