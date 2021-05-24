@@ -1,6 +1,8 @@
 defmodule SpiderWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :spider
 
+  plug CORSPlug
+
   socket "/socket", SpiderWeb.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
@@ -10,6 +12,10 @@ defmodule SpiderWeb.Endpoint do
   plug Plug.Static,
     at: "/", from: :spider, gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
+
+
+  plug Plug.Static, 
+    at: "/api/uploads", from: Path.expand("./uploads"), gzip: false
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
