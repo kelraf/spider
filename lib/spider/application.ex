@@ -12,6 +12,7 @@ defmodule Spider.Application do
       supervisor(Spider.Repo, []),
       # Start the endpoint when the application starts
       supervisor(SpiderWeb.Endpoint, []),
+      {Spider.VerificationAgentToolKit, %{}}
       # Start your own worker by calling: Spider.Worker.start_link(arg1, arg2, arg3)
       # worker(Spider.Worker, [arg1, arg2, arg3]),
     ]
