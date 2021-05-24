@@ -81,7 +81,7 @@ defmodule Seeds do
     defp create_super_instance_admin() do
 
         Accounts.create_user(%{
-            "phone_number" => "0794665127",
+            "phone_number" => "0718089771",
             "first_name" => "Spider Super Instance Admin",
             "last_name" => "Spider Super Instance Admin",
             "role" => "spider-super-instance-admin",

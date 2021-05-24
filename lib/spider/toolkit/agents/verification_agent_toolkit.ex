@@ -3,7 +3,7 @@ defmodule Spider.VerificationAgentToolKit do
 
     def start_link(opts) do  
         Agent.start_link(fn -> opts end, [name: __MODULE__])
-    end
+    end 
     
     def put(pid, key, value) do
         Agent.update(pid, &Map.put(&1, key, value))

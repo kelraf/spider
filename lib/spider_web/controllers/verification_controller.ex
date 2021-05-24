@@ -22,7 +22,7 @@ defmodule SpiderWeb.VerificationController do
 
                 spider_code = %{
                     code: code,
-                    created: NaiveDateTime.utc_now,
+                    created: NaiveDateTime.utc_now, 
                     status: 1
                 }
 
